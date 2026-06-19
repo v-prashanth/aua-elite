@@ -1,0 +1,5 @@
+/* Typography Configuration System */
+:root {
+  --font-fraunces: 'Fraunces', serif;
+  --font-inter: 'Inter', sans-serif;
+}

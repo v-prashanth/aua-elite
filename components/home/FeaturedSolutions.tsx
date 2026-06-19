@@ -1,0 +1,201 @@
+"use client";
+
+import * as React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Container } from "@/components/ui/Container";
+import { ArrowRight } from "lucide-react";
+import { Reveal } from "@/components/ui/Reveal";
+
+export const FeaturedSolutions: React.FC = () => {
+  return (
+    <section id="solutions-showcase" className="py-16 md:py-24 lg:py-32 bg-purewhite border-t border-navy-primary/5 space-y-20 md:space-y-32 lg:space-y-40" aria-label="Solutions Showcase">
+      
+      {/* 1. Tankless Showcase - Classic Sophisticated Split */}
+      <Container className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center w-full">
+        {/* Left Side: Editorial context */}
+        <div className="lg:col-span-5 min-w-0 flex flex-col text-left space-y-6 lg:pr-4">
+          <Reveal>
+            <span className="text-[10px] font-bold tracking-[0.25em] text-gold-primary uppercase block">
+              Showroom Experience I
+            </span>
+          </Reveal>
+          
+          <Reveal delay={0.1}>
+            <h3 className="text-2xl sm:text-3xl font-display font-medium tracking-tight text-navy-primary leading-tight">
+              German Tankless: Temperature-Locked Comfort
+            </h3>
+          </Reveal>
+          
+          <Reveal delay={0.2}>
+            <p className="text-xs sm:text-sm text-navy-primary/70 font-sans leading-relaxed">
+              Eliminate the preheating wait. Stiebel Eltron tankless systems deliver an endless stream of hot water calibrated precisely to your preference, hidden elegantly inside service shafts to keep your bathroom design visual clean and clutter-free.
+            </p>
+          </Reveal>
+          
+          <Reveal delay={0.25}>
+            <ul className="space-y-3 text-xs text-navy-primary font-medium font-sans">
+              <li className="flex items-start space-x-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold-primary shrink-0 mt-1.5" />
+                <span className="text-navy-primary/80">Zero temperature drops, even during simultaneous shower draws.</span>
+              </li>
+              <li className="flex items-start space-x-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold-primary shrink-0 mt-1.5" />
+                <span className="text-navy-primary/80">Compact German engineering fits out of sight inside vanities.</span>
+              </li>
+            </ul>
+          </Reveal>
+          
+          <Reveal delay={0.3} className="pt-2">
+            <Link 
+              href="/solutions" 
+              className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider text-gold-primary hover:text-navy-primary transition-colors outline-none group"
+            >
+              Explore Solution Outlines
+              <ArrowRight size={12} className="ml-1.5 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </Reveal>
+        </div>
+
+        <div className="lg:col-span-7 min-w-0 relative w-full h-[260px] sm:h-[380px] md:h-[440px] rounded-xl p-1 bg-purewhite border border-gold-primary/20 shadow-raised hover:border-gold-primary/45 transition-colors duration-500 group">
+          <div className="relative w-full h-full rounded-lg overflow-hidden border border-navy-primary/5">
+            <Reveal delay={0.1} className="w-full h-full relative">
+              <Image
+                src="/images/solutions_tankless.png"
+                alt="Premium bathroom vanity layout concealing Stiebel Eltron tankless heating unit"
+                fill
+                className="object-cover object-center transition-transform duration-700 hover:scale-105"
+                sizes="(max-width: 1024px) 100vw, 55vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-primary/20 via-transparent to-transparent pointer-events-none" />
+            </Reveal>
+          </div>
+        </div>
+      </Container>
+
+      {/* 2. Heat Pump Showcase - Asymmetric Overlap Layout */}
+      <Container className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-0 items-center w-full relative">
+        {/* Left Side: Large image container */}
+        <div className="lg:col-span-8 min-w-0 relative w-full h-[260px] sm:h-[380px] md:h-[460px] rounded-xl p-1 bg-purewhite border border-gold-primary/20 shadow-raised hover:border-gold-primary/45 transition-colors duration-500 lg:z-0 group">
+          <div className="relative w-full h-full rounded-lg overflow-hidden border border-navy-primary/5">
+            <Reveal delay={0.1} className="w-full h-full relative">
+              <Image
+                src="/images/solutions_heatpump.png"
+                alt="Central thermal heat pump installation on a high-end villa terrace"
+                fill
+                className="object-cover object-center transition-transform duration-700 hover:scale-105"
+                sizes="(max-width: 1024px) 100vw, 60vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-primary/20 via-transparent to-transparent pointer-events-none" />
+            </Reveal>
+          </div>
+        </div>
+
+        {/* Right Side: Floating Text Card overlapping the image on desktop */}
+        <div className="lg:col-span-4 min-w-0 flex flex-col text-left space-y-6 lg:-ml-16 lg:z-10 bg-purewhite p-6 sm:p-8 md:p-10 rounded-xl border border-navy-primary/5 shadow-raised">
+          <Reveal>
+            <span className="text-[10px] font-bold tracking-[0.25em] text-gold-primary uppercase block">
+              Showroom Experience II
+            </span>
+          </Reveal>
+          
+          <Reveal delay={0.1}>
+            <h3 className="text-2xl font-display font-medium tracking-tight text-navy-primary leading-tight">
+              Central Heat Pumps: Thermal Extraction
+            </h3>
+          </Reveal>
+          
+          <Reveal delay={0.2}>
+            <p className="text-xs sm:text-sm text-navy-primary/70 font-sans leading-relaxed">
+              Harness ambient air energy to warm your entire estate. This centralized loop runs silently, providing uniform hot water across all washrooms while cutting heating utility bills by up to 75% compared to traditional boilers.
+            </p>
+          </Reveal>
+          
+          <Reveal delay={0.25}>
+            <ul className="space-y-2.5 text-xs text-navy-primary font-medium font-sans">
+              <li className="flex items-start space-x-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold-primary shrink-0 mt-1.5" />
+                <span className="text-navy-primary/80">Runs 24/7/365 independent of solar availability or monsoons.</span>
+              </li>
+              <li className="flex items-start space-x-3">
+                <span className="w-1.5 h-1.5 rounded-full bg-gold-primary shrink-0 mt-1.5" />
+                <span className="text-navy-primary/80">Integrates with smart solar grids to utilize surplus power.</span>
+              </li>
+            </ul>
+          </Reveal>
+          
+          <Reveal delay={0.3} className="pt-2">
+            <Link 
+              href="/solutions" 
+              className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider text-gold-primary hover:text-navy-primary transition-colors outline-none group"
+            >
+              Explore Solution Outlines
+              <ArrowRight size={12} className="ml-1.5 transition-transform group-hover:translate-x-1" />
+            </Link>
+          </Reveal>
+        </div>
+      </Container>
+
+      {/* 3. Water Softeners Showcase - Editorial Landscape Layout */}
+      <Container className="flex flex-col w-full text-left space-y-8 sm:space-y-10">
+        {/* Top: Asymmetrical Header Block */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-start w-full">
+          <div className="lg:col-span-5 space-y-4">
+            <Reveal>
+              <span className="text-[10px] font-bold tracking-[0.25em] text-gold-primary uppercase block">
+                Showroom Experience III
+              </span>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h3 className="text-2xl sm:text-3xl font-display font-medium tracking-tight text-navy-primary leading-tight">
+                SoftFlow Systems: Absolute Mineral Protection
+              </h3>
+            </Reveal>
+          </div>
+          
+          <div className="lg:col-span-7 space-y-4 lg:pl-10">
+            <Reveal delay={0.2}>
+              <p className="text-xs sm:text-sm text-navy-primary/70 font-sans leading-relaxed">
+                Protect your designer brassware, custom marble, and hair from groundwater minerals. Our smart softeners work dynamically in the background to ensure every drop of water in your home is gentle on your skin and harmless to your high-end fixtures.
+              </p>
+            </Reveal>
+            <Reveal delay={0.25}>
+              <div className="flex flex-col sm:flex-row gap-4 sm:gap-10 text-xs text-navy-primary font-medium font-sans">
+                <span className="flex items-center space-x-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold-primary shrink-0" />
+                  <span className="text-navy-primary/80">Prevents hard-water scaling stains.</span>
+                </span>
+                <span className="flex items-center space-x-2">
+                  <span className="w-1.5 h-1.5 rounded-full bg-gold-primary shrink-0" />
+                  <span className="text-navy-primary/80">Protects heating coils from mineral blockages.</span>
+                </span>
+                <Link 
+                  href="/solutions" 
+                  className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider text-gold-primary hover:text-navy-primary transition-colors outline-none group sm:ml-auto"
+                >
+                  Explore Solution Outlines
+                  <ArrowRight size={12} className="ml-1.5 transition-transform group-hover:translate-x-1" />
+                </Link>
+              </div>
+            </Reveal>
+          </div>
+        </div>
+
+        <div className="relative w-full h-[200px] sm:h-[300px] md:h-[400px] rounded-xl p-1 bg-purewhite border border-gold-primary/20 shadow-resting hover:border-gold-primary/45 transition-colors duration-500 group">
+          <div className="relative w-full h-full rounded-lg overflow-hidden border border-navy-primary/5">
+            <Reveal delay={0.1} className="w-full h-full relative">
+              <Image
+                src="/images/solutions_softener.png"
+                alt="Soft water droplets on glass representing zero scaling water solutions"
+                fill
+                className="object-cover object-center transition-transform duration-700 hover:scale-105"
+                sizes="100vw"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-navy-primary/15 via-transparent to-transparent pointer-events-none" />
+            </Reveal>
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+};

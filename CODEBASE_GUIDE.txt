@@ -1,0 +1,375 @@
+AQUA ELITE SOLUTIONS — COMPREHENSIVE CODEBASE GUIDE
+
+This document provides a complete, file-by-file map of the Aqua Elite Solutions Next.js project. It explains the purpose, exports, and relationships of every single file in the repository (excluding auto-generated directories like node_modules and .next).
+
+========================================================================
+TECHNICAL STACK OVERVIEW
+========================================================================
+* Framework: Next.js 14 (App Router)
+* Language: TypeScript
+* Styling: Tailwind CSS (Vanilla configuration with custom tokens)
+* Animations: Framer Motion 12 (using custom physics easing for fluid, water-like motions)
+* Icons: Lucide React
+* Forms & Validation: Zod
+* Email Backend: Nodemailer (Gmail integration with security safeguards, HTML sanitization, and rate-limiting)
+
+========================================================================
+COMPLETE PROJECT FILE TREE
+========================================================================
+aqua-test/
+├── .env.local
+├── .eslintrc.json
+├── .gitignore
+├── CODEBASE_GUIDE.txt (This file)
+├── next-env.d.ts
+├── next.config.mjs
+├── package-lock.json
+├── package.json
+├── postcss.config.mjs
+├── README.md
+├── tailwind.config.ts
+├── tsconfig.json
+├── tsconfig.tsbuildinfo
+├── app/
+│   ├── favicon.ico
+│   ├── globals.css
+│   ├── layout.tsx
+│   ├── consultation/
+│   │   └── page.tsx
+│   ├── api/
+│   │   └── contact/
+│   │       └── route.ts
+│   ├── (marketing)/
+│   │   ├── page.tsx
+│   │   ├── about/
+│   │   │   └── page.tsx
+│   │   ├── contact/
+│   │   │   └── page.tsx
+│   │   ├── products/
+│   │   │   ├── page.tsx
+│   │   │   └── [slug]/
+│   │   │       └── page.tsx
+│   │   ├── projects/
+│   │   │   └── page.tsx
+│   │   └── faq/
+│   │       └── page.tsx
+│   └── fonts/
+│       ├── GeistMonoVF.woff
+│       └── GeistVF.woff
+├── components/
+│   ├── forms/
+│   │   └── .gitkeep
+│   ├── home/
+│   │   ├── FeaturedSolutions.tsx
+│   │   ├── FinalCTA.tsx
+│   │   ├── Hero.tsx
+│   │   ├── HowWeWork.tsx
+│   │   ├── TrustedBrands.tsx
+│   │   └── WhyAquaElite.tsx
+│   ├── layout/
+│   │   ├── Footer.tsx
+│   │   ├── MobileMenu.tsx
+│   │   ├── Navbar.tsx
+│   │   └── WhatsAppButton.tsx
+│   ├── products/
+│   │   ├── .gitkeep
+│   │   ├── ProductGallery.tsx
+│   │   └── ProductTechBlueprint.tsx
+│   ├── shared/
+│   │   ├── .gitkeep
+│   │   └── WaterRibbon.tsx
+│   └── ui/
+│       ├── Button.tsx
+│       ├── Card.tsx
+│       ├── Container.tsx
+│       ├── GlassPanel.tsx
+│       ├── Reveal.tsx
+│       └── SectionHeader.tsx
+├── data/
+│   ├── brands.ts
+│   ├── comparisons.ts
+│   ├── faqs.ts
+│   ├── process.ts
+│   ├── products.ts
+│   └── projects.ts
+├── hooks/
+│   ├── useNavbarState.ts
+│   ├── useParallax.ts
+│   ├── useReveal.ts
+│   └── useScrollProgress.ts
+├── lib/
+│   ├── animations.ts
+│   ├── seo.ts
+│   ├── tokens.ts
+│   └── utils.ts
+├── public/
+│   ├── icons/
+│   │   └── .gitkeep
+│   ├── images/
+│   │   ├── hero_villa.png
+│   │   ├── solutions_heatpump.png
+│   │   ├── solutions_softener.png
+│   │   ├── solutions_tankless.png
+│   │   └── .gitkeep
+│   └── logos/
+│       └── .gitkeep
+└── styles/
+    ├── globals.css
+    └── typography.css
+
+========================================================================
+DETAILED FILE-BY-FILE GUIDE
+========================================================================
+
+------------------------------------------------------------------------
+1. Root Configuration Files
+------------------------------------------------------------------------
+These configuration files define how the application runs, builds, compiles TypeScript, and styles elements.
+
+* CODEBASE_GUIDE.txt
+  - What it is: Codebase documentation file.
+  - Why it exists: Provides developers and stakeholders with an immediate, copyable reference map of every file inside the project.
+  - Exports: None.
+
+* .env.local
+  - What it is: Environment variables configurations.
+  - Why it exists: Holds secret API tokens and credentials that should not be committed to Git.
+  - Variables defined: GMAIL_USER, GMAIL_APP_PASSWORD, CONTACT_EMAIL_TO, SUPABASE_URL, SUPABASE_ANON_KEY.
+
+* .eslintrc.json
+  - What it is: Linting configuration file.
+  - Why it exists: Enforces clean code styles and checks for errors prior to compilation.
+  - Exports: Configuration JSON extending next/core-web-vitals and next/typescript.
+
+* .gitignore
+  - What it is: Git exclusion index.
+  - Why it exists: Stops sensitive local config files (.env*.local), temporary caches (.next/), dependencies (node_modules/), and compiled builds (build/, out/) from being pushed to source control.
+
+* next-env.d.ts
+  - What it is: Next.js compiler environment type references.
+  - Why it exists: Tells the TypeScript engine about Next.js-specific global types, file formats, and features.
+
+* next.config.mjs
+  - What it is: Next.js system configuration.
+  - Why it exists: Customizes compiler runs, sets custom security headers, and controls caching.
+  - Exports: nextConfig (the configuration object).
+  - Where & How used: Contains strict security headers (Content-Security-Policy, HSTS, X-Frame-Options, Cache-Control overrides) applied to all routes.
+
+* package.json
+  - What it is: Node.js project manifest.
+  - Why it exists: Defines the dependencies (Framer Motion, Zod, Nodemailer, Lucide React, Tailwind, Next.js) and script commands.
+
+* package-lock.json
+  - What it is: Dependency lockfile.
+  - Why it exists: Records the exact versions of all installed node modules to guarantee consistent environments.
+
+* postcss.config.mjs
+  - What it is: PostCSS compiler pipeline configuration.
+  - Why it exists: Configures Tailwind CSS as a PostCSS plugin so that Tailwind utility styles are compiled into standard CSS.
+
+* README.md
+  - What it is: Standard repository introduction.
+  - Why it exists: Gives new developers a quick starter guide on how to launch the project, build it, or read about Next.js resources.
+
+* tailwind.config.ts
+  - What it is: Tailwind CSS customization file.
+  - Why it exists: Configures the design system tokens (navy, gold, offwhite, typography headers using Fraunces, body font using Inter, spacing scales, and custom shadows).
+
+* tsconfig.json
+  - What it is: TypeScript compilation configuration.
+  - Why it exists: Defines syntax rules, compiler settings, and path aliases (like @/* mapping directly to the project root).
+
+* tsconfig.tsbuildinfo
+  - What it is: TypeScript incremental build cache file.
+  - Why it exists: Speeds up typescript checks on subsequent builds by caching information about unchanged files.
+
+
+------------------------------------------------------------------------
+2. Next.js Routing Stack (app/)
+------------------------------------------------------------------------
+This directory houses layout files, public assets, and dynamic paths structured under Next.js App Router rules.
+
+* app/favicon.ico
+  - What it is: Standard browser tab logo icon.
+
+* app/globals.css
+  - What it is: Primary project stylesheet. Injects Tailwind directives and custom design tokens (Glassmorphism classes: .glass-nav, .glass-card, .glass-cta; shadows: .elevation-resting, .elevation-raised, .elevation-floating).
+
+* app/layout.tsx
+  - What it is: Root Layout component. Injects common headers/footers, mounts Google Fonts, and coordinates general SEO attributes.
+
+* app/consultation/page.tsx
+  - What it is: Consultation scheduling booking page (/consultation route). Provides a direct portal to request site audits.
+
+* app/api/contact/route.ts
+  - What it is: Serverless contact backend endpoint (POST /api/contact). Includes rate-limiters, input sanitizers, and validation metrics for secure email sending.
+
+* app/(marketing)/page.tsx
+  - What it is: Simplified, restrained Homepage (/ route). Sequences exactly 7 segments to communicate expertise.
+
+* app/(marketing)/about/page.tsx
+  - What it is: About Page (/about route). Emphasizes technician-first background and honest value statements.
+
+* app/(marketing)/contact/page.tsx
+  - What it is: Direct Contact Page (/contact route). Hosts local hours, map details, coordinates, and inquiry forms.
+
+* app/(marketing)/products/page.tsx
+  - What it is: Brands & Products catalog landing page (/products route). Introduces we-recommend-brands philosophy and maps products by category.
+
+* app/(marketing)/products/[slug]/page.tsx
+  - What it is: Dynamic Product Detail template (/products/[slug] route). Follows user suitability blocks (Image, Overview, Suitability, Benefits, Specifications, Gallery, FAQs, Book Consultation).
+
+* app/(marketing)/projects/page.tsx
+  - What it is: Portfolio Page (/projects route). Outlines three real completed residential installations.
+
+* app/(marketing)/faq/page.tsx
+  - What it is: FAQ Page (/faq route). Displays maximum 10 short questions in simple English.
+
+* app/fonts/GeistMonoVF.woff & GeistVF.woff
+  - What it is: Local fallback variable font files.
+
+
+------------------------------------------------------------------------
+3. Component Architecture (components/)
+------------------------------------------------------------------------
+This directory houses modular client-side components grouped by their respective features.
+
+A. Home Components (components/home/)
+These are the seven simplified elements forming the Homepage.
+
+* Hero.tsx
+  - What it is: Whitespace-first hero banner. Uses a single powerful statement, a premium villa showcase image, and a single book consultation CTA.
+
+* WhatWeDo.tsx
+  - What it is: Minimal service highlights. Employs 4 simple cards restricted to 2 lines each.
+
+* FeaturedSolutions.tsx
+  - What it is: Solution categories selector. Renders exactly three categories (Tankless Heaters, Heat Pumps, Water Softeners) with a single description sentence each.
+
+* HowWeWork.tsx
+  - What it is: Horizontal process pipeline. Follows a clean linear flow from discovery to maintenance.
+
+* TrustedBrands.tsx
+  - What it is: Brand relationship index. Features Stiebel Eltron and Aqua Elite Softeners with an advisor-focused statement.
+
+* WhyAquaElite.tsx
+  - What it is: Four trust pillars grid. Focuses on experienced technicians, tailored designs, professional installation, and ongoing support without stats.
+
+* FinalCTA.tsx
+  - What it is: Minimal end-page CTA block. Offers a simple layout with a single consultation button.
+
+B. Layout Components (components/layout/)
+
+* Footer.tsx
+  - What it is: Direct site footer. Hosts page navigation, office coordinates, and business hours.
+
+* MobileMenu.tsx
+  - What it is: Navigation slide-over matching new Navbar.
+
+* Navbar.tsx
+  - What it is: Morphing glass header. Exposes only Products, About, Contact, and Book Consultation.
+
+* WhatsAppButton.tsx
+  - What it is: Floating quick-chat WhatsApp widget.
+
+C. Products Components (components/products/)
+
+* ProductGallery.tsx
+  - What it is: Color variation mockups viewer.
+
+* ProductTechBlueprint.tsx
+  - What it is: Interactive hotspot schematic viewer.
+
+D. Shared Components (components/shared/)
+
+* WaterRibbon.tsx
+  - What it is: Scroll-linked progress trace element.
+
+E. UI Component Library (components/ui/)
+
+* Button.tsx
+  - What it is: Framer Motion pill button wrapper. Supports primary gold, secondary navy, and outline variants.
+
+* Card.tsx
+  - What it is: Rounded card element. Restricts glassmorphism overlays to adhere to luxury design principles.
+
+* Container.tsx
+  - What it is: Content width boundary wrapper.
+
+* GlassPanel.tsx
+  - What it is: Frosted glass utility wrapper. Usage is limited to Navbar, floating elements, and small overlays.
+
+* Reveal.tsx
+  - What it is: Viewport entry fade transition wrapper.
+
+* SectionHeader.tsx
+  - What it is: Categorized title template header.
+
+
+------------------------------------------------------------------------
+4. Data Layer (data/)
+------------------------------------------------------------------------
+Static files hosting lists and data objects. This keeps content separated from the UI component logic.
+
+* brands.ts
+  - What it is: Partner manufacturers details.
+
+* comparisons.ts
+  - What it is: Side-by-side technology parameters.
+
+* faqs.ts
+  - What it is: Exactly 10 short support queries.
+
+* process.ts
+  - What it is: Flow details mapping out "How We Work".
+
+* products.ts
+  - What it is: Curator details for five products.
+
+* projects.ts
+  - What it is: Detailed case studies for three actual installations.
+
+
+------------------------------------------------------------------------
+5. Custom Hooks (hooks/)
+------------------------------------------------------------------------
+
+* useNavbarState.ts
+  - What it is: Tracks page scrolled state and coordinates hiding/showing parameters.
+
+* useParallax.ts
+  - What it is: Coordinates parallax offsets.
+
+* useReveal.ts
+  - What it is: Intersection observer wrapper hook.
+
+* useScrollProgress.ts
+  - What it is: Computes document scroll completion percentage.
+
+
+------------------------------------------------------------------------
+6. System Libraries (lib/)
+------------------------------------------------------------------------
+
+* animations.ts
+  - What it is: Framer Motion spring physics configurations.
+
+* seo.ts
+  - What it is: Global HTML meta tag constructor.
+
+* tokens.ts
+  - What it is: Static measurements and colors dictionary.
+
+* utils.ts
+  - What it is: CSS mergers, INR formatters, and URL slugifiers.
+
+
+------------------------------------------------------------------------
+7. Assets and Public Files (public/ & styles/)
+------------------------------------------------------------------------
+
+* public/images/
+  - What it is: Public media asset folder holding hero_villa.png and solutions images.
+
+* styles/globals.css & typography.css
+  - What it is: Legacy stylesheets coordination files.

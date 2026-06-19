@@ -1,0 +1,107 @@
+"use client";
+
+import * as React from "react";
+import Image from "next/image";
+import Link from "next/link";
+import { Container } from "@/components/ui/Container";
+import { SectionHeader } from "@/components/ui/SectionHeader";
+import { Button } from "@/components/ui/Button";
+import { Reveal } from "@/components/ui/Reveal";
+import { ArrowRight } from "lucide-react";
+import { products } from "@/data/products";
+
+export const FeaturedProducts: React.FC = () => {
+  // Curate exactly 3 flagship products
+  const featuredIds = ["dhb-e-18-24", "hpa-o-300-l", "ae-softflow-pro"];
+  const curatedProducts = products.filter((p) => featuredIds.includes(p.id));
+
+  // Map products to appropriate showcase images
+  const imageMap: Record<string, string> = {
+    "dhb-e-18-24": "/images/solutions_tankless.png",
+    "hpa-o-300-l": "/images/solutions_heatpump.png",
+    "ae-softflow-pro": "/images/solutions_softener.png",
+  };
+
+  const benefitMap: Record<string, string> = {
+    "dhb-e-18-24": "Endless hot water with zero preheating wait, completely concealed inside vanity units.",
+    "hpa-o-300-l": "Saves up to 75% on electricity bills by extracting ambient air energy for full-villa heating.",
+    "ae-softflow-pro": "Zero scale protection: prevents minerals from clogging pipes or staining designer brassware.",
+  };
+
+  return (
+    <section id="featured-products" className="py-12 md:py-20 lg:py-28 bg-purewhite" aria-label="Featured Products">
+      <Container className="max-w-5xl">
+        <Reveal>
+          <SectionHeader
+            tagline="Curated Showroom"
+            title="Flagship System Components"
+            description="We select and configure premium hardware models from trusted manufacturers to match your structural layout."
+            align="left"
+            className="mb-10"
+          />
+        </Reveal>
+
+        {/* Curated Grid - 3 items */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-10">
+          {curatedProducts.map((product, idx) => {
+            const image = imageMap[product.id] || "/images/solutions_tankless.png";
+            const benefit = benefitMap[product.id] || product.subtitle;
+            return (
+              <Reveal key={product.id} delay={idx * 0.15}>
+                <div className="flex flex-col h-full bg-purewhite border border-navy-primary/5 rounded-lg overflow-hidden transition-all duration-300 hover:border-gold-primary/20 elevation-resting hover:elevation-raised group">
+                  {/* Image wrapper */}
+                  <div className="relative w-full h-[200px] bg-offwhite border-b border-navy-primary/5 overflow-hidden">
+                    <Image
+                      src={image}
+                      alt={product.title}
+                      fill
+                      className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                      sizes="(max-w-768px) 100vw, 30vw"
+                    />
+                    <div className="absolute top-3 left-3 px-2 py-0.5 bg-[#0B2341] dark:bg-[#16171B] text-[#FFFFFF] dark:text-[#F3F4F6] rounded font-sans text-[7px] font-bold uppercase tracking-widest border border-gold-primary/25">
+                      {product.brand}
+                    </div>
+                  </div>
+
+                  {/* Narrative details */}
+                  <div className="flex flex-col justify-between flex-grow p-6 text-left space-y-4">
+                    <div className="space-y-2">
+                      <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold">
+                        {product.category.replace("-", " ")}
+                      </span>
+                      <h3 className="font-display text-sm font-semibold tracking-wide text-navy-primary">
+                        {product.title}
+                      </h3>
+                      <p className="text-[10px] sm:text-xs text-navy-primary/70 font-sans leading-relaxed">
+                        {benefit}
+                      </p>
+                    </div>
+
+                    <Link href={`/products/${product.slug}`} className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider text-gold-primary hover:text-navy-primary transition-colors outline-none group pt-2">
+                      <span>Explore Technical Outline</span>
+                      <ArrowRight size={12} className="ml-1.5 transition-transform group-hover:translate-x-1" />
+                    </Link>
+                  </div>
+                </div>
+              </Reveal>
+            );
+          })}
+        </div>
+
+        {/* View All Products CTA */}
+        <Reveal delay={0.3} className="text-center">
+          <Link href="/products">
+            <Button
+              variant="primary"
+              size="lg"
+              className="text-xs uppercase tracking-wider font-bold"
+            >
+              View All System Components
+              <ArrowRight size={14} className="ml-2" />
+            </Button>
+          </Link>
+        </Reveal>
+      </Container>
+    </section>
+  );
+};
