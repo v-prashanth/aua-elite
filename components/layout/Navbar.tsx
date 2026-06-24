@@ -166,9 +166,9 @@ export const Navbar: React.FC = () => {
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open navigation menu"
                 aria-expanded={mobileOpen}
-                className="flex lg:hidden items-center justify-center w-9 h-9 rounded-full text-navy-primary/60 dark:text-white/60 hover:text-navy-primary dark:hover:text-white hover:bg-navy-primary/5 dark:hover:bg-white/5 transition-all duration-200 -mr-1"
+                className="flex lg:hidden items-center justify-center w-11 h-11 rounded-full text-navy-primary/60 dark:text-white/60 hover:text-navy-primary dark:hover:text-white hover:bg-navy-primary/5 dark:hover:bg-white/5 transition-all duration-200 -mr-2"
               >
-                <Menu size={18} strokeWidth={1.75} />
+                <Menu size={20} strokeWidth={1.75} />
               </button>
             </div>
           </div>
@@ -216,9 +216,9 @@ export const Navbar: React.FC = () => {
                 <button
                   onClick={() => setMobileOpen(false)}
                   aria-label="Close navigation"
-                  className="w-9 h-9 rounded-full flex items-center justify-center text-navy-primary/40 dark:text-white/40 hover:text-navy-primary dark:hover:text-white hover:bg-navy-primary/5 dark:hover:bg-white/5 transition-all"
+                  className="w-11 h-11 rounded-full flex items-center justify-center text-navy-primary/40 dark:text-white/40 hover:text-navy-primary dark:hover:text-white hover:bg-navy-primary/5 dark:hover:bg-white/5 transition-all -mr-2"
                 >
-                  <X size={18} strokeWidth={1.75} />
+                  <X size={20} strokeWidth={1.75} />
                 </button>
               </div>
 
@@ -238,7 +238,7 @@ export const Navbar: React.FC = () => {
                           href={href}
                           onClick={() => setMobileOpen(false)}
                           className={cn(
-                            "block py-5 font-display text-2xl sm:text-3xl font-medium tracking-tight border-b border-navy-primary/6 dark:border-white/6 transition-colors duration-200",
+                            "block py-5 font-sans text-[11px] sm:text-[12px] font-bold uppercase tracking-[0.25em] border-b border-navy-primary/6 dark:border-white/6 transition-colors duration-200",
                             isActive
                               ? "text-gold-primary"
                               : "text-navy-primary/65 dark:text-white/65 hover:text-navy-primary dark:hover:text-white"

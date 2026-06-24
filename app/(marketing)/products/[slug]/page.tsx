@@ -76,7 +76,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
     <div className="relative min-h-screen bg-offwhite text-left font-sans pb-24 selection:bg-gold-primary/10">
       
       {/* ABOVE THE FOLD: Two-Column Layout */}
-      <section className="py-16 md:py-20 bg-purewhite border-b border-navy-primary/5">
+      <section className="pt-28 pb-16 md:pt-36 md:pb-20 bg-purewhite border-b border-navy-primary/5">
         <Container className="max-w-5xl">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
