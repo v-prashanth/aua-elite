@@ -4,188 +4,275 @@ import * as React from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
+import { X, Menu } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { Button } from "@/components/ui/Button";
-import { useNavbarState } from "@/hooks/useNavbarState";
-import { MobileMenu } from "./MobileMenu";
+import { ThemeToggle } from "./ThemeToggle";
+
+const NAV_LINKS = [
+  { label: "Solutions", href: "/products" },
+  { label: "Projects", href: "/projects" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
+];
 
 export const Navbar: React.FC = () => {
   const pathname = usePathname();
   const router = useRouter();
-  const { state } = useNavbarState();
-  const [isMobileMenuOpen, setIsMobileMenuOpen] = React.useState(false);
-  const [hoveredIndex, setHoveredIndex] = React.useState<number | null>(null);
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+  const [scrolled, setScrolled] = React.useState(false);
+  const [isDesktop, setIsDesktop] = React.useState(false);
+  const menuRef = React.useRef<HTMLDivElement>(null);
 
+  // Track scroll + screen size (pill only on desktop)
   React.useEffect(() => {
-    setIsMobileMenuOpen(false);
-  }, [pathname]);
+    const onScroll = () => setScrolled(window.scrollY > 60);
+    const onResize = () => setIsDesktop(window.innerWidth >= 1024);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onResize, { passive: true });
+    onScroll();
+    onResize();
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onResize);
+    };
+  }, []);
 
-  const navLinks = [
-    { label: "Solutions", href: "/solutions" },
-    { label: "Products", href: "/products" },
-    { label: "Projects", href: "/projects" },
-    { label: "About", href: "/about" }
-  ];
+  // Lock scroll on mobile menu open
+  React.useEffect(() => {
+    document.body.style.overflow = mobileOpen ? "hidden" : "";
+    return () => { document.body.style.overflow = ""; };
+  }, [mobileOpen]);
+
+  // Escape key to close
+  React.useEffect(() => {
+    if (!mobileOpen) return;
+    const fn = (e: KeyboardEvent) => { if (e.key === "Escape") setMobileOpen(false); };
+    window.addEventListener("keydown", fn);
+    return () => window.removeEventListener("keydown", fn);
+  }, [mobileOpen]);
+
+  React.useEffect(() => { setMobileOpen(false); }, [pathname]);
 
   return (
     <>
-      <header
-        className={cn(
-          "fixed z-50 left-0 right-0 top-0 w-full flex items-center justify-between transition-[height,background-color,border-color,box-shadow] duration-300 ease-in-out px-6 sm:px-12",
-          state === "landing"
-            ? "h-14 sm:h-16 bg-transparent border-b border-transparent shadow-none"
-            : "h-12 sm:h-14 glass-nav shadow-[0_2px_10px_rgba(11,35,65,0.02)]"
-        )}
-        role="navigation"
-        aria-label="Global Navigation"
-      >
-        {/* Brand Logo */}
-        <Link href="/" className="flex items-center space-x-2 group outline-none select-none">
-          <div className="relative w-7 h-7 flex items-center justify-center">
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-              className="text-gold-primary transition-all duration-300 group-hover:scale-105 group-hover:-translate-y-0.5"
-            >
-              <path
-                d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"
-                fill="currentColor"
-                className="opacity-20"
-              />
-              <motion.path
-                d="M12 2.69l5.66 5.66a8 8 0 1 1-11.31 0z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                initial={{ pathLength: 0 }}
-                animate={{ pathLength: 1 }}
-                transition={{ duration: 1.5, ease: "easeInOut" }}
-              />
-              <motion.path
-                d="M12 18c-2.5 0-4.5-2-4.5-4.5 0-1.5 1-2.5 2-3.5"
-                stroke="currentColor"
-                strokeWidth="1.5"
-                strokeLinecap="round"
-                animate={{
-                  y: [0, -1, 0],
-                  scaleY: [1, 1.05, 1]
-                }}
-                transition={{
-                  duration: 2,
-                  repeat: Infinity,
-                  ease: "easeInOut"
-                }}
-              />
-            </svg>
-          </div>
-          <div className="flex flex-col">
-            <span className="font-display text-xs md:text-sm font-semibold tracking-wide text-navy-primary group-hover:text-gold-primary transition-colors duration-300">
-              AQUA ELITE
-            </span>
-            <span className="text-[7px] uppercase tracking-widest text-gold-primary -mt-0.5 font-sans font-bold transition-all duration-300 group-hover:tracking-wider">
-              Complete Water Solutions
-            </span>
-          </div>
-        </Link>
-
-        {/* Desktop Links (Interactive Hover Pill & Dot) */}
-        <nav 
-          className="hidden lg:flex items-center space-x-1.5 relative"
-          onMouseLeave={() => setHoveredIndex(null)}
+      {/* ── Wrapper — sticky, full-width, transparent background ─────── */}
+      <div className="sticky top-0 z-50 w-full flex justify-center pointer-events-none">
+        <motion.header
+          role="banner"
+          // Pill effect ONLY on desktop; mobile stays full-width flat
+          animate={scrolled && isDesktop ? "scrolled" : "top"}
+          variants={{
+            top: {
+              width: "100%",
+              marginTop: 0,
+              borderRadius: 0,
+              paddingLeft: 0,
+              paddingRight: 0,
+              boxShadow: "none",
+            },
+            scrolled: {
+              width: "calc(100% - 48px)",
+              marginTop: 16,
+              borderRadius: 9999,
+              paddingLeft: 8,
+              paddingRight: 8,
+              boxShadow: "0 8px 32px -4px rgba(11,35,65,0.14), 0 2px 8px -2px rgba(11,35,65,0.08)",
+            },
+          }}
+          transition={{ type: "spring", stiffness: 260, damping: 28 }}
+          className={cn(
+            "pointer-events-auto overflow-hidden",
+            "transition-colors duration-300",
+            scrolled
+              ? "bg-white/90 dark:bg-[#0E0F13]/90 backdrop-blur-2xl border border-navy-primary/8 dark:border-white/8"
+              : "bg-white/80 dark:bg-[#0E0F13]/80 backdrop-blur-md border-b border-navy-primary/6 dark:border-white/6"
+          )}
         >
-          <AnimatePresence>
-            {navLinks.map((link, idx) => {
-              const isActive = pathname === link.href || pathname.startsWith(link.href + "/");
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onMouseEnter={() => setHoveredIndex(idx)}
-                  className={cn(
-                    "font-sans text-[9px] font-bold uppercase tracking-wider transition-all duration-200 outline-none relative py-1 px-3 focus-visible:text-gold-primary rounded-full select-none",
-                    isActive ? "text-gold-primary" : "text-navy-primary/85 hover:text-gold-primary"
-                  )}
-                >
-                  <span className="relative z-10">{link.label}</span>
-                  {/* Sliding Hover Pill */}
-                  {hoveredIndex === idx && (
-                    <motion.div
-                      layoutId="navHoverPill"
-                      className="absolute inset-0 rounded-full z-0 bg-navy-primary/5"
-                      initial={{ opacity: 0 }}
-                      animate={{ opacity: 1 }}
-                      exit={{ opacity: 0 }}
-                      transition={{
-                        type: "spring",
-                        stiffness: 380,
-                        damping: 30
-                      }}
-                    />
-                  )}
-                  {/* Micro-dot active indicator */}
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeIndicator"
-                      className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0.5 h-0.5 bg-gold-primary rounded-full"
+          <div
+            className={cn(
+              "flex items-center justify-between transition-all duration-300",
+              "px-6 lg:px-10",
+              scrolled ? "h-[60px] lg:h-[68px]" : "h-[72px] lg:h-[84px]"
+            )}
+          >
+            {/* Logo */}
+            <Link
+              href="/"
+              aria-label="Aqua Elite Solutions — Home"
+              className="flex-shrink-0 group outline-none"
+            >
+              <motion.div animate={scrolled ? { scale: 0.95 } : { scale: 1 }} transition={{ type: "spring", stiffness: 300, damping: 30 }}>
+                <span className="font-display font-semibold tracking-[0.18em] uppercase text-[13px] sm:text-[14px] block transition-colors duration-300 text-navy-primary dark:text-white group-hover:text-gold-primary">
+                  Aqua Elite
+                </span>
+                <span className="block text-[7px] tracking-[0.22em] uppercase font-sans font-medium text-silver mt-[2px] transition-colors duration-300 whitespace-nowrap">
+                  Water Solutions We Provide
+                </span>
+              </motion.div>
+            </Link>
+
+            {/* Desktop Nav */}
+            <nav className="hidden lg:flex items-center gap-10 xl:gap-14" aria-label="Primary navigation">
+              {NAV_LINKS.map(({ label, href }) => {
+                const isActive = href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/");
+                return (
+                  <Link
+                    key={href}
+                    href={href}
+                    className={cn(
+                      "relative text-[10px] xl:text-[11px] font-sans font-bold uppercase tracking-[0.2em] transition-colors duration-300 outline-none group py-1",
+                      isActive
+                        ? "text-navy-primary dark:text-white"
+                        : "text-navy-primary/45 dark:text-white/45 hover:text-navy-primary dark:hover:text-white"
+                    )}
+                  >
+                    {label}
+                    {/* Active gold dot */}
+                    <motion.span
+                      initial={false}
+                      animate={isActive ? { scaleX: 1, opacity: 1 } : { scaleX: 0, opacity: 0 }}
                       transition={{ type: "spring", stiffness: 380, damping: 30 }}
+                      className="absolute -bottom-0.5 left-0 right-0 h-[1.5px] bg-gold-primary origin-left rounded-full"
                     />
-                  )}
-                </Link>
-              );
-            })}
-          </AnimatePresence>
-        </nav>
+                    {/* Hover preview line */}
+                    {!isActive && (
+                      <span className="absolute -bottom-0.5 left-0 right-0 h-[1px] bg-navy-primary/20 dark:bg-white/20 scale-x-0 group-hover:scale-x-100 origin-left transition-transform duration-300 rounded-full" />
+                    )}
+                  </Link>
+                );
+              })}
+            </nav>
 
-        {/* Consultation Button & Hamburger */}
-        <div className="flex items-center space-x-3">
-          <Button
-            variant="primary"
-            size="sm"
-            className="hidden sm:inline-flex text-[9px] font-bold tracking-wider uppercase shadow-none px-4 py-2 min-h-[28px]"
-            onClick={() => router.push("/consultation")}
-          >
-            Book Consultation
-          </Button>
+            {/* Right side — toggle + CTA + hamburger */}
+            <div className="flex items-center gap-3 sm:gap-4">
+              {/* Dark/Light toggle */}
+              <ThemeToggle />
 
-          {/* Morphing Hamburger Menu Toggle */}
-          <button
-            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-            className="rounded-full border border-navy-primary/10 text-navy-primary hover:bg-navy-primary/5 transition-colors lg:hidden focus:outline-none focus-visible:ring-2 focus-visible:ring-gold-primary flex items-center justify-center w-8 h-8"
-            aria-expanded={isMobileMenuOpen}
-            aria-controls="mobile-menu-overlay"
-            aria-label="Toggle menu"
-          >
-            <div className="w-4 h-3 flex flex-col justify-between items-center relative">
-              <span className={cn(
-                "w-4 h-[1.5px] bg-current rounded transition-all duration-300 ease-in-out origin-center",
-                isMobileMenuOpen ? "rotate-45 translate-y-[5px]" : ""
-              )} />
-              <span className={cn(
-                "w-4 h-[1.5px] bg-current rounded transition-all duration-300 ease-in-out",
-                isMobileMenuOpen ? "opacity-0 scale-x-0" : ""
-              )} />
-              <span className={cn(
-                "w-4 h-[1.5px] bg-current rounded transition-all duration-300 ease-in-out origin-center",
-                isMobileMenuOpen ? "-rotate-45 -translate-y-[5px]" : ""
-              )} />
+              {/* Book CTA — desktop */}
+              <Link href="/consultation" className="hidden sm:block">
+                <motion.button
+                  whileHover={{ y: -1, scale: 1.02 }}
+                  whileTap={{ scale: 0.96 }}
+                  animate={scrolled ? { paddingLeft: 20, paddingRight: 20, paddingTop: 8, paddingBottom: 8 } : { paddingLeft: 24, paddingRight: 24, paddingTop: 10, paddingBottom: 10 }}
+                  transition={{ type: "spring", stiffness: 260, damping: 28 }}
+                  className="rounded-full text-[10px] font-sans font-bold uppercase tracking-[0.16em] bg-gold-primary text-navy-primary hover:bg-navy-primary hover:text-white dark:hover:bg-white dark:hover:text-navy-primary transition-colors duration-300 outline-none focus-visible:ring-2 focus-visible:ring-gold-primary whitespace-nowrap"
+                >
+                  Book Consultation
+                </motion.button>
+              </Link>
+
+              {/* Hamburger — mobile only */}
+              <button
+                onClick={() => setMobileOpen(true)}
+                aria-label="Open navigation menu"
+                aria-expanded={mobileOpen}
+                className="flex lg:hidden items-center justify-center w-9 h-9 rounded-full text-navy-primary/60 dark:text-white/60 hover:text-navy-primary dark:hover:text-white hover:bg-navy-primary/5 dark:hover:bg-white/5 transition-all duration-200 -mr-1"
+              >
+                <Menu size={18} strokeWidth={1.75} />
+              </button>
             </div>
-          </button>
-        </div>
-      </header>
+          </div>
+        </motion.header>
+      </div>
 
-      {/* Full screen mobile menu overlay */}
+      {/* ── Mobile Fullscreen Drawer ───────────────────────────────────── */}
       <AnimatePresence>
-        {isMobileMenuOpen && (
-          <MobileMenu
-            onClose={() => setIsMobileMenuOpen(false)}
-            activeItem={pathname}
-          />
+        {mobileOpen && (
+          <>
+            {/* Backdrop */}
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="fixed inset-0 z-[60] bg-black/20 backdrop-blur-sm lg:hidden"
+              onClick={() => setMobileOpen(false)}
+            />
+
+            {/* Drawer slides in from right */}
+            <motion.div
+              key="drawer"
+              ref={menuRef}
+              initial={{ x: "100%", opacity: 0 }}
+              animate={{ x: 0, opacity: 1 }}
+              exit={{ x: "100%", opacity: 0 }}
+              transition={{ type: "spring", stiffness: 300, damping: 32 }}
+              className="fixed top-0 right-0 bottom-0 z-[70] w-[80vw] max-w-[340px] bg-white dark:bg-[#0E0F13] flex flex-col shadow-2xl lg:hidden"
+              role="dialog"
+              aria-modal="true"
+              aria-label="Mobile navigation"
+            >
+              {/* Drawer header */}
+              <div className="flex items-center justify-between px-6 h-[72px] border-b border-navy-primary/5 dark:border-white/5">
+                <div className="flex flex-col">
+                  <span className="font-display font-semibold tracking-[0.18em] uppercase text-[13px] text-navy-primary dark:text-white">
+                    Aqua Elite
+                  </span>
+                  <span className="text-[7px] tracking-[0.22em] uppercase font-sans font-medium text-silver mt-[1px]">
+                    Water Solutions We Provide
+                  </span>
+                </div>
+                <button
+                  onClick={() => setMobileOpen(false)}
+                  aria-label="Close navigation"
+                  className="w-9 h-9 rounded-full flex items-center justify-center text-navy-primary/40 dark:text-white/40 hover:text-navy-primary dark:hover:text-white hover:bg-navy-primary/5 dark:hover:bg-white/5 transition-all"
+                >
+                  <X size={18} strokeWidth={1.75} />
+                </button>
+              </div>
+
+              {/* Nav links */}
+              <nav className="flex-grow flex flex-col justify-center px-8">
+                <div className="space-y-0">
+                  {NAV_LINKS.map(({ label, href }, i) => {
+                    const isActive = href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/");
+                    return (
+                      <motion.div
+                        key={href}
+                        initial={{ opacity: 0, x: 24 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{ delay: i * 0.07, type: "spring", stiffness: 300, damping: 28 }}
+                      >
+                        <Link
+                          href={href}
+                          onClick={() => setMobileOpen(false)}
+                          className={cn(
+                            "block py-5 font-display text-2xl sm:text-3xl font-medium tracking-tight border-b border-navy-primary/6 dark:border-white/6 transition-colors duration-200",
+                            isActive
+                              ? "text-gold-primary"
+                              : "text-navy-primary/65 dark:text-white/65 hover:text-navy-primary dark:hover:text-white"
+                          )}
+                        >
+                          {label}
+                        </Link>
+                      </motion.div>
+                    );
+                  })}
+                </div>
+              </nav>
+
+              {/* Bottom panel */}
+              <div className="px-8 pb-10 space-y-4">
+                <div className="flex items-center justify-between py-4 border-t border-navy-primary/6 dark:border-white/6">
+                  <span className="text-[10px] uppercase tracking-[0.2em] text-silver font-bold">
+                    Appearance
+                  </span>
+                  <ThemeToggle />
+                </div>
+                <button
+                  onClick={() => { setMobileOpen(false); router.push("/consultation"); }}
+                  className="w-full py-4 rounded-full bg-gold-primary text-navy-primary text-[10px] font-sans font-bold uppercase tracking-[0.18em] hover:bg-navy-primary hover:text-white transition-colors duration-300"
+                >
+                  Book Consultation
+                </button>
+              </div>
+            </motion.div>
+          </>
         )}
       </AnimatePresence>
     </>
   );
 };
+
+export default Navbar;

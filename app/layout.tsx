@@ -3,7 +3,6 @@ import { Inter, Fraunces } from "next/font/google";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
-import { ThemeToggle } from "@/components/layout/ThemeToggle";
 import { defaultMetadata } from "@/lib/seo";
 import "./globals.css";
 
@@ -38,7 +37,6 @@ export default function RootLayout({
         </main>
         <Footer />
         <WhatsAppButton />
-        <ThemeToggle />
       </body>
     </html>
   );

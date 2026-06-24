@@ -2,125 +2,340 @@
 
 import * as React from "react";
 import Link from "next/link";
-import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
-import { Reveal } from "@/components/ui/Reveal";
-import { ArrowRight, Check } from "lucide-react";
+import Image from "next/image";
+import { motion } from "framer-motion";
+import { ArrowRight } from "lucide-react";
+import { projects } from "@/data/projects";
+
+// ─── Process Steps ─────────────────────────────────────────────────────────────
+
+const STEPS = [
+  {
+    num: "01",
+    title: "Site Visit",
+    body: "We come to your property. Our technicians measure water pressure at source, test your groundwater hardness, and inspect your electrical panel phase load — before we recommend anything.",
+  },
+  {
+    num: "02",
+    title: "Sizing Assessment",
+    body: "We map your simultaneous usage patterns — how many bathrooms, whether you have rain showers, tubs, or wellness fixtures. Every recommendation is derived from engineering data, never intuition.",
+  },
+  {
+    num: "03",
+    title: "Brand-Independent Recommendation",
+    body: "We are not dealers for any single manufacturer. We select the best-fit system from trusted global brands based purely on what your property needs.",
+  },
+  {
+    num: "04",
+    title: "Professional Installation",
+    body: "Our own certified full-time technicians install. No third-party subcontractors, no handoffs. Every connection is pressure-tested before we leave.",
+  },
+  {
+    num: "05",
+    title: "Testing & Commissioning",
+    body: "We run the system under full load, verify thermal performance, check every electrical connection, and hand over a written commissioning report.",
+  },
+  {
+    num: "06",
+    title: "After-Sales Support",
+    body: "We remain your local contact for the life of the system — annual scale-cleaning, warranty coordination, and rapid response if anything requires attention.",
+  },
+];
+
+const BRANDS = [
+  {
+    name: "Stiebel Eltron",
+    origin: "Germany · Est. 1924",
+    note: "Global leader in tankless heating and air-source heat pumps.",
+  },
+  {
+    name: "A.O. Smith",
+    origin: "USA · Est. 1874",
+    note: "Pioneer in glass-lined storage geysers and safety engineering.",
+  },
+  {
+    name: "ZeroB",
+    origin: "India · Est. 1985",
+    note: "Residential water softeners and advanced filtration systems.",
+  },
+  {
+    name: "Zanskar",
+    origin: "India · Est. 2020",
+    note: "Smart, centralised eco-friendly thermal loop integrations.",
+  },
+];
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function AboutPage() {
-  const standards = [
-    {
-      title: "In-House Technician Assembly",
-      description: "We do not hire temporary sub-contractors. Our on-ground installations are completed exclusively by our trained, full-time engineering technicians."
-    },
-    {
-      title: "10-Bar Pressure Testing",
-      description: "Hyderabad's high-pressure booster systems stress plumbing lines. We pressure-test every pipe connection to a minimum of 10 Bar for 24 hours before wall closure."
-    },
-    {
-      title: "Electrical Phase Load Checks",
-      description: "High-capacity heaters require three-phase connections. We perform total phase load calculations to prevent circuit overloads or voltage dips."
-    }
-  ];
-
   return (
-    <div className="relative min-h-screen pt-28 pb-16 bg-offwhite text-left">
-      
-      {/* 1. Narrative Hero */}
-      <section className="pb-12 md:pb-16" aria-label="About Page Hero">
-        <Container className="max-w-3xl">
-          <Reveal>
-            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-gold-primary mb-3 block">
-              Our Origin
-            </span>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-display font-medium tracking-tight text-navy-primary leading-[1.15] text-balance">
-              From Service Shafts to Precision Integration
+    <div className="min-h-screen bg-[#F8F8F6] font-sans">
+
+      {/* ──────────────────────────────────────────────────────────
+          HERO
+      ────────────────────────────────────────────────────────── */}
+      <section className="bg-navy-primary text-white relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.025]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+          }}
+        />
+        <div className="relative max-w-[1320px] mx-auto px-6 lg:px-12 py-28 md:py-36">
+          <div className="max-w-2xl">
+            <p className="text-[9px] uppercase tracking-[0.3em] text-gold-primary font-bold mb-6">
+              Who We Are
+            </p>
+            <h1 className="font-display text-4xl sm:text-5xl md:text-[3.4rem] font-medium leading-[1.12] tracking-tight text-white mb-8">
+              We started as{" "}
+              <br className="hidden sm:block" />
+              field technicians.
             </h1>
-          </Reveal>
-          <Reveal delay={0.2}>
-            <p className="text-xs sm:text-sm text-silver max-w-xl mt-6 leading-relaxed font-sans text-balance">
-              Aqua Elite Solutions was founded not by corporate sales executives, but by on-ground technicians who spent years fixing water system failures in Hyderabad&apos;s luxury developments.
+            <p className="text-[13px] sm:text-[15px] text-white/55 leading-relaxed max-w-lg font-sans">
+              We built this company because we saw homeowners buying expensive
+              systems that were never sized correctly for their property. That
+              problem is entirely solvable — and it is what we do.
             </p>
-          </Reveal>
-        </Container>
+          </div>
+        </div>
+        <div
+          aria-hidden
+          className="absolute bottom-0 left-0 right-0 h-12 bg-[#F8F8F6]"
+          style={{ clipPath: "polygon(0 100%, 100% 0, 100% 100%)" }}
+        />
       </section>
 
-      {/* 2. Editorial Narrative - Story Focus */}
-      <section className="py-12 md:py-20 bg-purewhite border-y border-navy-primary/5" aria-label="The Story">
-        <Container className="max-w-2xl text-left space-y-8">
-          <Reveal>
-            <h2 className="font-display text-base font-semibold tracking-wide text-navy-primary mb-2">
-              Why We Began
-            </h2>
-            <p className="text-xs sm:text-sm text-silver leading-relaxed font-sans mb-4">
-              Between 2015 and 2021, our founding team worked as on-site technicians across Jubilee Hills, Gachibowli, and Banjara Hills. We spent our days inside service shafts and under-sink vanity cabinets, troubleshooting leaking boilers, cleaning calcified rain showers, and replacing shorted elements.
-            </p>
-            <p className="text-xs sm:text-sm text-silver leading-relaxed font-sans mb-4">
-              We noticed a persistent pattern: homeowners and architects were purchasing generic, off-the-shelf storage geysers or softeners from retail showrooms without any regard for water chemistry, plumbing pipe diameters, or electrical phase loads. Sales representatives were selling hardware models, not sizing math.
-            </p>
-            <p className="text-xs sm:text-sm text-silver leading-relaxed font-sans">
-              We established Aqua Elite Solutions in 2022 to shift the business from hardware sales to engineering integrity. We don&apos;t push products—we recommend solutions. By combining German heating engineering from Stiebel Eltron with our local knowledge of Hyderabad&apos;s high-hardness borewell water, we design systems that work invisibly and reliably.
-            </p>
-          </Reveal>
-        </Container>
+      {/* ──────────────────────────────────────────────────────────
+          OUR STORY — editorial text, no cards
+      ────────────────────────────────────────────────────────── */}
+      <section className="py-20 md:py-28 bg-white border-b border-navy-primary/5">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24">
+            <div className="pt-1">
+              <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
+                Our Background
+              </p>
+              <h2 className="font-display text-[1.5rem] sm:text-[1.8rem] font-medium text-navy-primary leading-tight tracking-tight">
+                Built from the ground up
+              </h2>
+            </div>
+            <div className="space-y-6 text-[13px] sm:text-[14px] text-silver leading-[1.9] font-sans">
+              <p>
+                Aqua Elite Solutions was founded by hands-on service technicians
+                who spent years inside Hyderabad&apos;s luxury residential
+                developments — Jubilee Hills, Gachibowli, Banjara Hills —
+                installing and repairing water systems.
+              </p>
+              <p>
+                We spent those years troubleshooting leaking geysers, calcified
+                showerheads, and burnt-out electrical elements. We noticed a
+                consistent pattern: retail showrooms were selling expensive,
+                high-capacity water heaters without checking whether the
+                customer&apos;s property could support them.
+              </p>
+              <p className="text-navy-primary font-medium">
+                Homeowners were buying premium products and experiencing
+                constant temperature drops, low pressure, and electrical faults
+                — because no one had sized the system to the property.
+              </p>
+              <p>
+                We started this company to fix exactly that. We are not a
+                manufacturer, not a showroom, and not a dealer. We are
+                independent technical advisors who size the system to your home,
+                recommend the best product, install it with our own team, and
+                stay available for the life of the system.
+              </p>
+            </div>
+          </div>
+        </div>
       </section>
 
-      {/* 3. In-House Standards Section */}
-      <section className="py-12 md:py-20 bg-offwhite" aria-label="Installation Standards">
-        <Container className="max-w-3xl">
-          <Reveal>
-            <h2 className="font-display text-base font-semibold tracking-wide text-navy-primary mb-6">
-              Our In-House Assembly Benchmarks
-            </h2>
-          </Reveal>
+      {/* ──────────────────────────────────────────────────────────
+          HOW WE WORK — numbered, clean, no timeline rail
+      ────────────────────────────────────────────────────────── */}
+      <section id="process" className="py-20 md:py-28 bg-[#F8F8F6] border-b border-navy-primary/5">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
 
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 text-left">
-            {standards.map((standard, idx) => (
-              <Reveal key={idx} delay={idx * 0.15}>
-                <div className="flex flex-col justify-between p-6 bg-purewhite border border-navy-primary/5 rounded-md h-full elevation-resting hover:border-gold-primary/20 transition-all duration-300">
-                  <div className="space-y-4">
-                    <div className="flex items-center gap-2 text-gold-primary">
-                      <Check size={16} />
-                      <h3 className="font-display font-semibold text-xs tracking-wider uppercase">
-                        {standard.title}
-                      </h3>
-                    </div>
-                    <p className="text-[11px] text-silver leading-relaxed font-sans">
-                      {standard.description}
-                    </p>
-                  </div>
-                </div>
-              </Reveal>
+          <div className="mb-16">
+            <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
+              Our Process
+            </p>
+            <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight">
+              How we work
+            </h2>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-px bg-navy-primary/6">
+            {STEPS.map((step) => (
+              <div
+                key={step.num}
+                className="bg-[#F8F8F6] p-8 md:p-10 hover:bg-white transition-colors duration-300 group"
+              >
+                <span className="font-display text-[11px] font-bold text-gold-primary tracking-[0.2em] block mb-6">
+                  {step.num}
+                </span>
+                <h3 className="font-display text-[1.1rem] sm:text-[1.2rem] font-medium text-navy-primary mb-3 leading-tight">
+                  {step.title}
+                </h3>
+                <p className="text-[12px] sm:text-[13px] text-silver leading-[1.85] font-sans">
+                  {step.body}
+                </p>
+              </div>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
-      {/* 4. Support Callout */}
-      <section className="py-12 md:py-16 bg-[#0B2341] dark:bg-[#121316] text-[#FFFFFF] dark:text-[#F3F4F6] border-t border-gold-primary/20" aria-label="About CTA">
-        <Container className="max-w-xl text-center">
-          <Reveal>
-            <h2 className="text-xl sm:text-2xl font-display font-medium tracking-tight mb-4">
-              Schedule a technical assessment of your property.
-            </h2>
-            <p className="text-xs sm:text-sm text-[#FFFFFF]/70 dark:text-[#F3F4F6]/70 mb-8 leading-relaxed font-sans max-w-md mx-auto">
-              Our engineering team is ready to analyze your plumbing layout blueprints or schedule a physical audit of your Hyderabad premises.
+      {/* ──────────────────────────────────────────────────────────
+          BRANDS — typographic list (matches products page)
+      ────────────────────────────────────────────────────────── */}
+      <section id="brands" className="py-20 md:py-28 bg-white border-b border-navy-primary/5">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
+
+          <div className="max-w-xl mb-14">
+            <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
+              Independent Advisory
             </p>
-            <Link href="/consultation">
-              <Button
-                variant="primary"
-                size="lg"
-                className="text-xs font-bold uppercase tracking-wider px-8 py-3.5 bg-gold-primary text-navy-primary hover:bg-gold-primary/95 rounded-full"
+            <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight mb-4">
+              Brands we work with
+            </h2>
+            <p className="text-[13px] text-silver leading-relaxed font-sans">
+              We are not tied to any manufacturer. We select the best option for
+              your property — based on your requirements, not sales targets.
+            </p>
+          </div>
+
+          <div className="divide-y divide-navy-primary/8">
+            {BRANDS.map((brand) => (
+              <div
+                key={brand.name}
+                className="py-6 md:py-8 grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-2 md:gap-8 items-baseline"
               >
-                Schedule Sizing Consultation
-                <ArrowRight size={14} className="ml-2" />
-              </Button>
-            </Link>
-          </Reveal>
-        </Container>
+                <span className="font-display text-[1.25rem] sm:text-[1.45rem] font-medium text-navy-primary tracking-tight">
+                  {brand.name}
+                </span>
+                <span className="text-[11px] text-silver/70 font-sans uppercase tracking-wider font-medium">
+                  {brand.origin}
+                </span>
+                <span className="text-[12px] text-silver font-sans leading-relaxed max-w-xs md:text-right">
+                  {brand.note}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
       </section>
+
+      {/* ──────────────────────────────────────────────────────────
+          COMPLETED PROJECTS — editorial, no cards
+      ────────────────────────────────────────────────────────── */}
+      <section id="projects" className="py-20 md:py-28 bg-[#F8F8F6]">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
+
+          <div className="mb-16">
+            <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
+              Completed Work
+            </p>
+            <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight">
+              Selected projects
+            </h2>
+          </div>
+
+          {/* Full-bleed editorial project rows */}
+          <div className="space-y-20 md:space-y-28">
+            {projects.map((project, idx) => (
+              <div
+                key={project.id}
+                className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-start"
+              >
+                {/* Image — large, dominant */}
+                <div className={idx % 2 === 1 ? "lg:order-2" : ""}>
+                  <div className="relative w-full aspect-[3/2] rounded-xl overflow-hidden bg-navy-primary/5">
+                    <Image
+                      src={project.image}
+                      alt={project.title}
+                      fill
+                      className="object-cover"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                  </div>
+                </div>
+
+                {/* Content — clean, no labels, no badges */}
+                <div className={`pt-2 ${idx % 2 === 1 ? "lg:order-1" : ""}`}>
+                  <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-4">
+                    {project.location}
+                  </p>
+                  <h3 className="font-display text-[1.5rem] sm:text-[1.8rem] font-medium text-navy-primary leading-tight tracking-tight mb-5">
+                    {project.title}
+                  </h3>
+                  <p className="text-[13px] sm:text-[14px] text-silver leading-[1.9] font-sans mb-8">
+                    {project.description}
+                  </p>
+
+                  {/* Products as plain text — no chips, no labels */}
+                  <div className="flex flex-wrap gap-x-4 gap-y-1">
+                    {project.productsUsed.map((p, i) => (
+                      <span
+                        key={p}
+                        className="text-[11px] font-sans font-semibold text-navy-primary/50 uppercase tracking-wider"
+                      >
+                        {i > 0 && <span className="mr-4 text-navy-primary/20">·</span>}
+                        {p}
+                      </span>
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────────────────────────────────────────────────
+          CONSULTATION CTA
+      ────────────────────────────────────────────────────────── */}
+      <section className="py-24 md:py-32 bg-navy-primary text-white">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
+          <div className="max-w-xl">
+            <p className="text-[9px] uppercase tracking-[0.3em] text-gold-primary font-bold mb-5">
+              Start here
+            </p>
+            <h2 className="font-display text-[2rem] sm:text-[2.6rem] md:text-[3rem] font-medium text-white leading-tight tracking-tight mb-6">
+              Tell us about your property.
+            </h2>
+            <p className="text-[13px] sm:text-[14px] text-white/50 leading-relaxed mb-10 font-sans max-w-md">
+              We&apos;ll schedule a site visit, audit your electrical panel and water
+              supply, and provide a written sizing recommendation — no obligation.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link href="/consultation">
+                <motion.button
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center gap-2.5 bg-gold-primary text-navy-primary px-8 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] hover:bg-white transition-colors duration-300"
+                >
+                  Book a Site Visit
+                  <ArrowRight size={13} strokeWidth={2.5} />
+                </motion.button>
+              </Link>
+              <Link href="/contact">
+                <motion.button
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center gap-2.5 border border-white/20 text-white/80 px-8 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] hover:border-white/50 hover:text-white transition-all duration-300"
+                >
+                  Call Us First
+                </motion.button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }

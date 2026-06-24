@@ -3,83 +3,73 @@
 import * as React from "react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { Ruler, Compass, Wrench, ShieldCheck } from "lucide-react";
+import { MessageSquare, MapPin, PackageCheck, HeartHandshake } from "lucide-react";
 
 export const AquaEliteApproach: React.FC = () => {
   const steps = [
     {
       num: "01",
-      icon: <Ruler className="w-5 h-5" />,
-      title: "Property & Fluid Assessment",
-      description: "We conduct site diagnostic audits to measure borewell TDS scaling index, pressure profiles, physical shaft bounds, and peak coincident loads across rain showers and wellness pools."
+      icon: <MessageSquare className="w-5 h-5" />,
+      title: "Understand Your Requirements",
+      description: "We start by listening. We ask the right questions about your property, your water usage, and your expectations — so we can recommend what genuinely fits, not what is easiest to sell."
     },
     {
       num: "02",
-      icon: <Compass className="w-5 h-5" />,
-      title: "Tailored Recommendation",
-      description: "We size systems precisely for your architecture. We source and recommend an unbiased mix of premium hardware components based strictly on diagnostics—never brand-locked."
+      icon: <MapPin className="w-5 h-5" />,
+      title: "Site Visit & Assessment",
+      description: "Our team visits your property to check the water supply, plumbing layout, and electrical setup. This helps us recommend the right product for your specific situation."
     },
     {
       num: "03",
-      icon: <Wrench className="w-5 h-5" />,
-      title: "Architectural Integration",
-      description: "Our engineering technicians install systems cleanly within constraints. Every pipe routing, bypass setup, and electrical connection complies with certified quality codes."
+      icon: <PackageCheck className="w-5 h-5" />,
+      title: "Supply & Professional Installation",
+      description: "We supply products from trusted brands and install them properly. Our installation specialists handle everything — from piping to electrical connections — cleanly and safely."
     },
     {
       num: "04",
-      icon: <ShieldCheck className="w-5 h-5" />,
-      title: "Flow Health Support",
-      description: "Continuous flow protection. We provide calibration reviews, seasonal TDS audits, and priority support dispatch to ensure your systems perform reliably year after year."
+      icon: <HeartHandshake className="w-5 h-5" />,
+      title: "After-Sales Support",
+      description: "Our job does not end at installation. We are available for maintenance, check-ups, and any service you need. We want your system to work well for years to come."
     }
   ];
 
   return (
-    <section id="advisory-approach" className="py-16 md:py-24 lg:py-32 bg-offwhite border-y border-navy-primary/5" aria-label="Our Advisory Approach">
+    <section id="advisory-approach" className="py-14 md:py-20 lg:py-28 bg-offwhite border-y border-navy-primary/5" aria-label="How We Work">
       <Container className="max-w-5xl">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-start w-full relative">
+        {/* Centered Section Header */}
+        <div className="text-center max-w-3xl mx-auto mb-12 sm:mb-16 space-y-4">
+          <Reveal>
+            <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-gold-primary block text-center">
+              How We Work
+            </span>
+          </Reveal>
           
-          {/* Left Column - Sticky Section Header */}
-          <div className="lg:col-span-5 lg:sticky lg:top-28 space-y-6 text-left">
-            <Reveal>
-              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-gold-primary block">
-                Our Advisory Method
-              </span>
-            </Reveal>
-            
-            <Reveal delay={0.1}>
-              <h2 className="text-3xl sm:text-4xl font-display font-medium tracking-tight text-navy-primary leading-[1.15] text-balance">
-                We Engineer Systems.
-                <br />
-                We Do Not Sell Hardware.
-              </h2>
-            </Reveal>
-            
-            <Reveal delay={0.2}>
-              <p className="text-xs sm:text-sm text-navy-primary/70 font-sans leading-relaxed max-w-sm">
-                A luxury home deserves a custom water blueprint. We analyze parameters first, diagnostics-first, to build around your architectural requirements rather than pushing products.
-              </p>
-            </Reveal>
-            
-            {/* Deep Trust Quote */}
-            <Reveal delay={0.3} className="border-t border-gold-primary/20 pt-6 mt-8 hidden lg:block">
-              <p className="font-display italic text-xs text-navy-primary/75 leading-relaxed text-balance">
-                &ldquo;Every villa has a unique layout. Designing a heating loop or softening setup without load sizing calculations is simply a guess. We do not guess with luxury homes.&rdquo;
-              </p>
-            </Reveal>
-          </div>
+          <Reveal delay={0.1}>
+            <h2 className="text-2xl sm:text-3xl font-display font-medium tracking-tight text-navy-primary leading-tight text-balance text-center">
+              We Recommend. We Install. We Support.
+            </h2>
+          </Reveal>
+          
+          <Reveal delay={0.15}>
+            <p className="text-xs sm:text-sm text-navy-primary/70 font-sans leading-relaxed max-w-2xl mx-auto text-center">
+              We are not a shop that sells products off a shelf. We understand your needs first, recommend the right solution, install it properly, and stay available after.
+            </p>
+          </Reveal>
+        </div>
 
-          {/* Right Column - Timeline Cards Stack */}
-          <div className="lg:col-span-7 space-y-6">
-            {steps.map((step, idx) => (
-              <Reveal key={idx} delay={idx * 0.1}>
-                <div className="p-6 sm:p-8 bg-purewhite border border-navy-primary/5 rounded-xl transition-all duration-300 hover:border-gold-primary/20 elevation-resting hover:elevation-raised relative overflow-hidden group text-left">
+        {/* 2x2 Timeline Cards Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+          {steps.map((step, idx) => (
+            <Reveal key={idx} delay={idx * 0.1}>
+              <div className="p-6 sm:p-8 bg-purewhite border border-navy-primary/5 rounded-xl transition-all duration-300 hover:border-[rgba(201,165,76,0.2)] elevation-resting hover:elevation-raised relative overflow-hidden group text-left h-full flex flex-col justify-between">
+                <div>
                   {/* Subtle number overlay */}
-                  <div className="absolute top-0 right-0 p-6 font-display text-4xl sm:text-5xl font-black text-gold-primary/10 select-none transition-colors duration-300 group-hover:text-gold-primary/20">
+                  <div className="absolute top-0 right-0 p-6 font-display text-4xl sm:text-5xl font-black text-[rgba(201,165,76,0.08)] select-none transition-colors duration-300 group-hover:text-[rgba(201,165,76,0.18)]">
                     {step.num}
                   </div>
                   
                   <div className="flex items-center space-x-4 mb-4">
-                    <div className="p-2.5 border border-gold-primary/10 rounded-lg bg-offwhite text-gold-primary">
+                    <div className="p-2.5 border border-[rgba(201,165,76,0.1)] rounded-lg bg-offwhite text-gold-primary">
                       {step.icon}
                     </div>
                     <h3 className="font-display text-sm md:text-base font-semibold tracking-wide text-navy-primary">
@@ -91,11 +81,17 @@ export const AquaEliteApproach: React.FC = () => {
                     {step.description}
                   </p>
                 </div>
-              </Reveal>
-            ))}
-          </div>
-
+              </div>
+            </Reveal>
+          ))}
         </div>
+
+        {/* Trust note */}
+        <Reveal delay={0.4} className="border-t border-[rgba(201,165,76,0.15)] pt-8 mt-12 text-center max-w-2xl mx-auto">
+          <p className="font-display italic text-xs sm:text-sm text-navy-primary/75 leading-relaxed text-balance text-center">
+            &ldquo;Every property is different. We take the time to understand yours before recommending anything. That is how we build trust.&rdquo;
+          </p>
+        </Reveal>
       </Container>
     </section>
   );

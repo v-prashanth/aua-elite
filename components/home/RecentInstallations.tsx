@@ -11,27 +11,27 @@ import { ArrowRight } from "lucide-react";
 
 export const RecentInstallations: React.FC = () => {
   return (
-    <section className="py-12 md:py-20 bg-purewhite border-t border-navy-primary/5" aria-label="Recent Installations">
+    <section className="py-14 md:py-20 lg:py-28 bg-purewhite border-t border-navy-primary/5" aria-label="Recent Installations">
       <Container className="max-w-5xl">
         <div className="text-left max-w-2xl mb-10 sm:mb-12">
           <Reveal>
             <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold-primary block mb-3">
-              Showcase Gallery
+              Happy Customers
             </span>
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="text-2xl sm:text-3xl font-display font-medium tracking-tight text-navy-primary leading-tight">
-              Real Installations. True Integration.
+              Completed Installations. Real Trust.
             </h2>
           </Reveal>
           <Reveal delay={0.15}>
             <p className="text-xs sm:text-sm text-silver font-sans leading-relaxed mt-3">
-              Review real integrations designed, installed, and supported by our engineering team in Hyderabad&apos;s premium properties. Authenticity over volume.
+              A look at some of our completed installations across Hyderabad. Real homes, real results.
             </p>
           </Reveal>
         </div>
 
-        <div className="space-y-10 sm:space-y-14 lg:space-y-20">
+        <div className="space-y-10 sm:space-y-16 lg:space-y-20">
           {projects.slice(0, 2).map((project, idx) => {
             const isEven = idx % 2 === 0;
             return (
@@ -103,7 +103,7 @@ export const RecentInstallations: React.FC = () => {
               size="lg"
               className="text-xs uppercase tracking-wider font-bold"
             >
-              Explore Full Work Showcase
+              See All Happy Customers
               <ArrowRight size={14} className="ml-2" />
             </Button>
           </Link>

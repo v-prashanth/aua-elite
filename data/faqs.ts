@@ -16,13 +16,13 @@ export const faqs: FAQ[] = [
     id: "faq-manufacturer",
     category: "About Us",
     question: "Do you manufacture the products you install?",
-    answer: "No. We are independent consulting and installation partners. We recommend and integrate systems from leading global engineering brands, such as Germany's Stiebel Eltron."
+    answer: "No. We are an independent installation and service partner. We supply and install products from trusted brands like Stiebel Eltron from Germany, AO Smith, ZeroB, and Zanskar — not our own manufactured products."
   },
   {
     id: "faq-brands",
     category: "Brands",
     question: "Which brands do you work with?",
-    answer: "We primarily work with Stiebel Eltron for premium tankless heaters and heat pumps, along with our custom Aqua Elite smart softening systems designed for Hyderabad's water quality."
+    answer: "We work with trusted brands including Stiebel Eltron for German tankless heaters and heat pumps, AO Smith for storage heaters, ZeroB for water softening, and Zanskar for central heat pump systems."
   },
   {
     id: "faq-three-phase",
@@ -64,6 +64,6 @@ export const faqs: FAQ[] = [
     id: "faq-warranty",
     category: "Support",
     question: "What warranty and service support do you provide?",
-    answer: "We provide a comprehensive 2-year warranty on all Stiebel Eltron heaters and heat pumps, backed by our trained Hyderabad engineering team and immediate spare parts support."
+    answer: "We provide a comprehensive 2-year warranty on all Stiebel Eltron heaters and heat pumps, backed by our trained service team in Hyderabad and immediate spare parts support."
   }
 ];

@@ -17,11 +17,27 @@ export const brands: Brand[] = [
     established: "1924"
   },
   {
-    id: "aqua-elite-solutions",
-    name: "Aqua Elite Solutions",
-    logoUrl: "/logos/aqua-elite.svg",
-    description: "Our in-house premium brand for smart volumetric ion-exchange softeners and custom whole-home filtration systems engineered to handle high TDS hard borewell water in Hyderabad.",
+    id: "ao-smith",
+    name: "AO Smith",
+    logoUrl: "/logos/ao-smith.svg",
+    description: "A world-renowned leader in water heating systems, famous for high-durability glass-lined elements and commercial-grade thermal loop solutions.",
+    origin: "USA",
+    established: "1874"
+  },
+  {
+    id: "zerob",
+    name: "ZeroB",
+    logoUrl: "/logos/zerob.svg",
+    description: "Ion Exchange's flagship residential brand. Renowned for smart, high-capacity water softeners and zero-scaling pre-filtration units designed for borewell water profiles.",
     origin: "India",
-    established: "2022"
+    established: "1985"
+  },
+  {
+    id: "zanskar",
+    name: "Zanskar",
+    logoUrl: "/logos/zanskar.svg",
+    description: "Innovators in high-efficiency thermal loops and air-source heat pumps designed specifically to match luxury villa environments and green building standards.",
+    origin: "India",
+    established: "2020"
   }
 ];

@@ -6,6 +6,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { CheckCircle, AlertTriangle, Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { PageHeader } from "@/components/ui/PageHeader";
 
 // ── Form logic ──────────────────────────────────────────────────────────────
 function ConsultationFormContent() {
@@ -29,7 +30,7 @@ function ConsultationFormContent() {
   React.useEffect(() => {
     if (interestParam) {
       let defaultMsg = "";
-      let defaultProp: typeof formData.propertyType = "villa";
+      let defaultProp: "villa" | "apartment" | "commercial" | "builder" | "other" = "villa";
       if (interestParam.startsWith("property-")) {
         const type = interestParam.replace("property-", "");
         if (type === "bathrooms") {
@@ -124,7 +125,7 @@ function ConsultationFormContent() {
         <div className="space-y-2">
           <h3 className="font-display text-lg font-semibold text-navy-primary">Audit Request Received</h3>
           <p className="text-xs text-silver font-sans leading-relaxed max-w-xs">
-            Our Hyderabad engineering team will review your parameters and contact you within 4 business hours.
+            Our service team will review your details and get back to you within 4 business hours.
           </p>
         </div>
         <button
@@ -266,7 +267,7 @@ function ConsultationFormContent() {
           {!loading && <ArrowRight size={14} className="ml-2" />}
         </Button>
         <p className="text-[9px] text-silver text-center mt-2 font-sans">
-          Free, no-obligation. Our engineer will call you within 4 hours.
+          Free, no-obligation. Our service team will call you within 4 hours.
         </p>
       </div>
     </form>
@@ -277,35 +278,14 @@ function ConsultationFormContent() {
 export default function ConsultationPage() {
   return (
     <div className="relative min-h-screen bg-offwhite">
-      {/* Hero banner */}
-      <div className="bg-navy-primary pt-28 pb-10 sm:pb-12 border-b border-gold-primary/10">
-        <Container className="max-w-4xl text-center">
-          <motion.span
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5 }}
-            className="text-[10px] font-bold uppercase tracking-[0.25em] text-gold-primary mb-3 block"
-          >
-            Free Engineering Consultation
-          </motion.span>
-          <motion.h1
-            initial={{ opacity: 0, y: 12 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="text-2xl sm:text-3xl md:text-4xl font-display font-medium tracking-tight text-purewhite leading-tight text-balance"
-          >
-            Book a Free Site Audit
-          </motion.h1>
-          <motion.p
-            initial={{ opacity: 0, y: 8 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="text-xs sm:text-sm text-purewhite/60 mt-3 max-w-lg mx-auto leading-relaxed font-sans"
-          >
-            Our engineers inspect your piping layout, measure water TDS, verify phase loads, and design the right system — before you spend a rupee.
-          </motion.p>
-        </Container>
-      </div>
+      <PageHeader
+        tagline="Free Consultation"
+        title="Book a Free Site Audit"
+        description="Our service team will visit your property, assess your water and electrical setup, and recommend the right solution — before you spend a rupee."
+        theme="dark"
+        align="center"
+        containerClassName="max-w-4xl"
+      />
 
       {/* Main Content: 2-column on desktop */}
       <Container className="max-w-4xl py-10 sm:py-14">
@@ -315,7 +295,7 @@ export default function ConsultationPage() {
           <div className="lg:col-span-7 min-w-0">
             <div className="bg-purewhite border border-navy-primary/8 rounded-lg p-5 sm:p-6 elevation-raised">
               <h2 className="font-display text-sm font-semibold text-navy-primary mb-1">
-                Request an Engineering Assessment
+                Book a Consultation
               </h2>
               <p className="text-[11px] text-silver font-sans mb-5 leading-relaxed">
                 Fill in your details and we will schedule a site visit at your convenience.

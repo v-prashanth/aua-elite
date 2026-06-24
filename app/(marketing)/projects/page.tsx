@@ -5,6 +5,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
+import { PageHeader } from "@/components/ui/PageHeader";
 import { Reveal } from "@/components/ui/Reveal";
 import { projects } from "@/data/projects";
 import { ArrowRight, Check } from "lucide-react";
@@ -30,26 +31,15 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="relative min-h-screen pt-28 md:pt-36 pb-16 md:pb-24 bg-offwhite text-left">
-      <Container className="max-w-5xl">
-        {/* Page Header */}
-        <div className="text-left max-w-2xl mb-8 md:mb-16">
-          <Reveal>
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold-primary block mb-3">
-              Case Studies
-            </span>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h1 className="text-2xl sm:text-3xl font-display font-medium tracking-tight text-navy-primary leading-tight">
-              Real Integrations. Authentic Work.
-            </h1>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <p className="text-xs sm:text-sm text-silver font-sans leading-relaxed mt-4">
-              We focus on precision execution rather than arbitrary project volume. Explore how we sized, installed, and calibrated heating and softening systems across luxury Hyderabad properties.
-            </p>
-          </Reveal>
-        </div>
+    <div className="relative min-h-screen pb-16 md:pb-24 bg-offwhite text-left">
+      <PageHeader
+        tagline="Happy Customers"
+        title="Real Installations. Real Results."
+        description="A look at some of the installations our team has completed across Hyderabad. Every project shown here was assessed, supplied, installed, and supported by us."
+        containerClassName="max-w-5xl"
+      />
+
+      <Container className="max-w-5xl py-12">
 
         {/* Detailed Projects Layout List */}
         <div className="space-y-8 md:space-y-12">
@@ -161,7 +151,7 @@ export default function ProjectsPage() {
                 Have a specific property integration in mind?
               </h2>
               <p className="text-xs sm:text-sm text-purewhite/70 mb-8 leading-relaxed font-sans max-w-md mx-auto text-balance">
-                Our technicians can work with your architect or builder to sizing piping layouts, verify electrical compatibility, and size solutions pre-construction.
+                Our team can visit your property, assess your requirements, and recommend the right system for your home or building.
               </p>
               <Link href="/consultation">
                 <Button
@@ -169,7 +159,7 @@ export default function ProjectsPage() {
                   size="lg"
                   className="text-xs uppercase font-bold tracking-wider px-8 py-3.5 bg-gold-primary text-navy-primary hover:bg-gold-primary/95 rounded-full"
                 >
-                  Schedule Engineering Review
+                  Book Consultation
                   <ArrowRight size={14} className="ml-2" />
                 </Button>
               </Link>

@@ -10,7 +10,7 @@ export const Container: React.FC<ContainerProps> = ({ className, clean = false, 
     <div
       className={cn(
         "w-full mx-auto",
-        !clean && "px-4 sm:px-6 lg:px-8 max-w-7xl",
+        !clean && "px-5 sm:px-8 lg:px-10 xl:px-16 max-w-7xl",
         className
       )}
       {...props}

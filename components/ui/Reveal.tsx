@@ -13,7 +13,7 @@ export interface RevealProps {
 
 export const Reveal: React.FC<RevealProps> = ({ children, width = "100%", className, delay = 0 }) => {
   const ref = React.useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-80px" });
+  const isInView = useInView(ref, { once: true, margin: "0px 0px -50px 0px" });
   const mainControls = useAnimation();
 
   React.useEffect(() => {

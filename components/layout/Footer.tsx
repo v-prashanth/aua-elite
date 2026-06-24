@@ -19,14 +19,14 @@ export const Footer: React.FC = () => {
                 AQUA ELITE
               </span>
               <span className="text-[10px] uppercase tracking-widest text-gold-primary -mt-0.5">
-                Complete Water Solutions
+                Water Heating &amp; Water Treatment
               </span>
             </Link>
             <p className="text-xs text-silver leading-relaxed max-w-xs">
-              Premium water heating and softening systems. Authorized Stiebel Eltron partner serving Hyderabad&apos;s finest residences, hotels, and commercial developments.
+              Water heating and water treatment solutions for homes and commercial properties in Hyderabad. We supply products from trusted brands, install them properly, and provide long-term support.
             </p>
             <div className="text-[10px] font-semibold text-gold-primary uppercase tracking-wider">
-              German Engineering ● Custom Integration
+              Stiebel Eltron ● AO Smith ● ZeroB ● Zanskar
             </div>
           </div>
 
@@ -38,22 +38,37 @@ export const Footer: React.FC = () => {
             <ul className="space-y-2.5 text-xs text-silver">
               <li>
                 <Link href="/" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
-                  The Experience
+                  Home
                 </Link>
               </li>
               <li>
-                <Link href="/solutions" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
-                  Bespoke Solutions
+                <Link href="/products" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
+                  Products
+                </Link>
+              </li>
+              <li>
+                <Link href="/projects" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
+                  Happy Customers
+                </Link>
+              </li>
+              <li>
+                <Link href="/about" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
+                  About Us
+                </Link>
+              </li>
+              <li>
+                <Link href="/faq" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
+                  FAQ
+                </Link>
+              </li>
+              <li>
+                <Link href="/contact" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
+                  Contact
                 </Link>
               </li>
               <li>
                 <Link href="/consultation" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors font-medium text-gold-primary/90 hover:text-gold-primary">
                   Book Consultation
-                </Link>
-              </li>
-              <li>
-                <Link href="/about" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
-                  About Our Company
                 </Link>
               </li>
             </ul>
@@ -62,32 +77,32 @@ export const Footer: React.FC = () => {
           {/* Solutions Profiles */}
           <div>
             <h4 className="text-xs font-semibold uppercase tracking-wider text-gold-primary mb-4">
-              Solutions Profiles
+              What We Do
             </h4>
             <ul className="space-y-2.5 text-xs text-silver">
               <li>
-                <Link href="/solutions" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
-                  Luxury Bathrooms
+                <Link href="/products" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
+                  Water Heating
                 </Link>
               </li>
               <li>
-                <Link href="/solutions" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
-                  Large Villas
+                <Link href="/products" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
+                  Heat Pump Systems
                 </Link>
               </li>
               <li>
-                <Link href="/solutions" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
-                  Premium Apartments
+                <Link href="/products" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
+                  Water Softening
                 </Link>
               </li>
               <li>
-                <Link href="/solutions" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
-                  Boutique Hotels & Resorts
+                <Link href="/products" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
+                  Water Purification
                 </Link>
               </li>
               <li>
-                <Link href="/solutions" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
-                  High-End Commercial
+                <Link href="/projects" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
+                  Residential Installations
                 </Link>
               </li>
             </ul>

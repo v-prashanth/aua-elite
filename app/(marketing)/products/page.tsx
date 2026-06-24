@@ -3,228 +3,505 @@
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
-import { Reveal } from "@/components/ui/Reveal";
-import { products, Product } from "@/data/products";
-import { Settings, Info, Check } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { ArrowRight, ArrowUpRight, X } from "lucide-react";
+import { products } from "@/data/products";
 import { cn } from "@/lib/utils";
 
+// ─── Types ────────────────────────────────────────────────────────────────────
+
+type Solution = {
+  id: string;
+  label: string;
+  sub: string;
+  requirements: string[];
+};
+
+// ─── Static Data ──────────────────────────────────────────────────────────────
+
+const SOLUTIONS: Solution[] = [
+  {
+    id: "kitchen",
+    label: "Kitchen & Basins",
+    sub: "Instant filtered water, under-sink heaters",
+    requirements: ["Kitchen Use"],
+  },
+  {
+    id: "bathroom",
+    label: "Single Bathroom",
+    sub: "Compact heaters for hand showers and basins",
+    requirements: ["Small Bathroom"],
+  },
+  {
+    id: "rain",
+    label: "Rain Shower & Luxury Bath",
+    sub: "High-flow, temperature-stable systems",
+    requirements: ["Rain Shower", "Luxury Bathroom", "Bathtub"],
+  },
+  {
+    id: "villa",
+    label: "Villa & Multiple Bathrooms",
+    sub: "Centralised heat pumps and thermal loops",
+    requirements: ["Large Family Home"],
+  },
+  {
+    id: "hotel",
+    label: "Hotel & Commercial",
+    sub: "Scalable central systems for high occupancy",
+    requirements: ["Hotels & Commercial"],
+  },
+];
+
+const COLLECTIONS = [
+  {
+    id: "tankless",
+    label: "01",
+    title: "Tankless Water Heaters",
+    body: "Germany's standard for instantaneous water heating. Delivers uninterrupted hot water the moment a tap opens — no storage, no standby loss, no waiting.",
+    image: "/images/solutions_tankless.png",
+    href: "/products/dhb-e-11-13-electronic-control",
+    models: products.filter((p) => p.category.startsWith("tankless")),
+  },
+  {
+    id: "heat-pump",
+    label: "02",
+    title: "Heat Pumps",
+    body: "Centralized thermal systems engineered for villas and estates. Extracts ambient heat from outdoor air to serve multiple bathrooms with up to 75% energy savings.",
+    image: "/images/solutions_heatpump.png",
+    href: "/products/wwk-302-h-heat-pump",
+    models: products.filter((p) => p.category === "heat-pump"),
+  },
+  {
+    id: "filtration",
+    label: "03",
+    title: "Water Filtration",
+    body: "Powerless hollow-fibre ultrafiltration. Protects your skin, your plumbing, and your drinking water from Hyderabad's scale and sediment deposits.",
+    image: "/images/solutions_softener.png",
+    href: "/products/fountain-7s-water-filter",
+    models: products.filter((p) => p.category === "water-filter"),
+  },
+];
+
+const BRANDS = [
+  {
+    name: "Stiebel Eltron",
+    origin: "Germany · Est. 1924",
+    note: "Global leader in tankless heating and air-source heat pumps.",
+  },
+  {
+    name: "A.O. Smith",
+    origin: "USA · Est. 1874",
+    note: "Pioneer in glass-lined storage geysers and safety engineering.",
+  },
+  {
+    name: "ZeroB",
+    origin: "India · Est. 1985",
+    note: "Residential water softeners and advanced filtration systems.",
+  },
+  {
+    name: "Zanskar",
+    origin: "India · Est. 2020",
+    note: "Smart, centralised eco-friendly thermal loop integrations.",
+  },
+];
+
+// ─── Page ─────────────────────────────────────────────────────────────────────
+
 export default function ProductsPage() {
-  const [activeTab, setActiveTab] = React.useState<string>("all");
-  const [checkoutProduct, setCheckoutProduct] = React.useState<Product | null>(null);
+  const [activeSolution, setActiveSolution] = React.useState<string | null>(null);
+  const drawerRef = React.useRef<HTMLDivElement>(null);
 
-  const categories = [
-    { id: "all", name: "All Systems" },
-    { id: "tankless", name: "Tankless Heaters" },
-    { id: "heat-pump", name: "Thermal Heat Pumps" },
-    { id: "water-softener", name: "Water Softeners" }
-  ];
+  const matchedProducts = React.useMemo(() => {
+    if (!activeSolution) return [];
+    const sol = SOLUTIONS.find((s) => s.id === activeSolution);
+    if (!sol) return [];
+    return products.filter((p) =>
+      sol.requirements.some((r) => p.requirements.includes(r))
+    );
+  }, [activeSolution]);
 
-  const filteredProducts = activeTab === "all"
-    ? products
-    : products.filter((p) => p.category === activeTab);
-
-  // Map products to appropriate showcase images
-  const imageMap: Record<string, string> = {
-    "dhb-e-11-13": "/images/solutions_tankless.png",
-    "dhb-e-18-24": "/images/solutions_tankless.png",
-    "dhb-e-27": "/images/solutions_tankless.png",
-    "hpa-o-300-l": "/images/solutions_heatpump.png",
-    "ae-softflow-pro": "/images/solutions_softener.png",
-  };
-
-  const handleRequestSizing = (product: Product) => {
-    setCheckoutProduct(product);
-  };
+  function handleSelect(id: string) {
+    if (activeSolution === id) {
+      setActiveSolution(null);
+    } else {
+      setActiveSolution(id);
+      setTimeout(() => {
+        drawerRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+      }, 80);
+    }
+  }
 
   return (
-    <div className="relative min-h-screen pt-28 md:pt-36 pb-16 md:pb-24 bg-offwhite">
-      <Container className="max-w-5xl">
-        {/* Page Header */}
-        <div className="text-left max-w-2xl mb-12">
-          <Reveal>
-            <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-gold-primary block mb-3">
-              Catalog Showroom
-            </span>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <h1 className="text-2xl sm:text-3xl font-display font-medium tracking-tight text-navy-primary leading-tight">
-              Premium System Components
-            </h1>
-          </Reveal>
-          <Reveal delay={0.15}>
-            <p className="text-xs sm:text-sm text-navy-primary/70 font-sans leading-relaxed mt-4">
-              Explore our curated selection of high-capacity water systems. From compact German tankless configurations to whole-villa softening lines, each component supports our consultation-first architecture.
+    <div className="min-h-screen bg-[#F8F8F6] font-sans">
+
+      {/* ──────────────────────────────────────────────────────────
+          HERO — dark authority statement
+      ────────────────────────────────────────────────────────── */}
+      <section className="bg-navy-primary text-white relative overflow-hidden">
+        {/* Subtle grid texture */}
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.025]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+          }}
+        />
+
+        <div className="relative max-w-[1320px] mx-auto px-6 lg:px-12 py-28 md:py-36">
+          <div className="max-w-2xl">
+            <p className="text-[9px] uppercase tracking-[0.3em] text-gold-primary font-bold mb-6">
+              Water Heating & Treatment · Hyderabad
             </p>
-          </Reveal>
+            <h1 className="font-display text-4xl sm:text-5xl md:text-[3.4rem] font-medium leading-[1.12] tracking-tight text-white mb-8">
+              Not every system{" "}
+              <br className="hidden sm:block" />
+              fits every property.
+            </h1>
+            <p className="text-[13px] sm:text-[15px] text-white/55 leading-relaxed max-w-lg font-sans font-normal mb-10">
+              We visit your site, measure your requirements, and recommend
+              the exact system — sized correctly, installed properly, and
+              supported long-term.
+            </p>
+            <Link href="/consultation">
+              <motion.button
+                whileHover={{ y: -2 }}
+                whileTap={{ scale: 0.97 }}
+                className="inline-flex items-center gap-2.5 bg-gold-primary text-navy-primary px-7 py-3.5 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] hover:bg-white transition-colors duration-300"
+              >
+                Book a Site Visit
+                <ArrowRight size={13} strokeWidth={2.5} />
+              </motion.button>
+            </Link>
+          </div>
         </div>
 
-        {/* Dynamic Category Tabs */}
-        <div className="border-b border-navy-primary/5 mb-12 flex space-x-2 overflow-x-auto scrollbar-none pb-1">
-          {categories.map((cat) => (
-            <button
-              key={cat.id}
-              onClick={() => setActiveTab(cat.id)}
-              className={cn(
-                "px-5 py-3.5 border-b-2 text-[10px] uppercase font-bold tracking-wider transition-all duration-200 shrink-0 outline-none",
-                activeTab === cat.id
-                  ? "border-gold-primary text-navy-primary font-bold"
-                  : "border-transparent text-silver hover:text-navy-primary"
-              )}
-            >
-              {cat.name}
-            </button>
-          ))}
-        </div>
+        {/* Diagonal divider */}
+        <div
+          aria-hidden
+          className="absolute bottom-0 left-0 right-0 h-12 bg-[#F8F8F6]"
+          style={{ clipPath: "polygon(0 100%, 100% 0, 100% 100%)" }}
+        />
+      </section>
 
-        {/* Brand Showcase Block (Equal treatment) */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-8">
-          <Reveal>
-            <div className="p-6 bg-purewhite border border-navy-primary/5 rounded-lg flex flex-col justify-between h-full text-left">
-              <div>
-                <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block mb-1">Germany ● Est. 1924</span>
-                <h3 className="font-display font-bold text-sm text-navy-primary uppercase tracking-wider mb-2">Stiebel Eltron</h3>
-                <p className="text-[11px] text-navy-primary/70 leading-relaxed font-sans">
-                  Precision engineered instantaneous water heaters and central air-source heat pumps built for durability, efficiency, and scale.
-                </p>
-              </div>
-            </div>
-          </Reveal>
-          <Reveal delay={0.1}>
-            <div className="p-6 bg-purewhite border border-navy-primary/5 rounded-lg flex flex-col justify-between h-full text-left">
-              <div>
-                <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block mb-1">India ● Est. 2022</span>
-                <h3 className="font-display font-bold text-sm text-navy-primary uppercase tracking-wider mb-2">Aqua Elite Solutions</h3>
-                <p className="text-[11px] text-navy-primary/70 leading-relaxed font-sans">
-                  Automated softeners and smart whole-villa pre-filtration lines designed specifically to mitigate Hyderabad&apos;s borewell water hardness.
-                </p>
-              </div>
-            </div>
-          </Reveal>
-        </div>
+      {/* ──────────────────────────────────────────────────────────
+          FIND YOUR SOLUTION — consultation wizard
+      ────────────────────────────────────────────────────────── */}
+      <section id="solutions" className="pt-20 pb-16 md:pb-24">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
 
-        {/* Product Cards Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
-          {filteredProducts.map((product, idx) => {
-            const image = imageMap[product.id] || "/images/solutions_tankless.png";
-            return (
-              <Reveal key={product.id} delay={idx * 0.1}>
-                <div className="flex flex-col h-full bg-purewhite border border-navy-primary/5 rounded-lg overflow-hidden transition-all duration-300 hover:border-gold-primary/20 elevation-resting hover:elevation-raised text-left">
-                  {/* Image banner */}
-                  <div className="relative w-full h-[220px] bg-offwhite border-b border-navy-primary/5">
-                    <Image
-                      src={image}
-                      alt={product.title}
-                      fill
-                      className="object-cover object-center"
-                      sizes="(max-width: 768px) 100vw, 30vw"
-                    />
-                    <div className="absolute top-3 left-3 px-2 py-1 bg-navy-primary text-purewhite rounded font-sans text-[8px] font-bold uppercase tracking-widest border border-gold-primary/20">
-                      {product.brand}
-                    </div>
-                  </div>
+          <div className="mb-12">
+            <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
+              Find Your Solution
+            </p>
+            <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight">
+              What are you solving for?
+            </h2>
+          </div>
 
-                  {/* Body Content */}
-                  <div className="flex flex-col justify-between flex-grow p-6 space-y-6">
-                    <div className="space-y-3">
-                      <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold">
-                        {product.category.replace("-", " ")}
+          {/* Large interactive rows — not cards */}
+          <div className="border-t border-navy-primary/10">
+            {SOLUTIONS.map((sol, i) => {
+              const isActive = activeSolution === sol.id;
+              return (
+                <React.Fragment key={sol.id}>
+                  <button
+                    onClick={() => handleSelect(sol.id)}
+                    className={cn(
+                      "w-full text-left border-b border-navy-primary/10 group transition-all duration-300 outline-none",
+                      "grid grid-cols-[1fr_auto] items-center gap-4",
+                      "py-5 md:py-6 px-0",
+                      isActive ? "bg-transparent" : "hover:bg-navy-primary/[0.02]"
+                    )}
+                  >
+                    <div className="flex items-baseline gap-5 md:gap-8">
+                      <span className={cn(
+                        "font-display text-[11px] font-bold tabular-nums transition-colors duration-300 w-5 shrink-0",
+                        isActive ? "text-gold-primary" : "text-navy-primary/25 group-hover:text-gold-primary/60"
+                      )}>
+                        {String(i + 1).padStart(2, "0")}
                       </span>
-                      <h3 className="font-display text-sm font-semibold tracking-wide text-navy-primary">
-                        {product.title}
-                      </h3>
-                      <p className="text-[10px] sm:text-xs text-navy-primary/70 font-sans leading-relaxed">
-                        {product.subtitle}
-                      </p>
-                    </div>
-
-                    <div className="space-y-3">
-                      {/* Technical specifications preview */}
-                      <div className="bg-offwhite p-3 rounded border border-navy-primary/5">
-                        <span className="text-[8px] font-bold tracking-widest text-navy-primary/60 uppercase block mb-1">Key Parameter</span>
-                        <span className="text-[10px] text-navy-primary font-medium font-sans">
-                          {product.category === "tankless" && `Power Load: ${product.specifications["Rated Output"] || "11-27 kW"}`}
-                          {product.category === "heat-pump" && `Cylinder Volume: ${product.specifications["Cylinder Capacity"] || "300 Liters"}`}
-                          {product.category === "water-softener" && `Flow Rate: ${product.specifications["Flow Rate Capacity"] || "2.5 m³/hour"}`}
+                      <div>
+                        <span className={cn(
+                          "font-display text-[1.1rem] sm:text-[1.3rem] md:text-[1.5rem] font-medium tracking-tight transition-colors duration-300 block",
+                          isActive ? "text-navy-primary" : "text-navy-primary/75 group-hover:text-navy-primary"
+                        )}>
+                          {sol.label}
+                        </span>
+                        <span className={cn(
+                          "text-[11px] font-sans transition-colors duration-300 block mt-0.5",
+                          isActive ? "text-silver" : "text-silver/60 group-hover:text-silver"
+                        )}>
+                          {sol.sub}
                         </span>
                       </div>
-
-                      {/* Dynamic CTA stack */}
-                      <div className="flex gap-2">
-                        <Link href={`/products/${product.slug}`} className="flex-1">
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="w-full justify-center text-[9px] uppercase tracking-wider font-bold"
-                          >
-                            <Info size={10} className="mr-1.5" />
-                            Details
-                          </Button>
-                        </Link>
-                        
-                        <Button
-                          variant="primary"
-                          size="sm"
-                          onClick={() => handleRequestSizing(product)}
-                          className="flex-1 justify-center text-[9px] uppercase tracking-wider font-bold"
-                        >
-                          <Settings size={10} className="mr-1.5" />
-                          Request Sizing
-                        </Button>
-                      </div>
                     </div>
+                    <div className={cn(
+                      "w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 shrink-0",
+                      isActive
+                        ? "border-navy-primary bg-navy-primary text-white rotate-45"
+                        : "border-navy-primary/20 text-navy-primary/40 group-hover:border-navy-primary/50 group-hover:text-navy-primary"
+                    )}>
+                      <ArrowRight size={12} strokeWidth={2} />
+                    </div>
+                  </button>
+
+                  {/* Inline drawer — opens below the selected row */}
+                  <AnimatePresence>
+                    {isActive && (
+                      <motion.div
+                        ref={drawerRef}
+                        initial={{ height: 0, opacity: 0 }}
+                        animate={{ height: "auto", opacity: 1 }}
+                        exit={{ height: 0, opacity: 0 }}
+                        transition={{ duration: 0.38, ease: [0.32, 0.72, 0, 1] }}
+                        className="overflow-hidden"
+                      >
+                        <div className="py-8 px-0 md:pl-[52px]">
+                          <div className="flex items-center justify-between mb-6">
+                            <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold">
+                              Recommended for {sol.label}
+                            </p>
+                            <button
+                              onClick={() => setActiveSolution(null)}
+                              className="text-[9px] uppercase tracking-wider font-bold text-navy-primary/40 hover:text-navy-primary flex items-center gap-1.5 transition-colors"
+                            >
+                              <X size={10} /> Close
+                            </button>
+                          </div>
+
+                          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                            {matchedProducts.map((product) => (
+                              <Link
+                                key={product.id}
+                                href={`/products/${product.slug}`}
+                                className="group flex items-center gap-4 p-4 rounded-xl bg-white border border-navy-primary/6 hover:border-gold-primary/30 hover:shadow-raised transition-all duration-300"
+                              >
+                                {/* Product image */}
+                                <div className="relative w-12 h-16 shrink-0 rounded bg-[#F2F3F5] flex items-center justify-center overflow-hidden">
+                                  <Image
+                                    src={product.image}
+                                    alt={product.title}
+                                    fill
+                                    className="object-contain p-1"
+                                    sizes="48px"
+                                  />
+                                </div>
+                                <div className="min-w-0 flex-1">
+                                  <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block mb-0.5">
+                                    {product.brand}
+                                  </span>
+                                  <h3 className="font-display text-[13px] font-semibold text-navy-primary truncate">
+                                    {product.title}
+                                  </h3>
+                                  <p className="text-[10px] text-silver line-clamp-1 mt-0.5 font-sans">
+                                    {product.subtitle}
+                                  </p>
+                                </div>
+                                <ArrowUpRight
+                                  size={14}
+                                  className="shrink-0 text-navy-primary/20 group-hover:text-gold-primary transition-colors duration-200"
+                                />
+                              </Link>
+                            ))}
+                          </div>
+
+                          {matchedProducts.length === 0 && (
+                            <p className="text-sm text-silver">
+                              No specific products matched. Book a consultation — we&apos;ll size it for you.
+                            </p>
+                          )}
+
+                          <div className="mt-6">
+                            <Link href={`/consultation?requirement=${sol.id}`}>
+                              <motion.button
+                                whileHover={{ y: -1 }}
+                                whileTap={{ scale: 0.97 }}
+                                className="inline-flex items-center gap-2 bg-navy-primary text-white px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.16em] hover:bg-navy-primary/85 transition-colors duration-300"
+                              >
+                                Get a Custom Recommendation
+                                <ArrowRight size={12} />
+                              </motion.button>
+                            </Link>
+                          </div>
+                        </div>
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                </React.Fragment>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────────────────────────────────────────────────
+          COLLECTIONS — full-width editorial, alternating
+      ────────────────────────────────────────────────────────── */}
+      <section id="collections" className="py-20 md:py-28 bg-white border-t border-navy-primary/5">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
+          <div className="mb-16">
+            <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
+              System Architecture
+            </p>
+            <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight">
+              Three categories of solution
+            </h2>
+          </div>
+
+          <div className="space-y-24 md:space-y-32">
+            {COLLECTIONS.map((col, idx) => (
+              <div
+                key={col.id}
+                className={cn(
+                  "grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center",
+                  idx % 2 === 1 ? "lg:[direction:rtl]" : ""
+                )}
+              >
+                {/* Image stage */}
+                <div className={cn(
+                  "relative rounded-2xl overflow-hidden bg-[#F0F2F5] aspect-[4/3]",
+                  idx % 2 === 1 ? "lg:[direction:ltr]" : ""
+                )}>
+                  <Image
+                    src={col.image}
+                    alt={col.title}
+                    fill
+                    className="object-contain p-8 md:p-12"
+                    sizes="(max-width: 1024px) 100vw, 50vw"
+                    priority={idx === 0}
+                  />
+                  {/* Label overlay */}
+                  <div className="absolute top-5 left-5">
+                    <span className="font-display text-[10px] font-bold text-navy-primary/30 uppercase tracking-[0.2em]">
+                      {col.label}
+                    </span>
                   </div>
                 </div>
-              </Reveal>
-            );
-          })}
-        </div>
-      </Container>
 
-      {/* Future-Ready Checkout Overlay Modal */}
-      {checkoutProduct && (
-        <div className="fixed inset-0 z-50 bg-navy-primary/40 backdrop-blur-md flex items-center justify-center p-4">
-          <Reveal className="bg-purewhite border border-gold-primary/20 rounded-lg max-w-md w-full p-6 sm:p-8 text-left shadow-floating relative">
-            <h3 className="font-display text-base font-semibold text-navy-primary mb-3">
-              Sizing Assessment &mdash; {checkoutProduct.title}
-            </h3>
-            
-            <p className="text-xs text-navy-primary/70 font-sans leading-relaxed mb-6">
-              To guarantee performance, this system requires a phase calculation and plumbing sizing audit before purchase. Sizing reviews will occur automatically during consultation.
-            </p>
+                {/* Text */}
+                <div className={cn(idx % 2 === 1 ? "lg:[direction:ltr]" : "")}>
+                  <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-4">
+                    {col.label} / {col.title}
+                  </p>
+                  <h3 className="font-display text-[1.8rem] sm:text-[2.2rem] font-medium text-navy-primary leading-tight tracking-tight mb-5">
+                    {col.title}
+                  </h3>
+                  <p className="text-[13px] sm:text-[14px] text-silver leading-relaxed mb-8 max-w-md font-sans">
+                    {col.body}
+                  </p>
 
-            <div className="space-y-4 mb-8">
-              <div className="flex items-start gap-3 bg-offwhite p-4 rounded border border-navy-primary/5">
-                <Check className="w-4 h-4 text-gold-primary shrink-0 mt-0.5" />
-                <p className="text-[10px] text-navy-primary font-medium font-sans">
-                  Online transaction pipeline is ready. Sizing reviews will occur automatically during consultation.
-                </p>
+                  {/* Model chips — subtle, not cards */}
+                  <div className="flex flex-wrap gap-2 mb-8">
+                    {col.models.map((m) => (
+                      <Link
+                        key={m.id}
+                        href={`/products/${m.slug}`}
+                        className="px-3 py-1.5 rounded-full border border-navy-primary/12 text-[10px] font-sans font-semibold text-navy-primary/65 hover:border-gold-primary/40 hover:text-navy-primary hover:bg-gold-primary/5 transition-all duration-200"
+                      >
+                        {m.title}
+                      </Link>
+                    ))}
+                  </div>
+
+                  <Link href={col.href}>
+                    <motion.button
+                      whileHover={{ x: 3 }}
+                      className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-navy-primary hover:text-gold-primary transition-colors duration-200 group"
+                    >
+                      View Details
+                      <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform duration-200" />
+                    </motion.button>
+                  </Link>
+                </div>
               </div>
-            </div>
-
-            <div className="flex flex-col sm:flex-row gap-3">
-              <Link href={`/consultation?interest=${checkoutProduct.slug}`} className="flex-1">
-                <Button
-                  variant="primary"
-                  size="md"
-                  className="w-full justify-center text-[10px] uppercase font-bold tracking-wider"
-                >
-                  Schedule Sizing Audit
-                </Button>
-              </Link>
-              <Button
-                variant="outline"
-                size="md"
-                onClick={() => setCheckoutProduct(null)}
-                className="w-full sm:w-auto justify-center text-[10px] uppercase font-bold tracking-wider"
-              >
-                Cancel
-              </Button>
-            </div>
-          </Reveal>
+            ))}
+          </div>
         </div>
-      )}
+      </section>
+
+      {/* ──────────────────────────────────────────────────────────
+          BRANDS — minimal typographic list
+      ────────────────────────────────────────────────────────── */}
+      <section id="brands" className="py-20 md:py-28 bg-[#F8F8F6] border-t border-navy-primary/5">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
+          <div className="max-w-xl mb-14">
+            <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
+              Independent Advisory
+            </p>
+            <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight mb-4">
+              Brands we work with
+            </h2>
+            <p className="text-[13px] text-silver leading-relaxed font-sans">
+              We are not tied to any single manufacturer. We recommend based on
+              your property&apos;s requirements — nothing else.
+            </p>
+          </div>
+
+          <div className="divide-y divide-navy-primary/8">
+            {BRANDS.map((brand) => (
+              <div
+                key={brand.name}
+                className="py-6 md:py-8 grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-2 md:gap-8 items-baseline group"
+              >
+                <span className="font-display text-[1.25rem] sm:text-[1.45rem] font-medium text-navy-primary tracking-tight">
+                  {brand.name}
+                </span>
+                <span className="text-[11px] text-silver/70 font-sans uppercase tracking-wider font-medium">
+                  {brand.origin}
+                </span>
+                <span className="text-[12px] text-silver font-sans leading-relaxed max-w-xs md:text-right">
+                  {brand.note}
+                </span>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────────────────────────────────────────────────
+          FINAL CTA
+      ────────────────────────────────────────────────────────── */}
+      <section className="py-24 md:py-32 bg-navy-primary text-white">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
+          <div className="max-w-xl">
+            <p className="text-[9px] uppercase tracking-[0.3em] text-gold-primary font-bold mb-5">
+              Ready to proceed?
+            </p>
+            <h2 className="font-display text-[2rem] sm:text-[2.6rem] md:text-[3rem] font-medium text-white leading-tight tracking-tight mb-6">
+              Tell us about your property.
+            </h2>
+            <p className="text-[13px] sm:text-[14px] text-white/50 leading-relaxed mb-10 font-sans max-w-md">
+              We&apos;ll schedule a site visit, audit your electrical panel and
+              water supply, and recommend the exact system — with a written
+              sizing report included.
+            </p>
+            <div className="flex flex-wrap gap-4">
+              <Link href="/consultation">
+                <motion.button
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center gap-2.5 bg-gold-primary text-navy-primary px-8 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] hover:bg-white transition-colors duration-300"
+                >
+                  Book a Site Visit
+                  <ArrowRight size={13} strokeWidth={2.5} />
+                </motion.button>
+              </Link>
+              <Link href="/contact">
+                <motion.button
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center gap-2.5 border border-white/20 text-white/80 px-8 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] hover:border-white/50 hover:text-white transition-all duration-300"
+                >
+                  Call Us First
+                </motion.button>
+              </Link>
+            </div>
+          </div>
+        </div>
+      </section>
+
     </div>
   );
 }

@@ -12,30 +12,30 @@ import { products } from "@/data/products";
 
 export const FeaturedProducts: React.FC = () => {
   // Curate exactly 3 flagship products
-  const featuredIds = ["dhb-e-18-24", "hpa-o-300-l", "ae-softflow-pro"];
+  const featuredIds = ["dhb-e-18-24", "wwk-302-h", "fountain-7s"];
   const curatedProducts = products.filter((p) => featuredIds.includes(p.id));
 
-  // Map products to appropriate showcase images
+  // Map products to actual product showcase images (clean filenames)
   const imageMap: Record<string, string> = {
-    "dhb-e-18-24": "/images/solutions_tankless.png",
-    "hpa-o-300-l": "/images/solutions_heatpump.png",
-    "ae-softflow-pro": "/images/solutions_softener.png",
+    "dhb-e-18-24": "/images/products/product-1.jpg",
+    "wwk-302-h": "/images/products/product-4.jpg",
+    "fountain-7s": "/images/products/product-3.jpg",
   };
 
   const benefitMap: Record<string, string> = {
     "dhb-e-18-24": "Endless hot water with zero preheating wait, completely concealed inside vanity units.",
-    "hpa-o-300-l": "Saves up to 75% on electricity bills by extracting ambient air energy for full-villa heating.",
-    "ae-softflow-pro": "Zero scale protection: prevents minerals from clogging pipes or staining designer brassware.",
+    "wwk-302-h": "Saves up to 75% on electricity bills by extracting ambient air energy for full-villa heating.",
+    "fountain-7s": "Premium 7-in-1 ultrafiltration removes 100% of bacteria without requiring any electricity.",
   };
 
   return (
-    <section id="featured-products" className="py-12 md:py-20 lg:py-28 bg-purewhite" aria-label="Featured Products">
+    <section id="featured-products" className="py-14 md:py-20 lg:py-28 bg-purewhite" aria-label="Featured Products">
       <Container className="max-w-5xl">
         <Reveal>
           <SectionHeader
-            tagline="Curated Showroom"
-            title="Flagship System Components"
-            description="We select and configure premium hardware models from trusted manufacturers to match your structural layout."
+            tagline="Our Products"
+            title="Products We Supply & Install"
+            description="We source products from trusted brands and recommend the right one for your home. Every product we supply, we also install and support."
             align="left"
             className="mb-10"
           />
@@ -46,6 +46,12 @@ export const FeaturedProducts: React.FC = () => {
           {curatedProducts.map((product, idx) => {
             const image = imageMap[product.id] || "/images/solutions_tankless.png";
             const benefit = benefitMap[product.id] || product.subtitle;
+            const displayCategory = product.category.startsWith("tankless")
+              ? "Tankless Heater"
+              : product.category === "heat-pump"
+              ? "Heat Pump"
+              : "Water Filter";
+
             return (
               <Reveal key={product.id} delay={idx * 0.15}>
                 <div className="flex flex-col h-full bg-purewhite border border-navy-primary/5 rounded-lg overflow-hidden transition-all duration-300 hover:border-gold-primary/20 elevation-resting hover:elevation-raised group">
@@ -67,7 +73,7 @@ export const FeaturedProducts: React.FC = () => {
                   <div className="flex flex-col justify-between flex-grow p-6 text-left space-y-4">
                     <div className="space-y-2">
                       <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold">
-                        {product.category.replace("-", " ")}
+                        {displayCategory}
                       </span>
                       <h3 className="font-display text-sm font-semibold tracking-wide text-navy-primary">
                         {product.title}
@@ -78,7 +84,7 @@ export const FeaturedProducts: React.FC = () => {
                     </div>
 
                     <Link href={`/products/${product.slug}`} className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider text-gold-primary hover:text-navy-primary transition-colors outline-none group pt-2">
-                      <span>Explore Technical Outline</span>
+                      <span>View Details</span>
                       <ArrowRight size={12} className="ml-1.5 transition-transform group-hover:translate-x-1" />
                     </Link>
                   </div>
@@ -96,7 +102,7 @@ export const FeaturedProducts: React.FC = () => {
               size="lg"
               className="text-xs uppercase tracking-wider font-bold"
             >
-              View All System Components
+              View All Products
               <ArrowRight size={14} className="ml-2" />
             </Button>
           </Link>
