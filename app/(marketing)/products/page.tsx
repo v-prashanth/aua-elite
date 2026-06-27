@@ -58,7 +58,7 @@ const COLLECTIONS = [
     label: "01",
     title: "Tankless Water Heaters",
     body: "Germany's standard for instantaneous water heating. Delivers uninterrupted hot water the moment a tap opens — no storage, no standby loss, no waiting.",
-    image: "/images/solutions_tankless.png",
+    image: "/images/solutions_tankless_generated.png",
     href: "/products/dhb-e-11-13-electronic-control",
     models: products.filter((p) => p.category.startsWith("tankless")),
   },
@@ -67,7 +67,7 @@ const COLLECTIONS = [
     label: "02",
     title: "Heat Pumps",
     body: "Centralized thermal systems engineered for villas and estates. Extracts ambient heat from outdoor air to serve multiple bathrooms with up to 75% energy savings.",
-    image: "/images/solutions_heatpump.png",
+    image: "/images/solutions_heatpump_generated.png",
     href: "/products/wwk-302-h-heat-pump",
     models: products.filter((p) => p.category === "heat-pump"),
   },
@@ -76,7 +76,7 @@ const COLLECTIONS = [
     label: "03",
     title: "Drinking Water Purifiers",
     body: "Premium German-engineered ultrafiltration systems. Delivers 100% bacteria-free, pure drinking water directly to your kitchen — operating completely without electricity or wastewater.",
-    image: "/images/products/product-3.jpg",
+    image: "/images/solutions_purifier_generated.png",
     href: "/products/fountain-7s-water-filter",
     models: products.filter((p) => p.category === "water-filter"),
   },
@@ -361,14 +361,14 @@ export default function ProductsPage() {
               >
                 {/* Image stage */}
                 <div className={cn(
-                  "relative rounded-2xl overflow-hidden bg-[#F0F2F5] aspect-[4/3]",
+                  "relative rounded-2xl overflow-hidden bg-offwhite border border-navy-primary/5 aspect-[4/3] group",
                   idx % 2 === 1 ? "lg:[direction:ltr]" : ""
                 )}>
                   <Image
                     src={col.image}
                     alt={col.title}
                     fill
-                    className="object-contain p-8 md:p-12"
+                    className="object-cover object-center transition-transform duration-700 hover:scale-105"
                     sizes="(max-width: 1024px) 100vw, 50vw"
                     priority={idx === 0}
                   />
