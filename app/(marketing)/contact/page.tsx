@@ -134,10 +134,15 @@ export default function ContactPage() {
                   <span className="text-[10px] uppercase tracking-[0.2em] text-silver/60 font-sans font-medium block mb-1.5">
                     Office
                   </span>
-                  <p className="text-[14px] text-navy-primary font-sans leading-relaxed">
+                  <a
+                    href="https://maps.app.goo.gl/ZyP87vtqo5odNARb8?g_st=aw"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block text-[14px] text-navy-primary hover:text-gold-primary font-sans leading-relaxed transition-colors duration-200"
+                  >
                     Jubilee Hills, Road No. 36<br />
                     Hyderabad, Telangana 500033
-                  </p>
+                  </a>
                 </div>
 
                 <div className="py-6">

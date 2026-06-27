@@ -142,10 +142,15 @@ export const Footer: React.FC = () => {
             <ul className="space-y-3 text-xs text-silver">
               <li className="flex items-start space-x-2.5">
                 <MapPin size={14} className="text-gold-primary shrink-0 mt-0.5" />
-                <span>
+                <a
+                  href="https://maps.app.goo.gl/ZyP87vtqo5odNARb8?g_st=aw"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors duration-200"
+                >
                   Jubilee Hills, Road No. 36,<br />
                   Hyderabad, Telangana - 500033
-                </span>
+                </a>
               </li>
               <li className="flex items-center space-x-2.5">
                 <Phone size={14} className="text-gold-primary shrink-0" />

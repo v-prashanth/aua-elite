@@ -354,7 +354,15 @@ export default function ConsultationPage() {
                 </li>
                 <li className="flex items-start gap-2.5">
                   <MapPin size={13} className="text-gold-primary shrink-0 mt-0.5" />
-                  <span className="text-purewhite/70">Jubilee Hills, Road No. 36,<br />Hyderabad — 500033</span>
+                  <a
+                    href="https://maps.app.goo.gl/ZyP87vtqo5odNARb8?g_st=aw"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="hover:text-gold-primary transition-colors duration-200 text-purewhite/70"
+                  >
+                    Jubilee Hills, Road No. 36,<br />
+                    Hyderabad — 500033
+                  </a>
                 </li>
               </ul>
               <div className="mt-4 pt-4 border-t border-purewhite/10 text-[10px] text-purewhite/50">
