@@ -140,8 +140,8 @@ export default function ContactPage() {
                     rel="noopener noreferrer"
                     className="block text-[14px] text-navy-primary hover:text-gold-primary font-sans leading-relaxed transition-colors duration-200"
                   >
-                    Jubilee Hills, Road No. 36<br />
-                    Hyderabad, Telangana 500033
+                    Hema Nagar, Boduppal<br />
+                    Hyderabad, Telangana 500039
                   </a>
                 </div>
 

@@ -148,8 +148,8 @@ export const Footer: React.FC = () => {
                   rel="noopener noreferrer"
                   className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors duration-200"
                 >
-                  Jubilee Hills, Road No. 36,<br />
-                  Hyderabad, Telangana - 500033
+                  Hema Nagar, Boduppal,<br />
+                  Hyderabad, Telangana - 500039
                 </a>
               </li>
               <li className="flex items-center space-x-2.5">

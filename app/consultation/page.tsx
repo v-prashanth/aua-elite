@@ -360,8 +360,8 @@ export default function ConsultationPage() {
                     rel="noopener noreferrer"
                     className="hover:text-gold-primary transition-colors duration-200 text-purewhite/70"
                   >
-                    Jubilee Hills, Road No. 36,<br />
-                    Hyderabad — 500033
+                    Hema Nagar, Boduppal,<br />
+                    Hyderabad — 500039
                   </a>
                 </li>
               </ul>
