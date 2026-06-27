@@ -17,9 +17,9 @@ export const FeaturedProducts: React.FC = () => {
 
   // Map products to actual product showcase images (clean filenames)
   const imageMap: Record<string, string> = {
-    "dhb-e-18-24": "/images/products/product-1.jpg",
-    "wwk-302-h": "/images/products/product-4.jpg",
-    "fountain-7s": "/images/products/product-3.jpg",
+    "dhb-e-18-24": "/images/products/dhb-e-18-24.jpg",
+    "wwk-302-h": "/images/products/wwk-302-h.jpg",
+    "fountain-7s": "/images/products/fountain-7s.jpg",
   };
 
   const benefitMap: Record<string, string> = {
@@ -68,10 +68,10 @@ export const FeaturedProducts: React.FC = () => {
                   {/* Image wrapper */}
                   <div className="relative w-full h-[200px] bg-offwhite border-b border-navy-primary/5 overflow-hidden">
                     <Image
-                      src={image}
+                      src={`${image}?v=2`}
                       alt={product.title}
                       fill
-                      className="object-contain p-4 transition-transform duration-700 group-hover:scale-105"
+                      className="object-cover transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-w-768px) 100vw, 30vw"
                     />
                     <div className="absolute top-3 left-3 px-2 py-0.5 bg-[#0B2341] dark:bg-[#16171B] text-[#FFFFFF] dark:text-[#F3F4F6] rounded font-sans text-[7px] font-bold uppercase tracking-widest border border-gold-primary/25">

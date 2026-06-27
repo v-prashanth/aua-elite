@@ -1,5 +1,6 @@
 "use client";
 
+// Force Next.js dev server cache invalidation for updated collection images
 import * as React from "react";
 import Link from "next/link";
 import Image from "next/image";
@@ -58,7 +59,7 @@ const COLLECTIONS = [
     label: "01",
     title: "Tankless Water Heaters",
     body: "Germany's standard for instantaneous water heating. Delivers uninterrupted hot water the moment a tap opens — no storage, no standby loss, no waiting.",
-    image: "/images/solutions_tankless_generated.png",
+    image: "/images/products/dhb-e-11-13.jpg",
     href: "/products/dhb-e-11-13-electronic-control",
     models: products.filter((p) => p.category.startsWith("tankless")),
   },
@@ -67,7 +68,7 @@ const COLLECTIONS = [
     label: "02",
     title: "Heat Pumps",
     body: "Centralized thermal systems engineered for villas and estates. Extracts ambient heat from outdoor air to serve multiple bathrooms with up to 75% energy savings.",
-    image: "/images/solutions_heatpump_generated.png",
+    image: "/images/products/wwk-302-h.jpg",
     href: "/products/wwk-302-h-heat-pump",
     models: products.filter((p) => p.category === "heat-pump"),
   },
@@ -76,7 +77,7 @@ const COLLECTIONS = [
     label: "03",
     title: "Drinking Water Purifiers",
     body: "Premium German-engineered ultrafiltration systems. Delivers 100% bacteria-free, pure drinking water directly to your kitchen — operating completely without electricity or wastewater.",
-    image: "/images/solutions_purifier_generated.png",
+    image: "/images/products/fountain-7s.jpg",
     href: "/products/fountain-7s-water-filter",
     models: products.filter((p) => p.category === "water-filter"),
   },
@@ -279,15 +280,15 @@ export default function ProductsPage() {
                                 className="group flex items-center gap-4 p-4 rounded-xl bg-white border border-navy-primary/6 hover:border-gold-primary/30 hover:shadow-raised transition-all duration-300"
                               >
                                 {/* Product image */}
-                                <div className="relative w-12 h-16 shrink-0 rounded bg-[#F2F3F5] flex items-center justify-center overflow-hidden">
-                                  <Image
-                                    src={product.image}
-                                    alt={product.title}
-                                    fill
-                                    className="object-contain p-1"
-                                    sizes="48px"
-                                  />
-                                </div>
+                                 <div className="relative w-12 h-16 shrink-0 rounded bg-[#F2F3F5] overflow-hidden">
+                                   <Image
+                                     src={`${product.image}?v=2`}
+                                     alt={product.title}
+                                     fill
+                                     className="object-cover"
+                                     sizes="48px"
+                                   />
+                                 </div>
                                 <div className="min-w-0 flex-1">
                                   <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block mb-0.5">
                                     {product.brand}

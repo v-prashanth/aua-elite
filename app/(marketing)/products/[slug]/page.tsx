@@ -1,5 +1,6 @@
 "use client";
 
+// Force Next.js dev server cache invalidation for updated product images
 import * as React from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -77,22 +78,20 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
       
       {/* ABOVE THE FOLD: Two-Column Layout */}
       <section className="pt-28 pb-16 md:pt-36 md:pb-20 bg-purewhite border-b border-navy-primary/5">
-        <Container className="max-w-5xl">
+        <Container clean className="max-w-4xl px-5 sm:px-8 lg:px-10">
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
-            {/* Left: Large Product Image (Uncropped portrait geyser in studio Stage) */}
-            <div className="lg:col-span-6 relative w-full h-[320px] sm:h-[420px] rounded-2xl bg-gradient-to-b from-offwhite to-purewhite border border-navy-primary/5 flex items-center justify-center p-8 overflow-hidden">
+            {/* Left: Large Product Image */}
+            <div className="lg:col-span-6 relative w-full h-[320px] sm:h-[420px] rounded-2xl bg-gradient-to-b from-offwhite to-purewhite border border-navy-primary/5 overflow-hidden">
               <div className="absolute inset-0 opacity-5 bg-[linear-gradient(to_bottom,transparent_95%,rgba(0,0,0,0.1)_95%)] bg-[size:100%_12px]" />
-              <div className="relative w-40 h-[280px] sm:w-48 sm:h-[360px] flex items-center justify-center">
-                <Image
-                  src={product.image}
-                  alt={product.title}
-                  fill
-                  className="object-contain p-2"
-                  sizes="(max-width: 1024px) 80vw, 40vw"
-                  priority
-                />
-              </div>
+              <Image
+                src={`${product.image}?v=2`}
+                alt={product.title}
+                fill
+                className="object-cover transition-transform duration-700 hover:scale-105"
+                sizes="(max-width: 1024px) 80vw, 40vw"
+                priority
+              />
             </div>
 
             {/* Right: Premium Information */}
