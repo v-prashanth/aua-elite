@@ -71,7 +71,7 @@ export const FeaturedProducts: React.FC = () => {
                       src={image}
                       alt={product.title}
                       fill
-                      className="object-cover object-center transition-transform duration-700 group-hover:scale-105"
+                      className="object-contain p-4 transition-transform duration-700 group-hover:scale-105"
                       sizes="(max-w-768px) 100vw, 30vw"
                     />
                     <div className="absolute top-3 left-3 px-2 py-0.5 bg-[#0B2341] dark:bg-[#16171B] text-[#FFFFFF] dark:text-[#F3F4F6] rounded font-sans text-[7px] font-bold uppercase tracking-widest border border-gold-primary/25">

@@ -74,9 +74,9 @@ const COLLECTIONS = [
   {
     id: "filtration",
     label: "03",
-    title: "Water Filtration",
-    body: "Powerless hollow-fibre ultrafiltration. Protects your skin, your plumbing, and your drinking water from Hyderabad's scale and sediment deposits.",
-    image: "/images/solutions_softener.png",
+    title: "Drinking Water Purifiers",
+    body: "Premium German-engineered ultrafiltration systems. Delivers 100% bacteria-free, pure drinking water directly to your kitchen — operating completely without electricity or wastewater.",
+    image: "/images/products/product-3.jpg",
     href: "/products/fountain-7s-water-filter",
     models: products.filter((p) => p.category === "water-filter"),
   },

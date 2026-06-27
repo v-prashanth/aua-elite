@@ -34,7 +34,7 @@ export const products: Product[] = [
   // --- 1. Three-Phase Tankless (Stiebel Eltron) - 5 products ---
   {
     id: "dhb-e-11-13",
-    image: "/images/product_excel_D6.jpg",
+    image: "/images/products/product-1.jpg",
     requirements: ["Kitchen Use", "Small Bathroom", "Rain Shower"],
 
     slug: "dhb-e-11-13-electronic-control",
@@ -82,7 +82,7 @@ export const products: Product[] = [
   },
   {
     id: "dhb-e-18-24",
-    image: "/images/product_excel_D6.jpg",
+    image: "/images/products/product-1.jpg",
     requirements: ["Rain Shower", "Luxury Bathroom"],
 
     slug: "dhb-e-18-24-comfort-series",
@@ -129,7 +129,7 @@ export const products: Product[] = [
   },
   {
     id: "dhb-e-27",
-    image: "/images/product_excel_D6.jpg",
+    image: "/images/products/product-1.jpg",
     requirements: ["Luxury Bathroom", "Bathtub"],
 
     slug: "dhb-e-27-ultra-capacity",
@@ -175,7 +175,7 @@ export const products: Product[] = [
   },
   {
     id: "dhe-18-21-24",
-    image: "/images/product_excel_D10.jpeg",
+    image: "/images/products/product-2.jpg",
     requirements: ["Rain Shower", "Luxury Bathroom", "Hotels & Commercial"],
 
     slug: "dhe-18-21-24-premium",
@@ -222,7 +222,7 @@ export const products: Product[] = [
   },
   {
     id: "dhe-27",
-    image: "/images/product_excel_D10.jpeg",
+    image: "/images/products/product-2.jpg",
     requirements: ["Luxury Bathroom", "Bathtub", "Hotels & Commercial"],
 
     slug: "dhe-27-premium",
@@ -271,7 +271,7 @@ export const products: Product[] = [
   // --- 2. Single-Phase Tankless (Stiebel Eltron) - 7 products ---
   {
     id: "dce-x-6-8",
-    image: "/images/product_excel_D13.jpg",
+    image: "/images/products/product-6.jpg",
     requirements: ["Small Bathroom"],
 
     slug: "dce-x-6-8-premium",
@@ -317,7 +317,7 @@ export const products: Product[] = [
   },
   {
     id: "dce-x-10-12",
-    image: "/images/product_excel_D13.jpg",
+    image: "/images/products/product-6.jpg",
     requirements: ["Small Bathroom", "Rain Shower"],
 
     slug: "dce-x-10-12-premium",
@@ -362,7 +362,7 @@ export const products: Product[] = [
   },
   {
     id: "dhc-6-ec",
-    image: "/images/product_excel_D15.jpeg",
+    image: "/images/products/product-7.jpg",
     requirements: ["Kitchen Use", "Small Bathroom"],
 
     slug: "dhc-6-ec-in",
@@ -407,7 +407,7 @@ export const products: Product[] = [
   },
   {
     id: "dhc-8-ec",
-    image: "/images/product_excel_D15.jpeg",
+    image: "/images/products/product-7.jpg",
     requirements: ["Kitchen Use", "Small Bathroom"],
 
     slug: "dhc-8-ec-in",
@@ -447,7 +447,7 @@ export const products: Product[] = [
   },
   {
     id: "dhc-6-xg",
-    image: "/images/product_excel_D17.jpg",
+    image: "/images/products/product-8.jpg",
     requirements: ["Kitchen Use", "Small Bathroom"],
 
     slug: "dhc-6-xg-in",
@@ -492,7 +492,7 @@ export const products: Product[] = [
   },
   {
     id: "dhc-8-xg",
-    image: "/images/product_excel_D17.jpg",
+    image: "/images/products/product-8.jpg",
     requirements: ["Kitchen Use", "Small Bathroom"],
 
     slug: "dhc-8-xg-in",
@@ -530,7 +530,7 @@ export const products: Product[] = [
   },
   {
     id: "ddp-6-ec",
-    image: "/images/product_excel_D19.jpeg",
+    image: "/images/products/product-9.jpg",
     requirements: ["Small Bathroom"],
 
     slug: "ddp-6-ec-in",
@@ -572,7 +572,7 @@ export const products: Product[] = [
   // --- 3. Air-to-Water Heat Pumps (Stiebel Eltron) - 3 products ---
   {
     id: "wwk-302-h",
-    image: "/images/product_excel_D21.jpg",
+    image: "/images/products/product-4.jpg",
     requirements: ["Large Family Home", "Hotels & Commercial"],
 
     slug: "wwk-302-h-heat-pump",
@@ -618,7 +618,7 @@ export const products: Product[] = [
   },
   {
     id: "wwk-223-electronic",
-    image: "/images/product_excel_D22.jpg",
+    image: "/images/products/product-10.jpg",
     requirements: ["Large Family Home"],
 
     slug: "wwk-223-electronic-heat-pump",
@@ -662,7 +662,7 @@ export const products: Product[] = [
   },
   {
     id: "wwk-303-electronic",
-    image: "/images/product_excel_D22.jpg",
+    image: "/images/products/product-10.jpg",
     requirements: ["Large Family Home", "Hotels & Commercial"],
 
     slug: "wwk-303-electronic-heat-pump",
@@ -708,7 +708,7 @@ export const products: Product[] = [
   // --- 4. Powerless Water Filters - 2 products ---
   {
     id: "fountain-7s",
-    image: "/images/product_excel_D25.jpg",
+    image: "/images/products/product-3.jpg",
     requirements: ["Kitchen Use"],
 
     slug: "fountain-7s-water-filter",
@@ -755,7 +755,7 @@ export const products: Product[] = [
   },
   {
     id: "stream-5s",
-    image: "/images/product_excel_D26.jpg",
+    image: "/images/products/product-5.jpg",
     requirements: ["Kitchen Use"],
 
     slug: "stream-5s-water-filter",
