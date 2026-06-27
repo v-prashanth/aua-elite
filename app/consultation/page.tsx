@@ -69,7 +69,7 @@ function ConsultationFormContent() {
     // Validate phone: strip spaces and dashes, check for 10 digits
     const cleanPhone = formData.phone.replace(/[\s\-+]/g, "").replace(/^91/, "");
     if (!/^[6-9]\d{9}$/.test(cleanPhone)) {
-      setError("Please enter a valid 10-digit Indian mobile number (e.g. 9849012345).");
+      setError("Please enter a valid 10-digit Indian mobile number (e.g. 8555998216).");
       setLoading(false);
       return;
     }
@@ -346,11 +346,11 @@ export default function ConsultationPage() {
               <ul className="space-y-3 text-[11px] font-sans">
                 <li className="flex items-center gap-2.5">
                   <Phone size={13} className="text-gold-primary shrink-0" />
-                  <a href="tel:+919849012345" className="hover:text-gold-primary transition-colors">+91 98490 12345</a>
+                  <a href="tel:+918555998216" className="hover:text-gold-primary transition-colors">+91 85559 98216</a>
                 </li>
                 <li className="flex items-center gap-2.5">
                   <Mail size={13} className="text-gold-primary shrink-0" />
-                  <a href="mailto:info@aquaelite.in" className="hover:text-gold-primary transition-colors">info@aquaelite.in</a>
+                  <a href="mailto:aquaelitesolution@gmail.com" className="hover:text-gold-primary transition-colors">aquaelitesolution@gmail.com</a>
                 </li>
                 <li className="flex items-start gap-2.5">
                   <MapPin size={13} className="text-gold-primary shrink-0 mt-0.5" />

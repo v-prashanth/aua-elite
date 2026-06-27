@@ -14,6 +14,7 @@ const config: Config = {
           primary: "var(--navy-primary)",
           dark: "var(--navy-dark)",
           light: "var(--navy-light)",
+          brand: "var(--navy-brand)",
         },
         gold: {
           primary: "var(--gold-primary)",

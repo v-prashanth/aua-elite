@@ -3,6 +3,7 @@
 import * as React from "react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
+import { cn } from "@/lib/utils";
 import { MessageSquare, MapPin, PackageCheck, HeartHandshake } from "lucide-react";
 
 export const AquaEliteApproach: React.FC = () => {
@@ -57,11 +58,18 @@ export const AquaEliteApproach: React.FC = () => {
           </Reveal>
         </div>
 
-        {/* 2x2 Timeline Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+        {/* Premium Unified Grid with Fine Lines */}
+        <div className="grid grid-cols-1 md:grid-cols-2 border border-navy-primary/8 dark:border-white/8 rounded-xl overflow-hidden bg-purewhite">
           {steps.map((step, idx) => (
-            <Reveal key={idx} delay={idx * 0.1}>
-              <div className="p-6 sm:p-8 bg-purewhite border border-navy-primary/5 rounded-xl transition-all duration-300 hover:border-[rgba(201,165,76,0.2)] elevation-resting hover:elevation-raised relative overflow-hidden group text-left h-full flex flex-col justify-between">
+            <Reveal key={idx} delay={idx * 0.1} className="h-full">
+              <div className={cn(
+                "p-6 sm:p-8 bg-purewhite transition-colors duration-300 hover:bg-offwhite/40 relative overflow-hidden group text-left h-full flex flex-col justify-between",
+                idx < 3 ? "border-b border-navy-primary/8 dark:border-white/8" : "",
+                idx === 0 ? "md:border-r md:border-b" : "",
+                idx === 1 ? "md:border-b md:border-r-0" : "",
+                idx === 2 ? "md:border-r md:border-b-0" : "",
+                idx === 3 ? "md:border-r-0 md:border-b-0" : ""
+              )}>
                 <div>
                   {/* Subtle number overlay */}
                   <div className="absolute top-0 right-0 p-6 font-display text-4xl sm:text-5xl font-black text-[rgba(201,165,76,0.08)] select-none transition-colors duration-300 group-hover:text-[rgba(201,165,76,0.18)]">

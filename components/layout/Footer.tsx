@@ -28,6 +28,32 @@ export const Footer: React.FC = () => {
             <div className="text-[10px] font-semibold text-gold-primary uppercase tracking-wider">
               Stiebel Eltron ● AO Smith ● ZeroB ● Zanskar
             </div>
+            <div className="flex items-center space-x-3 pt-1">
+              <a
+                href="https://instagram.com/aquaelitesolution"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="text-silver hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors flex items-center space-x-1.5 text-xs"
+                aria-label="Aqua Elite Solutions on Instagram"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width={14}
+                  height={14}
+                  fill="none"
+                  stroke="currentColor"
+                  strokeWidth="2.5"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="text-gold-primary shrink-0"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+                <span>@aquaelitesolution</span>
+              </a>
+            </div>
           </div>
 
           {/* Quick Links */}
@@ -123,14 +149,14 @@ export const Footer: React.FC = () => {
               </li>
               <li className="flex items-center space-x-2.5">
                 <Phone size={14} className="text-gold-primary shrink-0" />
-                <a href="tel:+919849012345" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
-                  +91 98490 12345
+                <a href="tel:+918555998216" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
+                  +91 85559 98216
                 </a>
               </li>
               <li className="flex items-center space-x-2.5">
                 <Mail size={14} className="text-gold-primary shrink-0" />
-                <a href="mailto:info@aquaelite.in" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
-                  info@aquaelite.in
+                <a href="mailto:aquaelitesolution@gmail.com" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
+                  aquaelitesolution@gmail.com
                 </a>
               </li>
               <li className="pt-2 border-t border-silver/10 text-[11px] text-silver/80">

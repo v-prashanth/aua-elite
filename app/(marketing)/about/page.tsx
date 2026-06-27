@@ -69,12 +69,12 @@ const BRANDS = [
 
 export default function AboutPage() {
   return (
-    <div className="min-h-screen bg-[#F8F8F6] font-sans">
+    <div className="min-h-screen bg-offwhite font-sans">
 
       {/* ──────────────────────────────────────────────────────────
           HERO
       ────────────────────────────────────────────────────────── */}
-      <section className="bg-navy-primary text-white relative overflow-hidden">
+      <section className="bg-navy-dark text-white relative overflow-hidden">
         <div
           aria-hidden
           className="absolute inset-0 opacity-[0.025]"
@@ -103,7 +103,7 @@ export default function AboutPage() {
         </div>
         <div
           aria-hidden
-          className="absolute bottom-0 left-0 right-0 h-12 bg-[#F8F8F6]"
+          className="absolute bottom-0 left-0 right-0 h-12 bg-offwhite"
           style={{ clipPath: "polygon(0 100%, 100% 0, 100% 100%)" }}
         />
       </section>
@@ -111,7 +111,7 @@ export default function AboutPage() {
       {/* ──────────────────────────────────────────────────────────
           OUR STORY — editorial text, no cards
       ────────────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28 bg-white border-b border-navy-primary/5">
+      <section className="py-20 md:py-28 bg-purewhite border-b border-navy-primary/5">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24">
             <div className="pt-1">
@@ -156,7 +156,7 @@ export default function AboutPage() {
       {/* ──────────────────────────────────────────────────────────
           HOW WE WORK — numbered, clean, no timeline rail
       ────────────────────────────────────────────────────────── */}
-      <section id="process" className="py-20 md:py-28 bg-[#F8F8F6] border-b border-navy-primary/5">
+      <section id="process" className="py-20 md:py-28 bg-offwhite border-b border-navy-primary/5">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
 
           <div className="mb-16">
@@ -172,7 +172,7 @@ export default function AboutPage() {
             {STEPS.map((step) => (
               <div
                 key={step.num}
-                className="bg-[#F8F8F6] p-8 md:p-10 hover:bg-white transition-colors duration-300 group"
+                className="bg-offwhite p-8 md:p-10 hover:bg-purewhite transition-colors duration-300 group"
               >
                 <span className="font-display text-[11px] font-bold text-gold-primary tracking-[0.2em] block mb-6">
                   {step.num}
@@ -192,7 +192,7 @@ export default function AboutPage() {
       {/* ──────────────────────────────────────────────────────────
           BRANDS — typographic list (matches products page)
       ────────────────────────────────────────────────────────── */}
-      <section id="brands" className="py-20 md:py-28 bg-white border-b border-navy-primary/5">
+      <section id="brands" className="py-20 md:py-28 bg-purewhite border-b border-navy-primary/5">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
 
           <div className="max-w-xl mb-14">
@@ -232,7 +232,7 @@ export default function AboutPage() {
       {/* ──────────────────────────────────────────────────────────
           COMPLETED PROJECTS — editorial, no cards
       ────────────────────────────────────────────────────────── */}
-      <section id="projects" className="py-20 md:py-28 bg-[#F8F8F6]">
+      <section id="projects" className="py-20 md:py-28 bg-offwhite">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
 
           <div className="mb-16">
@@ -298,7 +298,7 @@ export default function AboutPage() {
       {/* ──────────────────────────────────────────────────────────
           CONSULTATION CTA
       ────────────────────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 bg-navy-primary text-white">
+      <section className="py-24 md:py-32 bg-navy-dark text-white">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
           <div className="max-w-xl">
             <p className="text-[9px] uppercase tracking-[0.3em] text-gold-primary font-bold mb-5">
@@ -316,7 +316,7 @@ export default function AboutPage() {
                 <motion.button
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2.5 bg-gold-primary text-navy-primary px-8 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] hover:bg-white transition-colors duration-300"
+                  className="inline-flex items-center gap-2.5 bg-gold-primary text-navy-brand px-8 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] hover:bg-white transition-colors duration-300"
                 >
                   Book a Site Visit
                   <ArrowRight size={13} strokeWidth={2.5} />

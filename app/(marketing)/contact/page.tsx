@@ -49,17 +49,17 @@ export default function ContactPage() {
     }
   };
 
-  const waLink = `https://wa.me/919849012345?text=${encodeURIComponent(
+  const waLink = `https://wa.me/918555998216?text=${encodeURIComponent(
     "Hello Aqua Elite, I'd like to discuss a water heating or treatment project for my property."
   )}`;
 
   return (
-    <div className="min-h-screen bg-[#F8F8F6] font-sans">
+    <div className="min-h-screen bg-offwhite font-sans">
 
       {/* ──────────────────────────────────────────────────────────
           HERO
       ────────────────────────────────────────────────────────── */}
-      <section className="bg-navy-primary text-white relative overflow-hidden">
+      <section className="bg-navy-dark text-white relative overflow-hidden">
         <div
           aria-hidden
           className="absolute inset-0 opacity-[0.025]"
@@ -86,7 +86,7 @@ export default function ContactPage() {
         </div>
         <div
           aria-hidden
-          className="absolute bottom-0 left-0 right-0 h-12 bg-[#F8F8F6]"
+          className="absolute bottom-0 left-0 right-0 h-12 bg-offwhite"
           style={{ clipPath: "polygon(0 100%, 100% 0, 100% 100%)" }}
         />
       </section>
@@ -111,10 +111,10 @@ export default function ContactPage() {
                     Telephone
                   </span>
                   <a
-                    href="tel:+919849012345"
+                    href="tel:+918555998216"
                     className="font-display text-[1.35rem] sm:text-[1.55rem] font-medium text-navy-primary hover:text-gold-primary transition-colors duration-200"
                   >
-                    +91 98490 12345
+                    +91 85559 98216
                   </a>
                 </div>
 
@@ -123,10 +123,10 @@ export default function ContactPage() {
                     Email
                   </span>
                   <a
-                    href="mailto:info@aquaelite.in"
+                    href="mailto:aquaelitesolution@gmail.com"
                     className="font-display text-[1.1rem] sm:text-[1.25rem] font-medium text-navy-primary hover:text-gold-primary transition-colors duration-200"
                   >
-                    info@aquaelite.in
+                    aquaelitesolution@gmail.com
                   </a>
                 </div>
 
@@ -293,8 +293,8 @@ export default function ContactPage() {
                         className={cn(
                           "inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] transition-all duration-300",
                           loading
-                            ? "bg-navy-primary/30 text-white/50 cursor-not-allowed"
-                            : "bg-navy-primary text-white hover:bg-gold-primary hover:text-navy-primary"
+                            ? "bg-navy-primary/30 text-purewhite/50 cursor-not-allowed"
+                            : "bg-navy-primary text-purewhite hover:bg-gold-primary hover:text-navy-brand"
                         )}
                       >
                         {loading ? "Sending…" : "Send Message"}

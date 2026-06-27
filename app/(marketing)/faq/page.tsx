@@ -111,7 +111,7 @@ export default function FAQPage() {
                 </Button>
               </Link>
               <a
-                href="tel:+919849012345"
+                href="tel:+918555998216"
                 className="w-full sm:w-auto flex items-center justify-center px-5 py-2.5 border border-[#FFFFFF]/25 dark:border-[#F3F4F6]/25 hover:border-gold-primary hover:bg-[#FFFFFF]/5 dark:hover:bg-[#F3F4F6]/5 rounded-full font-sans font-bold text-[10px] uppercase tracking-wider text-[#FFFFFF] dark:text-[#F3F4F6] transition-all duration-300"
               >
                 <Phone size={12} className="mr-1.5" />

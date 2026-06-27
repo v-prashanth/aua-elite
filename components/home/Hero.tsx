@@ -19,6 +19,17 @@ export const Hero: React.FC = () => {
       {/* Subtle radial accent */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_40%,rgba(201,165,76,0.04)_0%,transparent_60%)] pointer-events-none" />
 
+      {/* Premium subtle blueprint grid pattern */}
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03] pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, var(--navy-primary) 1px, transparent 1px), linear-gradient(to bottom, var(--navy-primary) 1px, transparent 1px)",
+          backgroundSize: "60px 60px",
+        }}
+      />
+
       <Container className="relative z-10 w-full py-10 sm:py-12 md:py-16 lg:py-0">
         <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-16 items-center">
 

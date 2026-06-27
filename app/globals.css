@@ -6,6 +6,8 @@
   --navy-primary: #0B2341;
   --navy-dark: #0F2D52;
   --navy-light: #15396B;
+  /* Fixed brand navy — never remaps in dark mode. Use for hero banners & CTAs */
+  --navy-brand: #0B2341;
   --gold-primary: #C9A54C;
   --gold-muted: rgba(201, 165, 76, 0.15);
   --offwhite: #F7F8FA;

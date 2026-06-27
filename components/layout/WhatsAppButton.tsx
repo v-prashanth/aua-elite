@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { whatsAppPulse } from "@/lib/animations";
 
 export const WhatsAppButton: React.FC = () => {
-  const whatsappNumber = "919849012345"; // Hyderabad office contact
+  const whatsappNumber = "918555998216"; // Hyderabad office contact
   const message = encodeURIComponent(
     "Hello Aqua Elite Solutions, I would like to schedule a water & heating consultation for my property."
   );

@@ -58,6 +58,7 @@ export const Navbar: React.FC = () => {
       {/* ── Wrapper — sticky, full-width, transparent background ─────── */}
       <div className="sticky top-0 z-50 w-full flex justify-center pointer-events-none">
         <motion.header
+          layout
           role="banner"
           // Pill effect ONLY on desktop; mobile stays full-width flat
           animate={scrolled && isDesktop ? "scrolled" : "top"}
@@ -153,9 +154,9 @@ export const Navbar: React.FC = () => {
                 <motion.button
                   whileHover={{ y: -1, scale: 1.02 }}
                   whileTap={{ scale: 0.96 }}
-                  animate={scrolled ? { paddingLeft: 20, paddingRight: 20, paddingTop: 8, paddingBottom: 8 } : { paddingLeft: 24, paddingRight: 24, paddingTop: 10, paddingBottom: 10 }}
+                  animate={{ scale: scrolled ? 0.92 : 1 }}
                   transition={{ type: "spring", stiffness: 260, damping: 28 }}
-                  className="rounded-full text-[10px] font-sans font-bold uppercase tracking-[0.16em] bg-gold-primary text-navy-primary hover:bg-navy-primary hover:text-white dark:hover:bg-white dark:hover:text-navy-primary transition-colors duration-300 outline-none focus-visible:ring-2 focus-visible:ring-gold-primary whitespace-nowrap"
+                  className="rounded-full text-[10px] font-sans font-bold uppercase tracking-[0.16em] bg-gold-primary text-navy-brand hover:bg-navy-primary hover:text-white dark:hover:bg-white dark:hover:text-navy-primary transition-colors duration-300 outline-none focus-visible:ring-2 focus-visible:ring-gold-primary whitespace-nowrap px-6 py-2.5"
                 >
                   Book Consultation
                 </motion.button>

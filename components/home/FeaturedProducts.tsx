@@ -29,8 +29,18 @@ export const FeaturedProducts: React.FC = () => {
   };
 
   return (
-    <section id="featured-products" className="py-14 md:py-20 lg:py-28 bg-purewhite" aria-label="Featured Products">
-      <Container className="max-w-5xl">
+    <section id="featured-products" className="py-14 md:py-20 lg:py-28 bg-purewhite relative overflow-hidden" aria-label="Featured Products">
+      {/* Subtle blueprint grid pattern */}
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-[0.015] dark:opacity-[0.025] pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, var(--navy-primary) 1px, transparent 1px), linear-gradient(to bottom, var(--navy-primary) 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
+        }}
+      />
+      <Container className="relative z-10 max-w-5xl">
         <Reveal>
           <SectionHeader
             tagline="Our Products"

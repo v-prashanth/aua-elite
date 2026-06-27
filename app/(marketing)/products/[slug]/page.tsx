@@ -81,7 +81,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
             
             {/* Left: Large Product Image (Uncropped portrait geyser in studio Stage) */}
-            <div className="lg:col-span-6 relative w-full h-[320px] sm:h-[420px] rounded-2xl bg-gradient-to-b from-[#F7F8FA] to-[#EAF0F4] border border-navy-primary/5 flex items-center justify-center p-8 overflow-hidden">
+            <div className="lg:col-span-6 relative w-full h-[320px] sm:h-[420px] rounded-2xl bg-gradient-to-b from-offwhite to-purewhite border border-navy-primary/5 flex items-center justify-center p-8 overflow-hidden">
               <div className="absolute inset-0 opacity-5 bg-[linear-gradient(to_bottom,transparent_95%,rgba(0,0,0,0.1)_95%)] bg-[size:100%_12px]" />
               <div className="relative w-40 h-[280px] sm:w-48 sm:h-[360px] flex items-center justify-center">
                 <Image
@@ -127,7 +127,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               </div>
 
               {/* Suitable Applications Statement */}
-              <div className="p-5 border border-gold-primary/15 rounded-xl bg-[#F7F8FA] space-y-2">
+              <div className="p-5 border border-gold-primary/15 rounded-xl bg-offwhite space-y-2">
                 <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block">
                   Suitable Application
                 </span>
@@ -142,7 +142,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   <Button
                     variant="primary"
                     size="lg"
-                    className="w-full justify-center text-xs font-bold uppercase tracking-wider px-8 py-3.5 bg-navy-primary text-purewhite hover:bg-navy-light rounded-full border-transparent"
+                    className="w-full justify-center text-xs font-bold uppercase tracking-wider px-8 py-3.5 bg-navy-primary text-purewhite hover:bg-gold-primary hover:text-navy-brand rounded-full border-transparent"
                   >
                     Book Consultation
                     <ArrowRight size={14} className="ml-2" />
@@ -270,7 +270,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                       key={key} 
                       className={cn(
                         "border-b border-navy-primary/5 last:border-0",
-                        idx % 2 === 0 ? "bg-[#F7F8FA]/50" : "bg-purewhite"
+                        idx % 2 === 0 ? "bg-offwhite/50" : "bg-purewhite"
                       )}
                     >
                       <td className="px-6 py-4 font-bold text-navy-primary w-1/3 border-r border-navy-primary/5 uppercase text-[9px] tracking-wider">{key}</td>
@@ -285,14 +285,14 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
       </section>
 
       {/* SECTION 5 — NEED HELP CHOOSING? (Stop page here) */}
-      <section className="py-20 bg-navy-primary text-purewhite border-t border-gold-primary/20" id="consult-cta">
+      <section className="py-20 bg-navy-dark text-white border-t border-gold-primary/20" id="consult-cta">
         <Container className="max-w-2xl text-center">
           <Reveal>
             <div className="space-y-6">
-              <h2 className="font-display text-xl sm:text-2xl font-medium tracking-tight text-purewhite leading-snug">
+              <h2 className="font-display text-xl sm:text-2xl font-medium tracking-tight text-white leading-snug">
                 Need Help Sizing Your System?
               </h2>
-              <p className="text-xs sm:text-sm text-[#EAF0F4]/75 leading-relaxed font-sans max-w-md mx-auto text-balance">
+              <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-sans max-w-md mx-auto text-balance">
                 Every property has a unique cabling layout and hot water demand. Speak with a technical specialist today to plan a customized, zero-fault sizing.
               </p>
               <div className="pt-4">
@@ -300,7 +300,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   <Button
                     variant="primary"
                     size="lg"
-                    className="text-xs font-bold uppercase tracking-wider px-8 py-3.5 bg-gold-primary text-navy-dark hover:bg-gold-primary/95 border-transparent rounded-full"
+                    className="text-xs font-bold uppercase tracking-wider px-8 py-3.5 bg-gold-primary text-navy-brand hover:bg-gold-primary/95 border-transparent rounded-full"
                   >
                     Book Consultation
                     <ArrowRight size={14} className="ml-2" />

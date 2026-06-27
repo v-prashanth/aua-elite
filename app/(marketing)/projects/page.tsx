@@ -31,15 +31,26 @@ export default function ProjectsPage() {
   };
 
   return (
-    <div className="relative min-h-screen pb-16 md:pb-24 bg-offwhite text-left">
+    <div className="relative min-h-screen pb-16 md:pb-24 bg-offwhite text-left overflow-hidden">
+      {/* Subtle blueprint grid pattern */}
+      <div
+        aria-hidden
+        className="absolute inset-0 opacity-[0.015] dark:opacity-[0.025] pointer-events-none"
+        style={{
+          backgroundImage:
+            "linear-gradient(to right, var(--navy-primary) 1px, transparent 1px), linear-gradient(to bottom, var(--navy-primary) 1px, transparent 1px)",
+          backgroundSize: "80px 80px",
+        }}
+      />
       <PageHeader
         tagline="Happy Customers"
         title="Real Installations. Real Results."
         description="A look at some of the installations our team has completed across Hyderabad. Every project shown here was assessed, supplied, installed, and supported by us."
         containerClassName="max-w-5xl"
+        theme="dark"
       />
 
-      <Container className="max-w-5xl py-12">
+      <Container className="relative z-10 max-w-5xl py-12">
 
         {/* Detailed Projects Layout List */}
         <div className="space-y-8 md:space-y-12">
@@ -144,20 +155,20 @@ export default function ProjectsPage() {
         </div>
 
         {/* Bottom Consultation CTA */}
-        <section className="mt-10 py-10 md:py-12 bg-navy-primary text-purewhite rounded-lg border border-gold-muted/30" aria-label="Projects Page CTA">
+        <section className="mt-10 py-10 md:py-12 bg-navy-dark text-white rounded-lg border border-gold-muted/30" aria-label="Projects Page CTA">
           <Container className="max-w-2xl text-center">
             <Reveal>
               <h2 className="text-xl sm:text-2xl font-display font-medium tracking-tight mb-4 text-balance">
                 Have a specific property integration in mind?
               </h2>
-              <p className="text-xs sm:text-sm text-purewhite/70 mb-8 leading-relaxed font-sans max-w-md mx-auto text-balance">
+              <p className="text-xs sm:text-sm text-white/70 mb-8 leading-relaxed font-sans max-w-md mx-auto text-balance">
                 Our team can visit your property, assess your requirements, and recommend the right system for your home or building.
               </p>
               <Link href="/consultation">
                 <Button
                   variant="primary"
                   size="lg"
-                  className="text-xs uppercase font-bold tracking-wider px-8 py-3.5 bg-gold-primary text-navy-primary hover:bg-gold-primary/95 rounded-full"
+                  className="text-xs uppercase font-bold tracking-wider px-8 py-3.5 bg-gold-primary text-navy-brand hover:bg-gold-primary/95 rounded-full"
                 >
                   Book Consultation
                   <ArrowRight size={14} className="ml-2" />

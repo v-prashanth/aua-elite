@@ -28,14 +28,25 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
   return (
     <section
       className={cn(
-        "relative w-full border-b text-left transition-colors duration-300",
+        "relative w-full border-b text-left transition-colors duration-300 overflow-hidden",
         isDark
-          ? "bg-navy-primary text-purewhite border-gold-primary/10"
+          ? "bg-navy-dark text-white border-gold-primary/10"
           : "bg-offwhite text-navy-primary border-navy-primary/5",
         "pt-10 pb-8 md:pt-16 md:pb-12",
         className
       )}
     >
+      {isDark && (
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.025] pointer-events-none"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+          }}
+        />
+      )}
       <Container className={cn("max-w-4xl", containerClassName)}>
         <div className={cn("max-w-2xl", isCenter ? "mx-auto text-center" : "text-left")}>
           {tagline && (
@@ -54,7 +65,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
             <h1
               className={cn(
                 "text-2xl sm:text-3xl md:text-4xl font-display font-medium tracking-tight leading-[1.15] text-balance",
-                isDark ? "text-purewhite" : "text-navy-primary"
+                isDark ? "text-white" : "text-navy-primary"
               )}
             >
               {title}
@@ -65,7 +76,7 @@ export const PageHeader: React.FC<PageHeaderProps> = ({
               <p
                 className={cn(
                   "text-xs sm:text-sm mt-4 leading-relaxed font-sans text-balance",
-                  isDark ? "text-purewhite/70" : "text-navy-primary/70",
+                  isDark ? "text-white/70" : "text-navy-primary/70",
                   isCenter ? "mx-auto max-w-lg" : "max-w-xl"
                 )}
               >

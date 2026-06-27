@@ -132,12 +132,12 @@ export default function ProductsPage() {
   }
 
   return (
-    <div className="min-h-screen bg-[#F8F8F6] font-sans">
+    <div className="min-h-screen bg-offwhite font-sans">
 
       {/* ──────────────────────────────────────────────────────────
           HERO — dark authority statement
       ────────────────────────────────────────────────────────── */}
-      <section className="bg-navy-primary text-white relative overflow-hidden">
+      <section className="bg-navy-dark text-white relative overflow-hidden">
         {/* Subtle grid texture */}
         <div
           aria-hidden
@@ -168,7 +168,7 @@ export default function ProductsPage() {
               <motion.button
                 whileHover={{ y: -2 }}
                 whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2.5 bg-gold-primary text-navy-primary px-7 py-3.5 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] hover:bg-white transition-colors duration-300"
+                className="inline-flex items-center gap-2.5 bg-gold-primary text-navy-brand px-7 py-3.5 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] hover:bg-white transition-colors duration-300"
               >
                 Book a Site Visit
                 <ArrowRight size={13} strokeWidth={2.5} />
@@ -180,7 +180,7 @@ export default function ProductsPage() {
         {/* Diagonal divider */}
         <div
           aria-hidden
-          className="absolute bottom-0 left-0 right-0 h-12 bg-[#F8F8F6]"
+          className="absolute bottom-0 left-0 right-0 h-12 bg-offwhite"
           style={{ clipPath: "polygon(0 100%, 100% 0, 100% 100%)" }}
         />
       </section>
@@ -318,7 +318,7 @@ export default function ProductsPage() {
                               <motion.button
                                 whileHover={{ y: -1 }}
                                 whileTap={{ scale: 0.97 }}
-                                className="inline-flex items-center gap-2 bg-navy-primary text-white px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.16em] hover:bg-navy-primary/85 transition-colors duration-300"
+                                className="inline-flex items-center gap-2 bg-navy-primary text-purewhite px-6 py-3 rounded-full text-[10px] font-bold uppercase tracking-[0.16em] hover:bg-gold-primary hover:text-navy-brand transition-colors duration-300"
                               >
                                 Get a Custom Recommendation
                                 <ArrowRight size={12} />
@@ -339,7 +339,7 @@ export default function ProductsPage() {
       {/* ──────────────────────────────────────────────────────────
           COLLECTIONS — full-width editorial, alternating
       ────────────────────────────────────────────────────────── */}
-      <section id="collections" className="py-20 md:py-28 bg-white border-t border-navy-primary/5">
+      <section id="collections" className="py-20 md:py-28 bg-purewhite border-t border-navy-primary/5">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
           <div className="mb-16">
             <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
@@ -424,7 +424,7 @@ export default function ProductsPage() {
       {/* ──────────────────────────────────────────────────────────
           BRANDS — minimal typographic list
       ────────────────────────────────────────────────────────── */}
-      <section id="brands" className="py-20 md:py-28 bg-[#F8F8F6] border-t border-navy-primary/5">
+      <section id="brands" className="py-20 md:py-28 bg-offwhite border-t border-navy-primary/5">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
           <div className="max-w-xl mb-14">
             <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
@@ -463,7 +463,7 @@ export default function ProductsPage() {
       {/* ──────────────────────────────────────────────────────────
           FINAL CTA
       ────────────────────────────────────────────────────────── */}
-      <section className="py-24 md:py-32 bg-navy-primary text-white">
+      <section className="py-24 md:py-32 bg-navy-dark text-white">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
           <div className="max-w-xl">
             <p className="text-[9px] uppercase tracking-[0.3em] text-gold-primary font-bold mb-5">
@@ -482,7 +482,7 @@ export default function ProductsPage() {
                 <motion.button
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2.5 bg-gold-primary text-navy-primary px-8 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] hover:bg-white transition-colors duration-300"
+                  className="inline-flex items-center gap-2.5 bg-gold-primary text-navy-brand px-8 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] hover:bg-white transition-colors duration-300"
                 >
                   Book a Site Visit
                   <ArrowRight size={13} strokeWidth={2.5} />
