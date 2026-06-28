@@ -18,18 +18,18 @@ const E = [0.76, 0, 0.24, 1] as [number, number, number, number];
 
 const GRID_IMAGES = [
   // col / row expressed as CSS gridColumn / gridRow shorthand (start / end)
-  { src: "/images/projects/project-wap-5.jpg",  title: "Tankless Installation",    location: "Jubilee Hills", type: "Residential Villa", col: "1 / 3", row: "1 / 3" }, // big — top left
-  { src: "/images/projects/project-wap-12.jpg", title: "Softener & Pressure Loop", location: "Jubilee Hills", type: "Luxury Apartment",   col: "3 / 4", row: "1 / 2" },
-  { src: "/images/projects/project-wap-22.jpg", title: "Tankless Cascade",         location: "Gachibowli",   type: "Commercial Space",  col: "4 / 5", row: "1 / 2" },
-  { src: "/images/projects/project-wap-15.jpg", title: "Dual Softener System",     location: "Kokapet",      type: "Residential Villa", col: "3 / 5", row: "2 / 3" }, // wide — right mid
-  { src: "/images/projects/project-wap-18.jpg", title: "Air-Source Heat Pump",     location: "Madhapur",     type: "Luxury Villa",       col: "1 / 2", row: "3 / 4" },
-  { src: "/images/projects/ZB1.jpg",            title: "ZeroB Softener System",    location: "Banjara Hills", type: "Residential Home",  col: "2 / 4", row: "3 / 4" }, // wide — left-centre
-  { src: "/images/projects/project-wap-10.jpg", title: "3-Phase Tankless System",  location: "Somajiguda",   type: "Boutique Hotel",     col: "4 / 5", row: "3 / 5" }, // tall — far right
-  { src: "/images/projects/project-wap-8.jpg",  title: "Compact Softener",         location: "Banjara Hills", type: "Service Apartment", col: "1 / 3", row: "4 / 5" }, // wide — bottom left
-  { src: "/images/projects/ZB3.jpg",            title: "Iron Remover & Softener",  location: "Jubilee Hills", type: "Luxury Villa",       col: "3 / 4", row: "4 / 5" },
-  { src: "/images/projects/project-wap-20.jpg", title: "High-Flow Copper Loop",    location: "Jubilee Hills", type: "Residential Villa",  col: "1 / 2", row: "5 / 6" },
-  { src: "/images/projects/project-wap-4.jpg",  title: "Manifold Integration",     location: "Gachibowli",   type: "Commercial Office",  col: "2 / 4", row: "5 / 6" }, // wide — bottom
-  { src: "/images/projects/project-wap-9.jpg",  title: "High-Flow Softener",       location: "Kokapet",      type: "Luxury Apartment",   col: "4 / 5", row: "5 / 6" },
+  { src: "/images/projects/project-wap-5.jpg",  title: "Residential Villa Installation",    location: "Jubilee Hills", type: "Residential Villa", col: "1 / 3", row: "1 / 3" }, // big — top left
+  { src: "/images/projects/project-wap-12.jpg", title: "Luxury Apartment Installation", location: "Jubilee Hills", type: "Luxury Apartment",   col: "3 / 4", row: "1 / 2" },
+  { src: "/images/projects/project-wap-22.jpg", title: "Commercial Space Installation",         location: "Gachibowli",   type: "Commercial Space",  col: "4 / 5", row: "1 / 2" },
+  { src: "/images/projects/project-wap-15.jpg", title: "Residential Villa Installation",     location: "Kokapet",      type: "Residential Villa", col: "3 / 5", row: "2 / 3" }, // wide — right mid
+  { src: "/images/projects/project-wap-18.jpg", title: "Luxury Villa Installation",     location: "Madhapur",     type: "Luxury Villa",       col: "1 / 2", row: "3 / 4" },
+  { src: "/images/projects/ZB1.jpg",            title: "Residential Home Installation",    location: "Banjara Hills", type: "Residential Home",  col: "2 / 4", row: "3 / 4" }, // wide — left-centre
+  { src: "/images/projects/project-wap-10.jpg", title: "Boutique Hotel Installation",  location: "Somajiguda",   type: "Boutique Hotel",     col: "4 / 5", row: "3 / 5" }, // tall — far right
+  { src: "/images/projects/project-wap-8.jpg",  title: "Service Apartment Installation",         location: "Banjara Hills", type: "Service Apartment", col: "1 / 3", row: "4 / 5" }, // wide — bottom left
+  { src: "/images/projects/ZB3.jpg",            title: "Luxury Villa Installation",  location: "Jubilee Hills", type: "Luxury Villa",       col: "3 / 4", row: "4 / 5" },
+  { src: "/images/projects/project-wap-20.jpg", title: "Residential Villa Installation",    location: "Jubilee Hills", type: "Residential Villa",  col: "1 / 2", row: "5 / 6" },
+  { src: "/images/projects/project-wap-4.jpg",  title: "Commercial Office Installation",     location: "Gachibowli",   type: "Commercial Office",  col: "2 / 4", row: "5 / 6" }, // wide — bottom
+  { src: "/images/projects/project-wap-9.jpg",  title: "Luxury Apartment Installation",       location: "Kokapet",      type: "Luxury Apartment",   col: "4 / 5", row: "5 / 6" },
 ];
 
 /* ─────────────────────────────────────────────
@@ -90,14 +90,14 @@ function Lightbox({
               transition={{ duration: 0.38, ease: E }}
               className="absolute inset-0"
             >
-              <Image src={slide.src} alt={`${slide.title} — ${slide.location}`} fill className="object-contain" sizes="90vw" priority />
+              <Image src={slide.src} alt={`${slide.location} — ${slide.type}`} fill className="object-contain" sizes="90vw" priority />
             </motion.div>
           </AnimatePresence>
         </div>
 
         <AnimatePresence mode="wait">
           <motion.div
-            key={slide.title}
+            key={slide.location}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
@@ -105,7 +105,7 @@ function Lightbox({
             className="flex items-center justify-between w-full mt-4 px-1"
           >
             <div>
-              <p className="font-display font-medium text-white" style={{ fontSize: "clamp(14px, 2vw, 20px)" }}>{slide.title}</p>
+              <p className="font-display font-medium text-white" style={{ fontSize: "clamp(14px, 2vw, 20px)" }}>{slide.location}</p>
               <div className="flex items-center gap-2 mt-1">
                 <MapPin size={9} style={{ color: "var(--gold-primary)" }} />
                 <span className="text-[9px] font-bold uppercase tracking-[0.22em]" style={{ color: "var(--gold-primary)" }}>{slide.location}</span>
@@ -215,32 +215,40 @@ function HeroSection() {
 ───────────────────────────────────────────── */
 function GridCell({ item, index, onOpen }: { item: typeof GRID_IMAGES[number]; index: number; onOpen: () => void }) {
   const [hovered, setHovered] = React.useState(false);
+  const [isDesktop, setIsDesktop] = React.useState(false);
+
+  React.useEffect(() => {
+    const check = () => setIsDesktop(window.innerWidth >= 1024);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, []);
+
   return (
     <motion.div
-      initial={{ opacity: 0, scale: 0.97 }}
-      whileInView={{ opacity: 1, scale: 1 }}
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-40px" }}
-      transition={{ duration: 0.55, ease: E, delay: (index % 4) * 0.07 }}
+      transition={{ duration: 0.7, ease: E, delay: (index % 4) * 0.08 }}
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       onClick={onOpen}
-      className="relative overflow-hidden cursor-pointer"
+      className="relative overflow-hidden cursor-pointer rounded-2xl border border-navy-primary/10 bg-white/50 backdrop-blur-sm shadow-sm hover:shadow-xl transition-all duration-500 group"
       style={{
-        gridColumn: item.col,
-        gridRow: item.row,
-        minHeight: "clamp(160px, 18vw, 280px)",
-        background: "rgba(11,35,65,0.05)",
+        gridColumn: isDesktop ? item.col : "auto",
+        gridRow: isDesktop ? item.row : "auto",
+        height: isDesktop ? "auto" : "280px",
       }}
     >
       {/* Image */}
       <motion.div
         className="absolute inset-0"
-        animate={{ scale: hovered ? 1.06 : 1 }}
-        transition={{ duration: 0.65, ease: E }}
+        animate={{ scale: hovered ? 1.08 : 1 }}
+        transition={{ duration: 0.8, ease: E }}
       >
         <Image
-          src={item.src} alt={item.title} fill className="object-cover"
-          sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 25vw"
+          src={item.src} alt={`${item.location} — ${item.type}`} fill className="object-cover"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
       </motion.div>
 
@@ -248,41 +256,57 @@ function GridCell({ item, index, onOpen }: { item: typeof GRID_IMAGES[number]; i
       <div
         className="absolute inset-0 pointer-events-none transition-opacity duration-500"
         style={{
-          background: "linear-gradient(to top, rgba(11,35,65,0.88) 0%, rgba(11,35,65,0.08) 55%, transparent 100%)",
-          opacity: hovered ? 1 : 0.55,
+          background: "linear-gradient(to top, rgba(11,35,65,0.92) 0%, rgba(11,35,65,0.3) 50%, transparent 100%)",
+          opacity: hovered ? 1 : 0.75,
         }}
       />
 
       {/* Gold top sweep */}
       <motion.div
-        className="absolute top-0 left-0 right-0 h-[2px] origin-left"
+        className="absolute top-0 left-0 right-0 h-[3px] origin-left"
         style={{ background: "var(--gold-primary)" }}
         initial={{ scaleX: 0 }}
         animate={{ scaleX: hovered ? 1 : 0 }}
-        transition={{ duration: 0.38, ease: E }}
+        transition={{ duration: 0.45, ease: E }}
       />
 
-      {/* Label */}
-      <div className="absolute bottom-0 left-0 right-0 p-4 z-10">
-        <motion.div animate={{ y: hovered ? -4 : 0 }} transition={{ duration: 0.35, ease: E }}>
-          <p className="text-[8px] font-bold uppercase tracking-[0.22em] mb-1" style={{ color: "var(--gold-primary)" }}>
-            {item.location}
-          </p>
-          <p className="font-display font-medium text-white leading-tight" style={{ fontSize: "clamp(12px, 1.5vw, 16px)" }}>
-            {item.title}
-          </p>
+      {/* Label & Details */}
+      <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
+        <motion.div 
+          animate={{ y: hovered ? -6 : 0 }} 
+          transition={{ duration: 0.4, ease: E }}
+          className="flex flex-col gap-2"
+        >
+          <div className="flex items-center gap-1.5 text-white/90">
+            <MapPin size={11} style={{ color: "var(--gold-primary)" }} />
+            <p className="font-display font-medium text-white leading-none tracking-wide" style={{ fontSize: "clamp(15px, 1.8vw, 20px)" }}>
+              {item.location}
+            </p>
+          </div>
+          <div className="flex">
+            <span 
+              className="text-[9px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded-full border border-gold-primary/30"
+              style={{ 
+                background: "rgba(201,165,76,0.12)", 
+                color: "var(--gold-primary)",
+                backdropFilter: "blur(4px)" 
+              }}
+            >
+              {item.type}
+            </span>
+          </div>
         </motion.div>
       </div>
 
       {/* Expand icon */}
       <motion.div
-        className="absolute top-3 right-3 z-10 w-8 h-8 rounded-full flex items-center justify-center"
-        style={{ background: "rgba(201,165,76,0.9)" }}
-        initial={{ opacity: 0, scale: 0.6 }}
-        animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.6 }}
-        transition={{ duration: 0.28, ease: E }}
+        className="absolute top-4 right-4 z-10 w-9 h-9 rounded-full flex items-center justify-center border border-white/10 shadow-lg"
+        style={{ background: "rgba(201,165,76,0.95)" }}
+        initial={{ opacity: 0, scale: 0.6, y: -4 }}
+        animate={{ opacity: hovered ? 1 : 0, scale: hovered ? 1 : 0.6, y: hovered ? 0 : -4 }}
+        transition={{ duration: 0.3, ease: E }}
       >
-        <ArrowUpRight size={13} className="text-white" strokeWidth={2.5} />
+        <ArrowUpRight size={14} className="text-white" strokeWidth={2.5} />
       </motion.div>
     </motion.div>
   );
@@ -337,21 +361,19 @@ function PhotoGrid() {
 
         {/* Divider — matches about page */}
         <motion.div
-          className="mb-0 h-px"
-          style={{ background: "rgba(11,35,65,0.06)" }}
+          className="mb-10 h-px"
+          style={{ background: "rgba(11,35,65,0.08)" }}
           initial={{ scaleX: 0, transformOrigin: "left" }}
           whileInView={{ scaleX: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.9, ease: E }}
         />
 
-        {/* Asymmetric collage — explicit col/row spans on each cell */}
+        {/* Asymmetric collage */}
         <div
-          className="grid gap-px"
+          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
           style={{
-            background: "rgba(11,35,65,0.06)",
-            gridTemplateColumns: "repeat(4, 1fr)",
-            gridAutoRows: "clamp(160px, 18vw, 260px)",
+            gridAutoRows: "clamp(240px, 20vw, 340px)",
           }}
         >
           {GRID_IMAGES.map((item, i) => (
