@@ -77,12 +77,12 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
     <div className="relative min-h-screen bg-offwhite text-left font-sans pb-24 selection:bg-gold-primary/10">
       
       {/* ABOVE THE FOLD: Two-Column Layout */}
-      <section className="pt-28 pb-16 md:pt-36 md:pb-20 bg-purewhite border-b border-navy-primary/5">
-        <Container className="max-w-6xl">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
+      <section className="pt-12 pb-16 md:pt-16 md:pb-20 bg-purewhite border-b border-navy-primary/5">
+        <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12 w-full">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-16 items-center">
             
             {/* Left: Large Product Image */}
-            <div className="lg:col-span-6 relative w-full h-[300px] sm:h-[420px] md:h-[460px] lg:h-[500px] rounded-2xl bg-gradient-to-b from-offwhite to-purewhite border border-navy-primary/5 overflow-hidden">
+            <div className="relative w-full h-[300px] sm:h-[420px] md:h-[460px] lg:h-[500px] rounded-2xl bg-gradient-to-b from-offwhite to-purewhite border border-navy-primary/5 overflow-hidden">
               <div className="absolute inset-0 opacity-5 bg-[linear-gradient(to_bottom,transparent_95%,rgba(0,0,0,0.1)_95%)] bg-[size:100%_12px]" />
               <Image
                 src={`${product.image}?v=2`}
@@ -95,7 +95,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
             </div>
 
             {/* Right: Premium Information */}
-            <div className="lg:col-span-6 space-y-6 text-left">
+            <div className="space-y-6 text-left">
               <div className="flex flex-wrap items-center gap-3">
                 <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold border border-gold-primary/20 px-2 py-0.5 rounded bg-offwhite">
                   {product.brand} &bull; Sized & Verified
@@ -141,7 +141,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   <Button
                     variant="primary"
                     size="lg"
-                    className="w-full justify-center text-xs font-bold uppercase tracking-wider px-8 py-3.5 bg-navy-primary text-purewhite hover:bg-gold-primary hover:text-navy-brand rounded-full border-transparent"
+                    className="w-full justify-center text-xs font-bold uppercase tracking-wider px-5 py-3.5 bg-navy-primary text-purewhite hover:bg-gold-primary hover:text-navy-brand rounded-full border-transparent"
                   >
                     Book Consultation
                     <ArrowRight size={14} className="ml-2" />
@@ -152,7 +152,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                   <Button
                     variant="outline"
                     size="lg"
-                    className="w-full justify-center text-xs font-bold uppercase tracking-wider px-8 py-3.5 border-navy-primary/15 text-navy-primary hover:border-navy-primary rounded-full bg-purewhite"
+                    className="w-full justify-center text-xs font-bold uppercase tracking-wider px-5 py-3.5 border-navy-primary/15 text-navy-primary hover:border-navy-primary rounded-full bg-purewhite"
                   >
                     Enquire Now
                   </Button>
@@ -161,12 +161,12 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
             </div>
 
           </div>
-        </Container>
+        </div>
       </section>
 
       {/* SECTION 2 — PERFECT FOR (Only applicable items shown) */}
       <section className="py-20 bg-offwhite border-b border-navy-primary/5" id="suitability">
-        <Container className="max-w-6xl">
+        <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12 w-full">
           <Reveal>
             <div className="mb-12 space-y-3 text-left">
               <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block">
@@ -205,12 +205,12 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               </div>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
       {/* SECTION 3 — WHY CUSTOMERS CHOOSE THIS (Max 4 reasons) */}
       <section className="py-20 bg-purewhite border-b border-navy-primary/5" id="benefits">
-        <Container className="max-w-5xl">
+        <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12 w-full">
           <Reveal>
             <div className="mb-16 space-y-3 text-left">
               <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block">
@@ -239,12 +239,12 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               </Reveal>
             ))}
           </div>
-        </Container>
+        </div>
       </section>
 
       {/* SECTION 4 — KEY SPECIFICATIONS (Compact Layout) */}
       <section className="py-20 bg-offwhite border-b border-navy-primary/5" id="specifications">
-        <Container className="max-w-5xl">
+        <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12 w-full">
           <Reveal>
             <div className="mb-12 space-y-3 text-left">
               <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block">
@@ -280,7 +280,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               </table>
             </div>
           </Reveal>
-        </Container>
+        </div>
       </section>
 
       {/* SECTION 5 — NEED HELP CHOOSING? (Stop page here) */}
