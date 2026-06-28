@@ -13,10 +13,10 @@ export const WaterRibbon: React.FC = () => {
     offset: ["start start", "end end"]
   });
 
-  // Responsive, springy progress animation following scroll quickly with subtle ease
+  // Viscous, springy progress animation mimicking fluid movement
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 160,
-    damping: 24,
+    stiffness: 55,
+    damping: 18,
     restDelta: 0.001
   });
 
