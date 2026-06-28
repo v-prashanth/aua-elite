@@ -15,8 +15,8 @@ export const WaterRibbon: React.FC = () => {
 
   // Viscous, springy progress animation mimicking fluid movement
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 55,
-    damping: 18,
+    stiffness: 40,
+    damping: 14,
     restDelta: 0.001
   });
 
