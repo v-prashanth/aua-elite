@@ -78,18 +78,18 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
       
       {/* ABOVE THE FOLD: Two-Column Layout */}
       <section className="pt-28 pb-16 md:pt-36 md:pb-20 bg-purewhite border-b border-navy-primary/5">
-        <Container clean className="max-w-4xl px-5 sm:px-8 lg:px-10">
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-center">
+        <Container className="max-w-6xl">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-16 items-center">
             
             {/* Left: Large Product Image */}
-            <div className="lg:col-span-6 relative w-full h-[320px] sm:h-[420px] rounded-2xl bg-gradient-to-b from-offwhite to-purewhite border border-navy-primary/5 overflow-hidden">
+            <div className="lg:col-span-6 relative w-full h-[300px] sm:h-[420px] md:h-[460px] lg:h-[500px] rounded-2xl bg-gradient-to-b from-offwhite to-purewhite border border-navy-primary/5 overflow-hidden">
               <div className="absolute inset-0 opacity-5 bg-[linear-gradient(to_bottom,transparent_95%,rgba(0,0,0,0.1)_95%)] bg-[size:100%_12px]" />
               <Image
                 src={`${product.image}?v=2`}
                 alt={product.title}
                 fill
                 className="object-cover transition-transform duration-700 hover:scale-105"
-                sizes="(max-width: 1024px) 80vw, 40vw"
+                sizes="(max-width: 1024px) 100vw, 50vw"
                 priority
               />
             </div>
@@ -166,7 +166,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
 
       {/* SECTION 2 — PERFECT FOR (Only applicable items shown) */}
       <section className="py-20 bg-offwhite border-b border-navy-primary/5" id="suitability">
-        <Container className="max-w-4xl">
+        <Container className="max-w-6xl">
           <Reveal>
             <div className="mb-12 space-y-3 text-left">
               <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block">
@@ -210,7 +210,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
 
       {/* SECTION 3 — WHY CUSTOMERS CHOOSE THIS (Max 4 reasons) */}
       <section className="py-20 bg-purewhite border-b border-navy-primary/5" id="benefits">
-        <Container className="max-w-3xl">
+        <Container className="max-w-5xl">
           <Reveal>
             <div className="mb-16 space-y-3 text-left">
               <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block">
@@ -244,7 +244,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
 
       {/* SECTION 4 — KEY SPECIFICATIONS (Compact Layout) */}
       <section className="py-20 bg-offwhite border-b border-navy-primary/5" id="specifications">
-        <Container className="max-w-3xl">
+        <Container className="max-w-5xl">
           <Reveal>
             <div className="mb-12 space-y-3 text-left">
               <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block">
