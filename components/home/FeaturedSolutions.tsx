@@ -62,7 +62,7 @@ export const FeaturedSolutions: React.FC = () => {
             <Reveal delay={0.1} className="w-full">
               <div className="relative w-full h-[250px] sm:h-[370px] md:h-[430px]">
                 <Image
-                  src="/images/solutions_tankless_generated.png"
+                  src="/images/projects/project-wap-5.jpg"
                   alt="Premium bathroom vanity layout concealing Stiebel Eltron tankless heating unit"
                   fill
                   className="object-cover object-center transition-transform duration-700 hover:scale-105"
@@ -83,7 +83,7 @@ export const FeaturedSolutions: React.FC = () => {
             <Reveal delay={0.1} className="w-full">
               <div className="relative w-full h-[250px] sm:h-[370px] md:h-[450px]">
                 <Image
-                  src="/images/solutions_heatpump_generated.png"
+                  src="/images/projects/project-wap-18.jpg"
                   alt="Central thermal heat pump installation on a high-end villa terrace"
                   fill
                   className="object-cover object-center transition-transform duration-700 hover:scale-105"
@@ -190,7 +190,7 @@ export const FeaturedSolutions: React.FC = () => {
             <Reveal delay={0.1} className="w-full">
               <div className="relative w-full h-[190px] sm:h-[290px] md:h-[390px]">
                 <Image
-                  src="/images/solutions_purifier_generated.png"
+                  src="/images/projects/project-wap-12.jpg"
                   alt="Clean glass of pure drinking water in a premium Indian kitchen layout"
                   fill
                   className="object-cover object-center transition-transform duration-700 hover:scale-105"

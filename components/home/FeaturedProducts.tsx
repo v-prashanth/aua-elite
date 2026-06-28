@@ -54,7 +54,7 @@ export const FeaturedProducts: React.FC = () => {
         {/* Curated Grid - 3 items */}
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 mb-10">
           {curatedProducts.map((product, idx) => {
-            const image = imageMap[product.id] || "/images/solutions_tankless.png";
+            const image = imageMap[product.id] || "/images/products/dhb-e-18-24.jpg";
             const benefit = benefitMap[product.id] || product.subtitle;
             const displayCategory = product.category.startsWith("tankless")
               ? "Tankless Heater"
