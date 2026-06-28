@@ -15,21 +15,21 @@ export const RecentInstallations: React.FC = () => {
       style={{
         paddingTop: "clamp(64px, 8vw, 110px)",
         paddingBottom: "clamp(64px, 8vw, 110px)",
-        background: "var(--navy-brand)",
+        background: "var(--offwhite)",
       }}
     >
-      {/* Background blueprint grid overlay */}
+      {/* Background blueprint grid overlay matching upper sections */}
       <div
         aria-hidden
-        className="absolute inset-0 opacity-[0.02] pointer-events-none"
+        className="absolute inset-0 opacity-[0.015] pointer-events-none"
         style={{
           backgroundImage:
-            "linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)",
+            "linear-gradient(to right, var(--navy-primary) 1px, transparent 1px), linear-gradient(to bottom, var(--navy-primary) 1px, transparent 1px)",
           backgroundSize: "80px 80px",
         }}
       />
 
-      {/* Gold radial background glow */}
+      {/* Subtle radial background glow */}
       <div
         className="absolute pointer-events-none"
         style={{
@@ -38,7 +38,7 @@ export const RecentInstallations: React.FC = () => {
           width: "60%",
           height: "140%",
           background:
-            "radial-gradient(ellipse, rgba(201,165,76,0.06) 0%, transparent 70%)",
+            "radial-gradient(ellipse, rgba(201,165,76,0.04) 0%, transparent 70%)",
         }}
       />
 
@@ -47,7 +47,7 @@ export const RecentInstallations: React.FC = () => {
         className="absolute bottom-0 left-0 right-0 h-px"
         style={{
           background:
-            "linear-gradient(to right, transparent, rgba(201,165,76,0.35), transparent)",
+            "linear-gradient(to right, transparent, rgba(201,165,76,0.25), transparent)",
         }}
         initial={{ scaleX: 0 }}
         whileInView={{ scaleX: 1 }}
@@ -75,7 +75,7 @@ export const RecentInstallations: React.FC = () => {
               </span>
 
               <h2
-                className="font-display font-medium tracking-tight leading-[1.1] text-white"
+                className="font-display font-medium tracking-tight leading-[1.1] text-navy-primary"
                 style={{
                   fontSize: "clamp(28px, 3.8vw, 46px)",
                 }}
@@ -88,7 +88,7 @@ export const RecentInstallations: React.FC = () => {
                 className="font-sans leading-relaxed pt-2"
                 style={{
                   fontSize: "clamp(12px, 1.3vw, 13.5px)",
-                  color: "rgba(255,255,255,0.48)",
+                  color: "var(--silver)",
                   maxWidth: "500px",
                 }}
               >
@@ -101,7 +101,7 @@ export const RecentInstallations: React.FC = () => {
                 href="/projects"
                 className="inline-flex items-center gap-3 group"
               >
-                <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-white transition-opacity duration-300 group-hover:opacity-75">
+                <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-navy-primary transition-opacity duration-300 group-hover:opacity-70">
                   Explore Our Portfolio
                 </span>
                 <motion.span
@@ -124,17 +124,17 @@ export const RecentInstallations: React.FC = () => {
             transition={{ duration: 0.75, ease: E, delay: 0.12 }}
             className="lg:col-span-6 flex flex-col justify-between rounded-xl overflow-hidden group"
             style={{
-              background: "rgba(255, 255, 255, 0.015)",
-              border: "1px solid rgba(255, 255, 255, 0.05)",
+              background: "var(--purewhite)",
+              border: "1px solid rgba(11, 35, 65, 0.05)",
               padding: "clamp(24px, 4vw, 40px)",
-              transition: "border-color 0.4s ease, background-color 0.4s ease",
+              transition: "border-color 0.4s ease, box-shadow 0.4s ease",
             }}
             whileHover={{
-              borderColor: "rgba(201, 165, 76, 0.2)",
-              backgroundColor: "rgba(255, 255, 255, 0.025)",
+              borderColor: "rgba(201, 165, 76, 0.25)",
+              boxShadow: "0 12px 30px -4px rgba(11, 35, 65, 0.04)",
             }}
           >
-            {/* Subtle glow inside card on hover */}
+            {/* Subtle internal card hover glow */}
             <div
               className="absolute pointer-events-none transition-opacity duration-500 opacity-0 group-hover:opacity-100"
               style={{
@@ -143,7 +143,7 @@ export const RecentInstallations: React.FC = () => {
                 width: "80%",
                 height: "100%",
                 background:
-                  "radial-gradient(circle, rgba(201,165,76,0.04) 0%, transparent 60%)",
+                  "radial-gradient(circle, rgba(201,165,76,0.03) 0%, transparent 60%)",
               }}
             />
 
@@ -156,7 +156,7 @@ export const RecentInstallations: React.FC = () => {
               </span>
 
               <h3
-                className="font-display font-medium text-white leading-tight"
+                className="font-display font-medium text-navy-primary leading-tight"
                 style={{
                   fontSize: "clamp(20px, 2.8vw, 30px)",
                 }}
@@ -168,7 +168,7 @@ export const RecentInstallations: React.FC = () => {
                 className="font-sans leading-relaxed pt-1"
                 style={{
                   fontSize: "clamp(11.5px, 1.25vw, 13px)",
-                  color: "rgba(255,255,255,0.4)",
+                  color: "var(--silver)",
                   maxWidth: "480px",
                 }}
               >
@@ -181,7 +181,7 @@ export const RecentInstallations: React.FC = () => {
                 <motion.button
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 bg-gold-primary text-navy-brand px-6 py-3.5 rounded-sm text-[9px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 hover:bg-white"
+                  className="inline-flex items-center gap-2 bg-gold-primary text-white px-6 py-3.5 rounded-sm text-[9px] font-bold uppercase tracking-[0.2em] transition-colors duration-300 hover:bg-navy-primary"
                 >
                   <Calendar size={12} strokeWidth={2.5} />
                   Book Consultation
@@ -196,7 +196,7 @@ export const RecentInstallations: React.FC = () => {
                 <motion.button
                   whileHover={{ y: -2 }}
                   whileTap={{ scale: 0.97 }}
-                  className="inline-flex items-center gap-2 border border-white/10 text-white/80 px-6 py-3.5 rounded-sm text-[9px] font-bold uppercase tracking-[0.2em] transition-all duration-300 hover:border-white/40 hover:text-white"
+                  className="inline-flex items-center gap-2 border border-navy-primary/10 text-navy-primary px-6 py-3.5 rounded-sm text-[9px] font-bold uppercase tracking-[0.2em] transition-all duration-300 hover:border-navy-primary/30"
                 >
                   <MessageCircle size={12} strokeWidth={2.5} className="text-[#25D366]" />
                   Chat via WhatsApp
