@@ -177,10 +177,10 @@ export const Footer: React.FC = () => {
             &copy; {currentYear} Aqua Elite Solutions. All rights reserved. Authorized Stiebel Eltron Sales & Service Partner.
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
-            <Link href="/#privacy" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
+            <Link href="/privacy" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
               Privacy Policy
             </Link>
-            <Link href="/#terms" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
+            <Link href="/terms" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
               Terms of Service
             </Link>
             <a

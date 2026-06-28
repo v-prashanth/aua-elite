@@ -1,0 +1,10 @@
+# Aqua Elite Solutions — robots.txt
+User-agent: *
+Allow: /
+
+# Block internal/system routes
+Disallow: /api/
+Disallow: /_next/
+
+# Sitemap
+Sitemap: https://aquaelitesolutions.com/sitemap.xml
