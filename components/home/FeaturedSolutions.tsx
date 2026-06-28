@@ -190,8 +190,8 @@ export const FeaturedSolutions: React.FC = () => {
             <Reveal delay={0.1} className="w-full">
               <div className="relative w-full h-[190px] sm:h-[290px] md:h-[390px]">
                 <Image
-                  src="/images/projects/project-wap-12.jpg"
-                  alt="Clean glass of pure drinking water in a premium Indian kitchen layout"
+                  src="/images/water_showcase.png"
+                  alt="Stunning abstract visual of clean, pure water flowing and rippling"
                   fill
                   className="object-cover object-center transition-transform duration-700 hover:scale-105"
                   sizes="100vw"
