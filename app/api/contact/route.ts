@@ -47,7 +47,7 @@ const ContactSchema = z.object({
     .email("Please provide a valid email address.")
     .max(254),
 
-  propertyType: z.enum(["villa", "apartment", "commercial", "builder", "other"]),
+  propertyType: z.enum(["villa", "apartment", "commercial", "builder", "other"]).optional().default("other"),
 
   bathrooms: z
     .string()

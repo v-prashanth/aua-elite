@@ -36,7 +36,7 @@ export default function ContactPage() {
       const res = await fetch("/api/contact", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ ...formData, phone: clean, isConsultation: false }),
+        body: JSON.stringify({ ...formData, phone: clean, isConsultation: false, propertyType: "other" }),
       });
       const data = await res.json();
       if (!res.ok) throw new Error(data.error || "Submission failed.");
