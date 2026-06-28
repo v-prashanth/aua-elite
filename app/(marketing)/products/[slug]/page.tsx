@@ -126,13 +126,38 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
               </div>
 
               {/* Suitable Applications Statement */}
-              <div className="p-5 border border-gold-primary/15 rounded-xl bg-offwhite space-y-2">
-                <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block">
+              <div className="text-xs font-sans">
+                <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block mb-1">
                   Suitable Application
                 </span>
-                <p className="text-[11px] sm:text-xs text-navy-primary font-sans leading-relaxed">
+                <p className="text-navy-primary/85 leading-relaxed font-medium">
                   {product.bestSuited}
                 </p>
+              </div>
+
+              {/* Sizing & Suitability Mini-Grid */}
+              <div className="space-y-3 pt-2 border-t border-navy-primary/5">
+                <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block">
+                  Sized & Verified For
+                </span>
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                  {applicableUseCases.map((item) => (
+                    <div 
+                      key={item.name} 
+                      className="p-3.5 rounded-xl border border-navy-primary/5 bg-[#F2F3F5]/30 flex flex-col justify-between"
+                    >
+                      <div className="flex items-center justify-between mb-1.5">
+                        <h4 className="text-[9px] font-sans font-bold uppercase tracking-wider text-navy-primary">
+                          {item.name}
+                        </h4>
+                        <Check size={11} className="text-gold-primary" />
+                      </div>
+                      <p className="text-[9px] font-sans text-silver leading-snug">
+                        {item.label}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
 
               {/* CTAs */}
@@ -164,49 +189,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
         </div>
       </section>
 
-      {/* SECTION 2 — PERFECT FOR (Only applicable items shown) */}
-      <section className="py-20 bg-offwhite border-b border-navy-primary/5" id="suitability">
-        <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12 w-full">
-          <Reveal>
-            <div className="mb-12 space-y-3 text-left">
-              <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block">
-                Engineering Sizing
-              </span>
-              <h2 className="font-display text-lg sm:text-xl font-medium text-navy-primary">
-                Perfect For
-              </h2>
-              <p className="text-[11px] sm:text-xs text-silver leading-relaxed">
-                This specific model is sized, verified, and recommended for the following applications:
-              </p>
-            </div>
-          </Reveal>
 
-          {/* Sizing Grid showing ONLY applicable use cases */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 text-left">
-            {applicableUseCases.map((item) => (
-              <div
-                key={item.name}
-                className="p-5 rounded-xl border bg-purewhite border-gold-primary/20 text-navy-primary shadow-resting flex flex-col justify-between min-h-[110px]"
-              >
-                <div className="flex items-center justify-between">
-                  <span className="text-[8px] font-sans font-bold uppercase tracking-wider text-gold-primary">
-                    Sized & Verified
-                  </span>
-                  <Check size={12} className="text-gold-primary" />
-                </div>
-                <div>
-                  <h3 className="font-display text-xs font-semibold uppercase tracking-wide">
-                    {item.name}
-                  </h3>
-                  <span className="text-[9px] font-sans text-silver block mt-0.5">
-                    {item.label}
-                  </span>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* SECTION 3 — WHY CUSTOMERS CHOOSE THIS (Max 4 reasons) */}
       <section className="py-20 bg-purewhite border-b border-navy-primary/5" id="benefits">
