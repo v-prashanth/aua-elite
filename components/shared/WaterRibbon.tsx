@@ -13,10 +13,10 @@ export const WaterRibbon: React.FC = () => {
     offset: ["start start", "end end"]
   });
 
-  // Responsive, springy progress animation following scroll quickly with subtle ease
+  // Slower, highly viscous spring animation to make it flow smoothly and lag elegantly
   const smoothProgress = useSpring(scrollYProgress, {
-    stiffness: 160,
-    damping: 24,
+    stiffness: 30,
+    damping: 15,
     restDelta: 0.001
   });
 
@@ -31,9 +31,9 @@ export const WaterRibbon: React.FC = () => {
 
   // Spline path total length
   const totalLength = 8200;
-  // Offset the drawing progress to draw 2-3 sections ahead of the current scroll viewport
-  const progressAhead = Math.min(progress * 1.35 + 0.15, 1);
-  const dashOffset = shouldReduceMotion ? 0 : totalLength * (1 - progressAhead);
+  // Offset progress slightly backward so the tip of the flow stays just above the center of the viewport
+  const progressCenter = Math.max(progress - 0.06, 0);
+  const dashOffset = shouldReduceMotion ? 0 : totalLength * (1 - progressCenter);
 
   return (
     <div
