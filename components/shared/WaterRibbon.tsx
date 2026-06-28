@@ -31,9 +31,8 @@ export const WaterRibbon: React.FC = () => {
 
   // Spline path total length
   const totalLength = 8200;
-  // Offset the drawing progress to draw 2-3 sections ahead of the current scroll viewport
-  const progressAhead = Math.min(progress * 1.35 + 0.15, 1);
-  const dashOffset = shouldReduceMotion ? 0 : totalLength * (1 - progressAhead);
+  // Draw the active line exactly in sync with the user's scroll position
+  const dashOffset = shouldReduceMotion ? 0 : totalLength * (1 - progress);
 
   return (
     <div
@@ -58,9 +57,6 @@ export const WaterRibbon: React.FC = () => {
             <stop offset="55%" stopColor="#C9A54C" />
             <stop offset="80%" stopColor="#E08A24" />
             <stop offset="100%" stopColor="#D96E14" />
-            {/* Smooth shifting of the gradient window to simulate internal liquid current */}
-            <animate attributeName="y1" values="0%;35%;0%" dur="12s" repeatCount="indefinite" />
-            <animate attributeName="y2" values="100%;135%;100%" dur="12s" repeatCount="indefinite" />
           </linearGradient>
         </defs>
 
