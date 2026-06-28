@@ -58,6 +58,9 @@ export const WaterRibbon: React.FC = () => {
             <stop offset="55%" stopColor="#C9A54C" />
             <stop offset="80%" stopColor="#E08A24" />
             <stop offset="100%" stopColor="#D96E14" />
+            {/* Smooth shifting of the gradient window to simulate internal liquid current */}
+            <animate attributeName="y1" values="0%;35%;0%" dur="12s" repeatCount="indefinite" />
+            <animate attributeName="y2" values="100%;135%;100%" dur="12s" repeatCount="indefinite" />
           </linearGradient>
         </defs>
 
@@ -70,7 +73,7 @@ export const WaterRibbon: React.FC = () => {
           strokeLinecap="round"
         />
 
-        {/* 3. Main Scroll-Linked Active Path (Draws/erases as user scrolls) */}
+        {/* 2. Main Scroll-Linked Active Path (Draws/erases as user scrolls) */}
         <path
           d="M 600 0 C 650 400, 300 800, 350 1200 C 400 1600, 900 2000, 850 2400 C 800 2800, 200 3200, 250 3600 C 300 4000, 1000 4400, 950 4800 C 900 5200, 250 5600, 300 6000 C 350 6400, 850 6800, 800 7200 C 750 7600, 600 7900, 600 8000"
           stroke="url(#premium-flow-grad)"
