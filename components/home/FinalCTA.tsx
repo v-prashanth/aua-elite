@@ -90,7 +90,7 @@ export const FinalCTA: React.FC = () => {
                 lineHeight: 1.15,
               }}
             >
-              Design a custom water system for your property.
+              Ready to find the right water solution for your property?
             </h2>
 
             <p 
@@ -101,7 +101,7 @@ export const FinalCTA: React.FC = () => {
                 maxWidth: "520px",
               }}
             >
-              Speak with our service team to assess your property and find the right water solution for your home.
+              Book a free site visit. We assess your property, recommend the right system, and provide a written proposal — no obligation.
             </p>
 
             {/* Fluid animated CTA buttons */}

@@ -2,11 +2,19 @@
 
 import * as React from "react";
 import { useSearchParams } from "next/navigation";
-import { Container } from "@/components/ui/Container";
-import { Button } from "@/components/ui/Button";
-import { CheckCircle, AlertTriangle, Phone, Mail, MapPin, ArrowRight } from "lucide-react";
+import { CheckCircle, AlertTriangle, Phone, Mail, MapPin, ArrowRight, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { PageHeader } from "@/components/ui/PageHeader";
+
+const E = [0.76, 0, 0.24, 1] as [number, number, number, number];
+
+// ── Trust Points ─────────────────────────────────────────────────────────────
+const TRUST_POINTS = [
+  { label: "Free Site Inspection", desc: "We visit your property at no cost to assess your setup." },
+  { label: "Requirement Assessment", desc: "We understand exactly what your property needs." },
+  { label: "Product Recommendation", desc: "Honest, brand-independent advice based on your requirements." },
+  { label: "Transparent Pricing", desc: "Clear quotes — no hidden fees, no surprises." },
+  { label: "Installation Planning", desc: "Full coordination and scheduling by our specialist team." },
+];
 
 // ── Form logic ──────────────────────────────────────────────────────────────
 function ConsultationFormContent() {
@@ -44,13 +52,13 @@ function ConsultationFormContent() {
           defaultMsg = "Interested in a premium apartment utility setup.";
         } else if (type === "hotels") {
           defaultProp = "commercial";
-          defaultMsg = "Interested in boutique hotel central heating loops.";
+          defaultMsg = "Interested in hotel central heating systems.";
         } else if (type === "commercial") {
           defaultProp = "commercial";
-          defaultMsg = "Interested in high-end commercial systems.";
+          defaultMsg = "Interested in commercial water systems.";
         }
       } else {
-        defaultMsg = `Interested in integrating: ${interestParam.replace(/-/g, " ").toUpperCase()}`;
+        defaultMsg = `Interested in: ${interestParam.replace(/-/g, " ")}`;
       }
       setFormData((prev) => ({
         ...prev,
@@ -66,10 +74,9 @@ function ConsultationFormContent() {
     setError(null);
     setSuccess(false);
 
-    // Validate phone: strip spaces and dashes, check for 10 digits
     const cleanPhone = formData.phone.replace(/[\s\-+]/g, "").replace(/^91/, "");
     if (!/^[6-9]\d{9}$/.test(cleanPhone)) {
-      setError("Please enter a valid 10-digit Indian mobile number (e.g. 8555998216).");
+      setError("Please enter a valid 10-digit Indian mobile number.");
       setLoading(false);
       return;
     }
@@ -90,23 +97,16 @@ function ConsultationFormContent() {
       });
 
       const data = await res.json();
-      if (!res.ok) {
-        throw new Error(data.error || "Failed to submit consultation request.");
-      }
+      if (!res.ok) throw new Error(data.error || "Failed to submit consultation request.");
 
       setSuccess(true);
       setFormData({
-        fullName: "",
-        email: "",
-        phone: "",
-        propertyType: "villa",
-        bathrooms: "",
-        message: "",
+        fullName: "", email: "", phone: "",
+        propertyType: "villa", bathrooms: "", message: "",
         isConsultation: true,
       });
     } catch (err) {
-      const error = err as Error;
-      setError(error.message || "Something went wrong. Please try again.");
+      setError((err as Error).message || "Something went wrong. Please try again.");
     } finally {
       setLoading(false);
     }
@@ -117,20 +117,20 @@ function ConsultationFormContent() {
       <motion.div
         initial={{ opacity: 0, y: 12 }}
         animate={{ opacity: 1, y: 0 }}
-        className="flex flex-col items-center justify-center py-16 text-center space-y-5"
+        className="py-20 text-center space-y-6"
       >
-        <div className="w-16 h-16 rounded-full bg-gold-primary/10 flex items-center justify-center border border-gold-primary/20">
-          <CheckCircle className="w-8 h-8 text-gold-primary" />
+        <div className="w-14 h-14 rounded-full border border-gold-primary/30 flex items-center justify-center mx-auto">
+          <CheckCircle className="w-7 h-7 text-gold-primary" strokeWidth={1.5} />
         </div>
         <div className="space-y-2">
-          <h3 className="font-display text-lg font-semibold text-navy-primary">Audit Request Received</h3>
-          <p className="text-xs text-silver font-sans leading-relaxed max-w-xs">
-            Our service team will review your details and get back to you within 4 business hours.
+          <h3 className="font-display text-[1.3rem] font-medium text-navy-primary">Request received.</h3>
+          <p className="text-[13px] text-silver font-sans max-w-xs mx-auto leading-relaxed">
+            We&apos;ll call you within 4 hours during business hours to arrange your site visit.
           </p>
         </div>
         <button
           onClick={() => setSuccess(false)}
-          className="text-[10px] font-bold uppercase tracking-wider text-gold-primary hover:text-navy-primary transition-colors mt-2 outline-none"
+          className="text-[10px] font-bold uppercase tracking-[0.18em] text-navy-primary/40 hover:text-navy-primary transition-colors"
         >
           Submit another request
         </button>
@@ -139,81 +139,64 @@ function ConsultationFormContent() {
   }
 
   return (
-    <form onSubmit={handleSubmit} className="space-y-4 text-left font-sans" noValidate>
+    <form onSubmit={handleSubmit} className="space-y-0 text-left font-sans" noValidate>
       <AnimatePresence>
         {error && (
           <motion.div
-            initial={{ opacity: 0, y: -6 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0 }}
-            className="flex gap-3 items-start p-3 rounded-md border border-red-300/40 bg-red-50 text-red-700 text-xs"
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: "auto" }}
+            exit={{ opacity: 0, height: 0 }}
+            className="overflow-hidden"
           >
-            <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
-            <span>{error}</span>
+            <div className="mb-6 flex gap-3 items-start p-4 bg-red-50 border border-red-200/60 rounded text-red-700 text-[12px] font-sans">
+              <AlertTriangle className="w-4 h-4 shrink-0 mt-0.5" />
+              <span>{error}</span>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>
 
-      {/* Row 1: Full Name */}
-      <div className="space-y-1">
-        <label htmlFor="fullName" className="font-bold text-navy-primary uppercase tracking-widest text-[9px]">
-          Full Name <span className="text-gold-primary">*</span>
-        </label>
+      {/* Full Name */}
+      <FormField label="Full Name" required>
         <input
-          id="fullName"
-          type="text"
-          required
+          id="fullName" type="text" required
           value={formData.fullName}
           onChange={(e) => setFormData({ ...formData, fullName: e.target.value })}
           placeholder="Your full name"
-          className="w-full px-3 py-2.5 rounded-md border border-navy-primary/10 bg-offwhite text-navy-primary text-xs placeholder-silver/50 focus:outline-none focus:border-gold-primary focus:bg-purewhite transition-colors"
+          className={inputClass}
         />
-      </div>
+      </FormField>
 
-      {/* Row 2: Phone + Email */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div className="space-y-1">
-          <label htmlFor="phone" className="font-bold text-navy-primary uppercase tracking-widest text-[9px]">
-            Phone <span className="text-gold-primary">*</span>
-          </label>
+      {/* Phone + Email */}
+      <div className="grid grid-cols-1 sm:grid-cols-2">
+        <FormField label="Mobile Number" required>
           <input
-            id="phone"
-            type="tel"
-            required
+            id="phone" type="tel" required
             value={formData.phone}
             onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-            placeholder="10-digit mobile number"
-            className="w-full px-3 py-2.5 rounded-md border border-navy-primary/10 bg-offwhite text-navy-primary text-xs placeholder-silver/50 focus:outline-none focus:border-gold-primary focus:bg-purewhite transition-colors"
+            placeholder="10-digit number"
+            className={inputClass}
           />
-        </div>
-
-        <div className="space-y-1">
-          <label htmlFor="email" className="font-bold text-navy-primary uppercase tracking-widest text-[9px]">
-            Email Address <span className="text-gold-primary">*</span>
-          </label>
+        </FormField>
+        <FormField label="Email Address" required>
           <input
-            id="email"
-            type="email"
-            required
+            id="email" type="email" required
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
             placeholder="name@domain.com"
-            className="w-full px-3 py-2.5 rounded-md border border-navy-primary/10 bg-offwhite text-navy-primary text-xs placeholder-silver/50 focus:outline-none focus:border-gold-primary focus:bg-purewhite transition-colors"
+            className={`${inputClass} sm:pl-6`}
           />
-        </div>
+        </FormField>
       </div>
 
-      {/* Row 3: Property Type + Bathrooms */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-        <div className="space-y-1">
-          <label htmlFor="propertyType" className="font-bold text-navy-primary uppercase tracking-widest text-[9px]">
-            Property Type <span className="text-gold-primary">*</span>
-          </label>
+      {/* Property Type + Bathrooms */}
+      <div className="grid grid-cols-1 sm:grid-cols-2">
+        <FormField label="Property Type" required>
           <select
             id="propertyType"
             value={formData.propertyType}
             onChange={(e) => setFormData({ ...formData, propertyType: e.target.value as typeof formData.propertyType })}
-            className="w-full px-3 py-2.5 rounded-md border border-navy-primary/10 bg-offwhite text-navy-primary text-xs focus:outline-none focus:border-gold-primary focus:bg-purewhite transition-colors"
+            className={`${inputClass} cursor-pointer`}
           >
             <option value="villa">Villa (Independent)</option>
             <option value="apartment">Apartment / Penthouse</option>
@@ -221,158 +204,199 @@ function ConsultationFormContent() {
             <option value="builder">Builder / Developer</option>
             <option value="other">Other</option>
           </select>
-        </div>
-
-        <div className="space-y-1">
-          <label htmlFor="bathrooms" className="font-bold text-navy-primary uppercase tracking-widest text-[9px]">
-            No. of Bathrooms
-          </label>
+        </FormField>
+        <FormField label="No. of Bathrooms">
           <input
-            id="bathrooms"
-            type="text"
+            id="bathrooms" type="text"
             value={formData.bathrooms}
             onChange={(e) => setFormData({ ...formData, bathrooms: e.target.value })}
             placeholder="e.g. 4 bathrooms"
-            className="w-full px-3 py-2.5 rounded-md border border-navy-primary/10 bg-offwhite text-navy-primary text-xs placeholder-silver/50 focus:outline-none focus:border-gold-primary focus:bg-purewhite transition-colors"
+            className={`${inputClass} sm:pl-6`}
           />
-        </div>
+        </FormField>
       </div>
 
-      {/* Row 4: Message */}
-      <div className="space-y-1">
-        <label htmlFor="message" className="font-bold text-navy-primary uppercase tracking-widest text-[9px]">
-          Requirements <span className="text-gold-primary">*</span>
-        </label>
+      {/* Message */}
+      <FormField label="Requirements" required>
         <textarea
-          id="message"
-          required
+          id="message" required rows={4}
           value={formData.message}
           onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-          rows={3}
-          placeholder="Describe your system goals, number of floors, known TDS level, or any specific requirements."
-          className="w-full px-3 py-2.5 rounded-md border border-navy-primary/10 bg-offwhite text-navy-primary text-xs placeholder-silver/50 focus:outline-none focus:border-gold-primary focus:bg-purewhite transition-colors resize-none leading-relaxed"
+          placeholder="Describe your property, water heating needs, or any specific requirements."
+          className={`${inputClass} resize-none leading-relaxed`}
         />
-      </div>
+      </FormField>
 
       {/* Submit */}
-      <div className="pt-1">
-        <Button
+      <div className="pt-10">
+        <motion.button
           type="submit"
           disabled={loading}
-          variant="primary"
-          size="lg"
-          className="w-full justify-center text-xs uppercase tracking-wider font-bold"
+          whileHover={!loading ? { y: -2 } : {}}
+          whileTap={!loading ? { scale: 0.97 } : {}}
+          transition={{ duration: 0.25, ease: E }}
+          className={`inline-flex items-center gap-2.5 px-8 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] transition-all duration-300 ${
+            loading
+              ? "bg-navy-primary/30 text-purewhite/50 cursor-not-allowed"
+              : "bg-navy-primary text-purewhite hover:bg-gold-primary hover:text-navy-brand"
+          }`}
         >
-          {loading ? "Submitting…" : "Schedule Free Site Audit"}
-          {!loading && <ArrowRight size={14} className="ml-2" />}
-        </Button>
-        <p className="text-[9px] text-silver text-center mt-2 font-sans">
-          Free, no-obligation. Our service team will call you within 4 hours.
+          {loading ? "Submitting…" : "Schedule Free Site Visit"}
+          {!loading && <ArrowRight size={13} strokeWidth={2.5} />}
+        </motion.button>
+        <p className="text-[10px] text-silver/60 mt-3 font-sans">
+          Free, no-obligation. We will call you within 4 hours.
         </p>
       </div>
     </form>
   );
 }
 
-// ── Page layout ─────────────────────────────────────────────────────────────
+// ── Field wrapper (bottom-border editorial style, matching contact page) ──────
+function FormField({ label, required, children }: { label: string; required?: boolean; children: React.ReactNode }) {
+  return (
+    <div className="group pt-8 border-b border-navy-primary/10 pb-1 focus-within:border-navy-primary transition-colors duration-200">
+      <label className="block text-[9px] uppercase tracking-[0.28em] text-silver/60 font-sans font-bold mb-2 group-focus-within:text-gold-primary transition-colors duration-200">
+        {label}
+        {required && <span className="text-gold-primary ml-1">*</span>}
+      </label>
+      {children}
+    </div>
+  );
+}
+
+const inputClass =
+  "w-full bg-transparent text-navy-primary text-[15px] font-sans placeholder-silver/35 focus:outline-none pb-2 font-medium";
+
+// ── Page layout ──────────────────────────────────────────────────────────────
 export default function ConsultationPage() {
   return (
-    <div className="relative min-h-screen bg-offwhite">
-      <PageHeader
-        tagline="Free Consultation"
-        title="Book a Free Site Audit"
-        description="Our service team will visit your property, assess your water and electrical setup, and recommend the right solution — before you spend a rupee."
-        theme="dark"
-        align="center"
-        containerClassName="max-w-4xl"
-      />
+    <div className="min-h-screen bg-offwhite font-sans">
 
-      {/* Main Content: 2-column on desktop */}
-      <Container className="max-w-4xl py-10 sm:py-14">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-10 items-start">
+      {/* Hero — dark navy, matching other page heroes */}
+      <section className="bg-navy-dark text-white relative overflow-hidden">
+        <div
+          aria-hidden
+          className="absolute inset-0 opacity-[0.025]"
+          style={{
+            backgroundImage:
+              "linear-gradient(to right, #ffffff 1px, transparent 1px), linear-gradient(to bottom, #ffffff 1px, transparent 1px)",
+            backgroundSize: "80px 80px",
+          }}
+        />
+        <div className="relative max-w-[1320px] mx-auto px-6 lg:px-12 py-20 md:py-28">
+          <div className="max-w-xl">
+            <p className="text-[9px] uppercase tracking-[0.3em] text-gold-primary font-bold mb-6">
+              Free Consultation
+            </p>
+            <h1 className="font-display text-4xl sm:text-5xl md:text-[3.2rem] font-medium leading-[1.12] tracking-tight text-white mb-6">
+              Book a Free{" "}
+              <br className="hidden sm:block" />
+              Site Visit.
+            </h1>
+            <p className="text-[13px] sm:text-[15px] text-white/55 leading-relaxed font-sans max-w-md">
+              Our installation specialists will visit your property, assess your water and
+              electrical setup, and recommend the right solution — before you commit to anything.
+            </p>
+          </div>
+        </div>
+        <div
+          aria-hidden
+          className="absolute bottom-0 left-0 right-0 h-12 bg-offwhite"
+          style={{ clipPath: "polygon(0 100%, 100% 0, 100% 100%)" }}
+        />
+      </section>
 
-          {/* LEFT: Form */}
-          <div className="lg:col-span-7 min-w-0">
-            <div className="bg-purewhite border border-navy-primary/8 rounded-lg p-5 sm:p-6 elevation-raised">
-              <h2 className="font-display text-sm font-semibold text-navy-primary mb-1">
-                Book a Consultation
-              </h2>
-              <p className="text-[11px] text-silver font-sans mb-5 leading-relaxed">
-                Fill in your details and we will schedule a site visit at your convenience.
+      {/* Main Content — editorial 2-column */}
+      <section className="py-20 md:py-28">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-16 lg:gap-24 items-start">
+
+            {/* LEFT: Trust info */}
+            <div>
+              <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-8">
+                What&apos;s Included
               </p>
 
+              {/* Trust checklist */}
+              <div className="space-y-7 mb-12">
+                {TRUST_POINTS.map((point) => (
+                  <div key={point.label} className="flex gap-4 items-start">
+                    <div className="w-5 h-5 rounded-full border border-gold-primary/40 flex items-center justify-center shrink-0 mt-0.5">
+                      <Check size={10} className="text-gold-primary" strokeWidth={2.5} />
+                    </div>
+                    <div>
+                      <span className="font-display text-[14px] font-medium text-navy-primary block leading-tight mb-1">
+                        {point.label}
+                      </span>
+                      <span className="font-sans text-[12px] text-silver leading-relaxed">
+                        {point.desc}
+                      </span>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Divider */}
+              <div className="border-t border-navy-primary/8 pt-8">
+                <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-6">
+                  Prefer to Call?
+                </p>
+                <div className="space-y-4 text-[13px] font-sans">
+                  <a
+                    href="tel:+918555998216"
+                    className="flex items-center gap-3 text-navy-primary hover:text-gold-primary transition-colors duration-200 group"
+                  >
+                    <Phone size={13} className="text-gold-primary shrink-0" />
+                    +91 85559 98216
+                  </a>
+                  <a
+                    href="mailto:aquaelitesolution@gmail.com"
+                    className="flex items-center gap-3 text-navy-primary hover:text-gold-primary transition-colors duration-200"
+                  >
+                    <Mail size={13} className="text-gold-primary shrink-0" />
+                    aquaelitesolution@gmail.com
+                  </a>
+                  <div className="flex items-start gap-3 text-silver">
+                    <MapPin size={13} className="text-gold-primary shrink-0 mt-0.5" />
+                    <a
+                      href="https://maps.app.goo.gl/ZyP87vtqo5odNARb8?g_st=aw"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="hover:text-navy-primary transition-colors duration-200"
+                    >
+                      Hema Nagar, Boduppal<br />
+                      Hyderabad, Telangana — 500039
+                    </a>
+                  </div>
+                  <p className="text-[11px] text-silver/60 pt-2 border-t border-navy-primary/6">
+                    Mon – Sat: 9:00 AM – 7:00 PM
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* RIGHT: Form */}
+            <div>
+              <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-2">
+                Book Your Visit
+              </p>
+              <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight mb-8">
+                Tell us about your property.
+              </h2>
+
               <React.Suspense fallback={
-                <div className="py-10 text-center text-silver text-xs font-sans">
+                <div className="py-10 text-center text-silver text-[13px] font-sans">
                   Loading form…
                 </div>
               }>
                 <ConsultationFormContent />
               </React.Suspense>
             </div>
-          </div>
-
-          {/* RIGHT: Info sidebar */}
-          <div className="lg:col-span-5 min-w-0 space-y-4">
-
-            {/* What we audit */}
-            <div className="bg-purewhite border border-navy-primary/8 rounded-lg p-5">
-              <h3 className="font-display text-xs font-semibold text-navy-primary uppercase tracking-wider mb-4">
-                What Our Audit Covers
-              </h3>
-              <ul className="space-y-3">
-                {[
-                  { label: "Water TDS Analysis", desc: "We measure Hyderabad borewell hardness on-site." },
-                  { label: "Plumbing Sizing", desc: "Pipe diameters, inlet pressure, and flow rate math." },
-                  { label: "Electrical Phase Check", desc: "Three-phase load calculations for safety compliance." },
-                  { label: "Architecture Fit", desc: "Confirm equipment fits inside service shafts or vanities." },
-                  { label: "System Recommendation", desc: "Unbiased hardware spec for your exact layout." },
-                ].map((item, i) => (
-                  <li key={i} className="flex items-start gap-2.5">
-                    <span className="w-1.5 h-1.5 rounded-full bg-gold-primary mt-1.5 shrink-0" />
-                    <div>
-                      <span className="font-sans text-[11px] font-semibold text-navy-primary">{item.label}</span>
-                      <span className="font-sans text-[10px] text-silver block leading-relaxed">{item.desc}</span>
-                    </div>
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            {/* Contact card */}
-            <div className="bg-navy-primary text-purewhite rounded-lg p-5 border border-gold-primary/10">
-              <h3 className="font-display text-xs font-semibold uppercase tracking-wider text-gold-primary mb-4">
-                Prefer to Call Us?
-              </h3>
-              <ul className="space-y-3 text-[11px] font-sans">
-                <li className="flex items-center gap-2.5">
-                  <Phone size={13} className="text-gold-primary shrink-0" />
-                  <a href="tel:+918555998216" className="hover:text-gold-primary transition-colors">+91 85559 98216</a>
-                </li>
-                <li className="flex items-center gap-2.5">
-                  <Mail size={13} className="text-gold-primary shrink-0" />
-                  <a href="mailto:aquaelitesolution@gmail.com" className="hover:text-gold-primary transition-colors">aquaelitesolution@gmail.com</a>
-                </li>
-                <li className="flex items-start gap-2.5">
-                  <MapPin size={13} className="text-gold-primary shrink-0 mt-0.5" />
-                  <a
-                    href="https://maps.app.goo.gl/ZyP87vtqo5odNARb8?g_st=aw"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="hover:text-gold-primary transition-colors duration-200 text-purewhite/70"
-                  >
-                    Hema Nagar, Boduppal,<br />
-                    Hyderabad — 500039
-                  </a>
-                </li>
-              </ul>
-              <div className="mt-4 pt-4 border-t border-purewhite/10 text-[10px] text-purewhite/50">
-                Mon–Sat: 9:00 AM – 7:00 PM
-              </div>
-            </div>
 
           </div>
         </div>
-      </Container>
+      </section>
     </div>
   );
 }

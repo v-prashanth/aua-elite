@@ -2,10 +2,8 @@
 
 import * as React from "react";
 import Link from "next/link";
-import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
-import { projects } from "@/data/projects";
 
 // ─── Process Steps ─────────────────────────────────────────────────────────────
 
@@ -13,32 +11,32 @@ const STEPS = [
   {
     num: "01",
     title: "Site Visit",
-    body: "We come to your property. Our technicians measure water pressure at source, test your groundwater hardness, and inspect your electrical panel phase load — before we recommend anything.",
+    body: "We visit your property. Our installation specialists inspect your water supply, check the plumbing layout, and assess your electrical setup — before we recommend anything.",
   },
   {
     num: "02",
-    title: "Sizing Assessment",
-    body: "We map your simultaneous usage patterns — how many bathrooms, whether you have rain showers, tubs, or wellness fixtures. Every recommendation is derived from engineering data, never intuition.",
+    title: "Requirement Assessment",
+    body: "We map your hot water requirements — how many bathrooms, your fixture types, your daily usage patterns. Every recommendation is based on what your property actually needs.",
   },
   {
     num: "03",
-    title: "Brand-Independent Recommendation",
-    body: "We are not dealers for any single manufacturer. We select the best-fit system from trusted global brands based purely on what your property needs.",
+    title: "Independent Recommendation",
+    body: "We are not dealers for any single manufacturer. We select the right system from trusted brands based purely on your property requirements — nothing else.",
   },
   {
     num: "04",
     title: "Professional Installation",
-    body: "Our own certified full-time technicians install. No third-party subcontractors, no handoffs. Every connection is pressure-tested before we leave.",
+    body: "Our own experienced installation specialists handle everything. No handoffs, no subcontractors. Every connection is properly tested before we leave.",
   },
   {
     num: "05",
-    title: "Testing & Commissioning",
-    body: "We run the system under full load, verify thermal performance, check every electrical connection, and hand over a written commissioning report.",
+    title: "Testing & Handover",
+    body: "We run the system, verify the installation, and walk you through everything before we hand over. We want you to feel confident about what has been installed.",
   },
   {
     num: "06",
     title: "After-Sales Support",
-    body: "We remain your local contact for the life of the system — annual scale-cleaning, warranty coordination, and rapid response if anything requires attention.",
+    body: "We remain your contact for the life of the system — maintenance, warranty coordination, and prompt response whenever you need assistance.",
   },
 ];
 
@@ -46,7 +44,7 @@ const BRANDS = [
   {
     name: "Stiebel Eltron",
     origin: "Germany · Est. 1924",
-    note: "Global leader in tankless heating and air-source heat pumps.",
+    note: "Global leader in tankless water heating and air-source heat pumps.",
   },
   {
     name: "A.O. Smith",
@@ -90,14 +88,14 @@ export default function AboutPage() {
               Who We Are
             </p>
             <h1 className="font-display text-4xl sm:text-5xl md:text-[3.4rem] font-medium leading-[1.12] tracking-tight text-white mb-8">
-              We started as{" "}
+              Consultation first.{" "}
               <br className="hidden sm:block" />
-              field technicians.
+              Installation second.
             </h1>
             <p className="text-[13px] sm:text-[15px] text-white/55 leading-relaxed max-w-lg font-sans">
-              We built this company because we saw homeowners buying expensive
-              systems that were never sized correctly for their property. That
-              problem is entirely solvable — and it is what we do.
+              We are an independent consultation and installation company. We understand
+              your requirements, visit your property, recommend the right products, and
+              install them properly.
             </p>
           </div>
         </div>
@@ -109,7 +107,7 @@ export default function AboutPage() {
       </section>
 
       {/* ──────────────────────────────────────────────────────────
-          OUR STORY — editorial text, no cards
+          WHO WE ARE — editorial text, no cards
       ────────────────────────────────────────────────────────── */}
       <section className="py-20 md:py-28 bg-purewhite border-b border-navy-primary/5">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
@@ -119,34 +117,29 @@ export default function AboutPage() {
                 Our Background
               </p>
               <h2 className="font-display text-[1.5rem] sm:text-[1.8rem] font-medium text-navy-primary leading-tight tracking-tight">
-                Built from the ground up
+                Why consultation matters
               </h2>
             </div>
             <div className="space-y-6 text-[13px] sm:text-[14px] text-silver leading-[1.9] font-sans">
               <p>
-                Aqua Elite Solutions was founded by hands-on service technicians
-                who spent years inside Hyderabad&apos;s luxury residential
-                developments — Jubilee Hills, Gachibowli, Banjara Hills —
-                installing and repairing water systems.
+                Aqua Elite Solutions was founded to solve a specific problem: water heating
+                and treatment systems were being sold and installed without anyone properly
+                assessing whether they were the right fit for the property.
               </p>
               <p>
-                We spent those years troubleshooting leaking geysers, calcified
-                showerheads, and burnt-out electrical elements. We noticed a
-                consistent pattern: retail showrooms were selling expensive,
-                high-capacity water heaters without checking whether the
-                customer&apos;s property could support them.
+                The result was homeowners investing in expensive systems that did not perform
+                as expected — undersized for the load, incorrectly specified for the
+                water hardness, or incompatible with the electrical supply.
               </p>
               <p className="text-navy-primary font-medium">
-                Homeowners were buying premium products and experiencing
-                constant temperature drops, low pressure, and electrical faults
-                — because no one had sized the system to the property.
+                The right product for the wrong property is still the wrong product. That
+                is why we start with a site visit — not a product catalogue.
               </p>
               <p>
-                We started this company to fix exactly that. We are not a
-                manufacturer, not a showroom, and not a dealer. We are
-                independent technical advisors who size the system to your home,
-                recommend the best product, install it with our own team, and
-                stay available for the life of the system.
+                We are not a manufacturer, not a showroom, and not a dealer tied to any
+                single brand. We are an independent advisory and installation company. We
+                assess your property, recommend the right system, install it with our own
+                team, and stay available for the life of the system.
               </p>
             </div>
           </div>
@@ -154,7 +147,7 @@ export default function AboutPage() {
       </section>
 
       {/* ──────────────────────────────────────────────────────────
-          HOW WE WORK — numbered, clean, no timeline rail
+          HOW WE WORK — numbered, clean
       ────────────────────────────────────────────────────────── */}
       <section id="process" className="py-20 md:py-28 bg-offwhite border-b border-navy-primary/5">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
@@ -190,9 +183,60 @@ export default function AboutPage() {
       </section>
 
       {/* ──────────────────────────────────────────────────────────
-          BRANDS — typographic list (matches products page)
+          WHAT WE OFFER — trust pillars without invented claims
       ────────────────────────────────────────────────────────── */}
-      <section id="brands" className="py-20 md:py-28 bg-purewhite border-b border-navy-primary/5">
+      <section className="py-20 md:py-28 bg-purewhite border-b border-navy-primary/5">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
+          <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24">
+            <div className="pt-1">
+              <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
+                What You Get
+              </p>
+              <h2 className="font-display text-[1.5rem] sm:text-[1.8rem] font-medium text-navy-primary leading-tight tracking-tight">
+                Our commitment to you
+              </h2>
+            </div>
+            <div className="divide-y divide-navy-primary/8">
+              {[
+                {
+                  title: "Free Site Inspection",
+                  body: "We visit your property at no charge to assess your water supply, plumbing layout, and electrical capacity before recommending anything.",
+                },
+                {
+                  title: "Honest Recommendation",
+                  body: "We recommend based on what your property needs — not based on what is easiest to sell. We work with multiple trusted brands.",
+                },
+                {
+                  title: "Professional Installation",
+                  body: "Our experienced installation specialists handle the complete installation — from pipework to electrical connections — cleanly and correctly.",
+                },
+                {
+                  title: "Competitive Pricing",
+                  body: "We provide transparent pricing with no hidden costs. You will know exactly what you are paying for before any work begins.",
+                },
+                {
+                  title: "After-Sales Support",
+                  body: "We remain your contact for the life of your system. Maintenance, warranty queries, and any follow-up service — we are available.",
+                },
+              ].map((item) => (
+                <div key={item.title} className="py-7">
+                  <h3 className="font-display text-[1rem] sm:text-[1.1rem] font-medium text-navy-primary mb-2 leading-tight">
+                    {item.title}
+                  </h3>
+                  <p className="text-[12px] sm:text-[13px] text-silver leading-[1.85] font-sans">
+                    {item.body}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────────────────────────────────────────────────
+          BRANDS — typographic list
+      ────────────────────────────────────────────────────────── */}
+      <section id="brands" className="py-20 md:py-28 bg-offwhite border-b border-navy-primary/5">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
 
           <div className="max-w-xl mb-14">
@@ -203,8 +247,8 @@ export default function AboutPage() {
               Brands we work with
             </h2>
             <p className="text-[13px] text-silver leading-relaxed font-sans">
-              We are not tied to any manufacturer. We select the best option for
-              your property — based on your requirements, not sales targets.
+              We are not tied to any single manufacturer. We recommend based on your
+              property&apos;s requirements — nothing else.
             </p>
           </div>
 
@@ -230,72 +274,6 @@ export default function AboutPage() {
       </section>
 
       {/* ──────────────────────────────────────────────────────────
-          COMPLETED PROJECTS — editorial, no cards
-      ────────────────────────────────────────────────────────── */}
-      <section id="projects" className="py-20 md:py-28 bg-offwhite">
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
-
-          <div className="mb-16">
-            <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
-              Completed Work
-            </p>
-            <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight">
-              Selected projects
-            </h2>
-          </div>
-
-          {/* Full-bleed editorial project rows */}
-          <div className="space-y-20 md:space-y-28">
-            {projects.map((project, idx) => (
-              <div
-                key={project.id}
-                className="grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-start"
-              >
-                {/* Image — large, dominant */}
-                <div className={idx % 2 === 1 ? "lg:order-2" : ""}>
-                  <div className="relative w-full aspect-[3/2] rounded-xl overflow-hidden bg-navy-primary/5">
-                    <Image
-                      src={project.image}
-                      alt={project.title}
-                      fill
-                      className="object-cover"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                  </div>
-                </div>
-
-                {/* Content — clean, no labels, no badges */}
-                <div className={`pt-2 ${idx % 2 === 1 ? "lg:order-1" : ""}`}>
-                  <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-4">
-                    {project.location}
-                  </p>
-                  <h3 className="font-display text-[1.5rem] sm:text-[1.8rem] font-medium text-navy-primary leading-tight tracking-tight mb-5">
-                    {project.title}
-                  </h3>
-                  <p className="text-[13px] sm:text-[14px] text-silver leading-[1.9] font-sans mb-8">
-                    {project.description}
-                  </p>
-
-                  {/* Products as plain text — no chips, no labels */}
-                  <div className="flex flex-wrap gap-x-4 gap-y-1">
-                    {project.productsUsed.map((p, i) => (
-                      <span
-                        key={p}
-                        className="text-[11px] font-sans font-semibold text-navy-primary/50 uppercase tracking-wider"
-                      >
-                        {i > 0 && <span className="mr-4 text-navy-primary/20">·</span>}
-                        {p}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* ──────────────────────────────────────────────────────────
           CONSULTATION CTA
       ────────────────────────────────────────────────────────── */}
       <section className="py-24 md:py-32 bg-navy-dark text-white">
@@ -308,8 +286,8 @@ export default function AboutPage() {
               Tell us about your property.
             </h2>
             <p className="text-[13px] sm:text-[14px] text-white/50 leading-relaxed mb-10 font-sans max-w-md">
-              We&apos;ll schedule a site visit, audit your electrical panel and water
-              supply, and provide a written sizing recommendation — no obligation.
+              Book a free site visit. We&apos;ll assess your property and provide a written
+              recommendation — no obligation.
             </p>
             <div className="flex flex-wrap gap-4">
               <Link href="/consultation">
@@ -318,7 +296,7 @@ export default function AboutPage() {
                   whileTap={{ scale: 0.97 }}
                   className="inline-flex items-center gap-2.5 bg-gold-primary text-navy-brand px-8 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] hover:bg-white transition-colors duration-300"
                 >
-                  Book a Site Visit
+                  Book a Free Site Visit
                   <ArrowRight size={13} strokeWidth={2.5} />
                 </motion.button>
               </Link>
@@ -328,7 +306,7 @@ export default function AboutPage() {
                   whileTap={{ scale: 0.97 }}
                   className="inline-flex items-center gap-2.5 border border-white/20 text-white/80 px-8 py-4 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] hover:border-white/50 hover:text-white transition-all duration-300"
                 >
-                  Call Us First
+                  Contact Us
                 </motion.button>
               </Link>
             </div>

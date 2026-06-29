@@ -2,107 +2,283 @@
 
 import * as React from "react";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { Container } from "@/components/ui/Container";
+import { ArrowRight, ClipboardCheck, BadgeIndianRupee, Star, Wrench } from "lucide-react";
 
+const EASE = [0.16, 1, 0.3, 1] as [number, number, number, number];
+
+// ─── Ribbon items (duplicated for seamless loop) ───────────────────────────────
+const RIBBON_ITEMS = [
+  { icon: ClipboardCheck, label: "Free Site Inspection"       },
+  { icon: BadgeIndianRupee, label: "Competitive Pricing"      },
+  { icon: Star,            label: "Expert Recommendation"     },
+  { icon: Wrench,          label: "Professional Installation" },
+];
+
+// Triple-duplicate so the loop is always visually filled
+const TICKER = [...RIBBON_ITEMS, ...RIBBON_ITEMS, ...RIBBON_ITEMS];
+
+// ─── Marquee ribbon ────────────────────────────────────────────────────────────
+function FlashRibbon() {
+  return (
+    <div
+      className="absolute bottom-0 left-0 right-0 overflow-hidden"
+      style={{
+        background: "var(--navy-brand)",
+        borderTop: "1px solid rgba(201,165,76,0.2)",
+      }}
+      aria-hidden
+    >
+      {/* Left fade edge */}
+      <div
+        className="absolute left-0 top-0 bottom-0 z-10 pointer-events-none"
+        style={{
+          width: "80px",
+          background: "linear-gradient(to right, var(--navy-brand), transparent)",
+        }}
+      />
+      {/* Right fade edge */}
+      <div
+        className="absolute right-0 top-0 bottom-0 z-10 pointer-events-none"
+        style={{
+          width: "80px",
+          background: "linear-gradient(to left, var(--navy-brand), transparent)",
+        }}
+      />
+
+      {/* Scrolling track */}
+      <motion.div
+        className="flex items-center"
+        style={{ width: "max-content" }}
+        animate={{ x: ["0%", "-33.333%"] }}
+        transition={{
+          duration: 22,
+          ease: "linear",
+          repeat: Infinity,
+        }}
+      >
+        {TICKER.map((item, i) => {
+          const Icon = item.icon;
+          return (
+            <div
+              key={i}
+              className="flex items-center gap-2.5 shrink-0"
+              style={{ padding: "10px 28px" }}
+            >
+              <Icon
+                size={11}
+                strokeWidth={2}
+                style={{ color: "var(--gold-primary)", flexShrink: 0 }}
+              />
+              <span
+                className="font-sans font-semibold uppercase tracking-[0.14em] whitespace-nowrap"
+                style={{ fontSize: "10px", color: "rgba(255,255,255,0.75)" }}
+              >
+                {item.label}
+              </span>
+              {/* Separator diamond */}
+              <span
+                className="ml-2"
+                style={{
+                  width: "3px",
+                  height: "3px",
+                  borderRadius: "1px",
+                  background: "rgba(201,165,76,0.4)",
+                  transform: "rotate(45deg)",
+                  display: "inline-block",
+                  flexShrink: 0,
+                }}
+              />
+            </div>
+          );
+        })}
+      </motion.div>
+    </div>
+  );
+}
+
+// ─── Hero ──────────────────────────────────────────────────────────────────────
 export const Hero: React.FC = () => {
-  const router = useRouter();
-
   return (
     <section
-      className="relative min-h-[calc(100vh-var(--navbar-h))] flex items-center bg-offwhite overflow-hidden"
+      className="relative flex flex-col bg-offwhite overflow-hidden"
+      style={{ minHeight: "calc(100vh - var(--navbar-h))" }}
       aria-label="Hero Section"
     >
-      {/* Subtle radial accent */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_20%_40%,rgba(201,165,76,0.04)_0%,transparent_60%)] pointer-events-none" />
+      {/* Radial gold accent */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 60% 55% at 18% 45%, rgba(201,165,76,0.055) 0%, transparent 100%)",
+        }}
+      />
 
-      {/* Premium subtle blueprint grid pattern */}
+      {/* Blueprint grid */}
       <div
         aria-hidden
-        className="absolute inset-0 opacity-[0.02] dark:opacity-[0.03] pointer-events-none"
+        className="absolute inset-0 pointer-events-none"
         style={{
           backgroundImage:
             "linear-gradient(to right, var(--navy-primary) 1px, transparent 1px), linear-gradient(to bottom, var(--navy-primary) 1px, transparent 1px)",
           backgroundSize: "60px 60px",
+          opacity: 0.018,
         }}
       />
 
-      <Container className="relative z-10 w-full py-10 sm:py-12 md:py-16 lg:py-0">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-10 lg:gap-16 items-center">
+      {/* ── Content wrapper — grows to fill, leaves room for ribbon ── */}
+      <div className="relative z-10 flex-1 flex items-center w-full max-w-7xl mx-auto px-5 sm:px-8 lg:px-10 xl:px-16 py-12 sm:py-14 md:py-16 lg:py-10"
+        style={{ paddingBottom: "52px" /* ribbon height */ }}
+      >
+        <div className="w-full grid grid-cols-1 md:grid-cols-2 gap-10 lg:gap-16 xl:gap-20 items-center">
 
-          {/* ── Left: Text ── */}
-          <div className="flex flex-col justify-center text-left space-y-5 sm:space-y-6">
-            <motion.div
-              initial={{ opacity: 0, y: 24 }}
+          {/* ────────────────────────────────────────────
+              LEFT — copy + CTAs (no trust items here)
+          ──────────────────────────────────────────── */}
+          <div className="flex flex-col justify-center text-left">
+
+            {/* Eyebrow */}
+            <motion.span
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.16, 1, 0.3, 1] }}
-              className="space-y-4 sm:space-y-5"
+              transition={{ duration: 0.6, ease: EASE }}
+              className="block text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.38em] mb-5"
+              style={{ color: "var(--gold-primary)" }}
             >
-              <span className="text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.35em] text-gold-primary block">
-                Aqua Elite Solutions
+              Aqua Elite Solutions · Hyderabad
+            </motion.span>
+
+            {/* Headline */}
+            <motion.h1
+              initial={{ opacity: 0, y: 22 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.85, ease: EASE, delay: 0.08 }}
+              className="font-display font-medium tracking-tight text-navy-primary leading-[1.06] mb-5"
+              style={{ fontSize: "clamp(2.1rem, 5.2vw, 3.75rem)" }}
+            >
+              The Right Water Solution —{" "}
+              <br className="hidden sm:block" />
+              <span
+                className="italic font-serif font-normal"
+                style={{ color: "var(--gold-primary)" }}
+              >
+                Chosen, Installed &amp; Supported.
               </span>
+            </motion.h1>
 
-              <h1 className="text-[2.4rem] sm:text-5xl md:text-[3rem] lg:text-[3.4rem] xl:text-[3.8rem] font-display font-medium tracking-tight text-navy-primary leading-[1.07]">
-                The Right Water Solution
-                <br />
-                <span className="text-gold-primary italic font-serif font-normal">
-                  Chosen, Installed & Supported.
-                </span>
-              </h1>
-
-              <p className="text-sm sm:text-[15px] text-navy-primary/70 font-sans leading-relaxed max-w-[520px]">
-                We understand your requirements, visit your site, recommend the right products from trusted brands, handle the installation, and provide support long after the job is done.
-              </p>
-            </motion.div>
-
-            <motion.div
+            {/* Supporting paragraph */}
+            <motion.p
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3 pt-1"
+              transition={{ duration: 0.8, ease: EASE, delay: 0.18 }}
+              className="font-sans leading-relaxed text-navy-primary/65 mb-8 max-w-[500px]"
+              style={{ fontSize: "clamp(13px, 1.5vw, 15px)" }}
             >
-              <Button
-                variant="primary"
-                size="lg"
-                onClick={() => router.push("/consultation")}
-                className="w-full sm:w-auto text-[10px] sm:text-xs font-bold tracking-wider uppercase px-7 py-3.5 shadow-none"
-              >
-                Book Consultation
-                <ArrowRight size={13} className="ml-2" />
-              </Button>
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() => router.push("/products")}
-                className="w-full sm:w-auto text-[10px] sm:text-xs font-bold tracking-wider uppercase px-7 py-3.5"
-              >
-                View Our Products
-              </Button>
+              We visit your property, measure your requirements, and recommend the
+              exact water heating or treatment system — sized correctly, installed
+              properly, and supported long-term.
+            </motion.p>
+
+            {/* CTA buttons */}
+            <motion.div
+              initial={{ opacity: 0, y: 14 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, ease: EASE, delay: 0.28 }}
+              className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3"
+            >
+              <Link href="/consultation">
+                <motion.button
+                  whileHover={{ y: -2, boxShadow: "0 8px 28px rgba(201,165,76,0.28)" }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ duration: 0.22, ease: EASE }}
+                  className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] w-full sm:w-auto"
+                  style={{ background: "var(--gold-primary)", color: "#fff" }}
+                >
+                  Book Consultation
+                  <ArrowRight size={13} strokeWidth={2.5} />
+                </motion.button>
+              </Link>
+              <Link href="/products">
+                <motion.button
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  transition={{ duration: 0.22, ease: EASE }}
+                  className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] border transition-all duration-300 w-full sm:w-auto"
+                  style={{
+                    border: "1.5px solid var(--navy-primary)",
+                    color: "var(--navy-primary)",
+                  }}
+                >
+                  View Products
+                </motion.button>
+              </Link>
             </motion.div>
           </div>
 
-          {/* ── Right: Image ── */}
+          {/* ────────────────────────────────────────────
+              RIGHT — hero image
+          ──────────────────────────────────────────── */}
           <motion.div
-            initial={{ opacity: 0, scale: 1.03 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 1.1, ease: [0.16, 1, 0.3, 1], delay: 0.1 }}
-            className="relative w-full h-[250px] sm:h-[350px] md:h-[400px] lg:h-[440px] xl:h-[480px] rounded-xl overflow-hidden border border-gold-primary/20 shadow-raised bg-purewhite"
+            initial={{ opacity: 0, scale: 1.03, y: 12 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            transition={{ duration: 1.1, ease: EASE, delay: 0.12 }}
+            className="relative w-full order-first md:order-last"
+            style={{ height: "clamp(260px, 46vw, 500px)" }}
           >
-            <Image
-              src="/images/hero_villa.png"
-              alt="Premium modern residential villa interior"
-              fill
-              className="object-cover object-center"
-              priority
-              sizes="(max-width: 768px) 100vw, 50vw"
+            {/* Image frame */}
+            <div
+              className="absolute inset-0 rounded-2xl overflow-hidden"
+              style={{
+                border: "1px solid rgba(201,165,76,0.18)",
+                boxShadow: "0 20px 60px rgba(11,35,65,0.1), 0 2px 8px rgba(11,35,65,0.06)",
+              }}
+            >
+              <Image
+                src="/images/hero_villa.png"
+                alt="Premium residential villa — water heating and treatment installation by Aqua Elite Solutions"
+                fill
+                className="object-cover object-center"
+                priority
+                sizes="(max-width: 768px) 100vw, 50vw"
+              />
+              <div
+                className="absolute inset-0 pointer-events-none"
+                style={{
+                  background:
+                    "linear-gradient(to top, rgba(11,35,65,0.2) 0%, rgba(11,35,65,0.03) 40%, transparent 70%)",
+                }}
+              />
+            </div>
+
+            {/* Gold corner accents */}
+            <motion.div
+              className="absolute -top-px -left-px pointer-events-none"
+              style={{
+                width: "72px", height: "3px",
+                background: "linear-gradient(to right, var(--gold-primary), transparent)",
+              }}
+              initial={{ scaleX: 0, transformOrigin: "left" }}
+              animate={{ scaleX: 1 }}
+              transition={{ duration: 0.9, ease: EASE, delay: 0.6 }}
             />
-            <div className="absolute inset-0 bg-gradient-to-t from-navy-primary/15 via-transparent to-transparent pointer-events-none" />
+            <motion.div
+              className="absolute -top-px -left-px pointer-events-none"
+              style={{
+                width: "3px", height: "72px",
+                background: "linear-gradient(to bottom, var(--gold-primary), transparent)",
+              }}
+              initial={{ scaleY: 0, transformOrigin: "top" }}
+              animate={{ scaleY: 1 }}
+              transition={{ duration: 0.9, ease: EASE, delay: 0.65 }}
+            />
           </motion.div>
+
         </div>
-      </Container>
+      </div>
+
+      {/* ── Flash ribbon — pinned to bottom of hero ── */}
+      <FlashRibbon />
     </section>
   );
 };

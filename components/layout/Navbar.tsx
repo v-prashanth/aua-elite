@@ -107,7 +107,7 @@ export const Navbar: React.FC = () => {
                   Aqua Elite
                 </span>
                 <span className="block text-[7px] tracking-[0.22em] uppercase font-sans font-medium text-silver mt-[2px] transition-colors duration-300 whitespace-nowrap">
-                  Water Solutions We Provide
+                  Water Heating & Treatment
                 </span>
               </motion.div>
             </Link>
@@ -211,7 +211,7 @@ export const Navbar: React.FC = () => {
                     Aqua Elite
                   </span>
                   <span className="text-[7px] tracking-[0.22em] uppercase font-sans font-medium text-silver mt-[1px]">
-                    Water Solutions We Provide
+                    Water Heating & Treatment
                   </span>
                 </div>
                 <button

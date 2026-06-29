@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ChevronRight, MapPin, X, ChevronLeft, ChevronRight as ChevronRightIcon } from "lucide-react";
+import { ArrowUpRight, ChevronRight, X, ChevronLeft, ChevronRight as ChevronRightIcon } from "lucide-react";
 
 /* ─────────────────────────────────────────────
    EASING
@@ -12,30 +12,28 @@ import { ArrowUpRight, ChevronRight, MapPin, X, ChevronLeft, ChevronRight as Che
 const E = [0.76, 0, 0.24, 1] as [number, number, number, number];
 
 /* ─────────────────────────────────────────────
-   DATA
+   DATA — Real installation photos with honest captions only.
+   No invented location names. No invented project names.
 ───────────────────────────────────────────── */
-
-
 const GRID_IMAGES = [
-  // col / row expressed as CSS gridColumn / gridRow shorthand (start / end)
-  { src: "/images/projects/project-wap-5.jpg",  title: "Residential Villa Installation",    location: "Jubilee Hills", type: "Residential Villa", col: "1 / 3", row: "1 / 3" }, // big — top left
-  { src: "/images/projects/project-wap-12.jpg", title: "Luxury Apartment Installation", location: "Jubilee Hills", type: "Luxury Apartment",   col: "3 / 4", row: "1 / 2" },
-  { src: "/images/projects/project-wap-22.jpg", title: "Commercial Space Installation",         location: "Gachibowli",   type: "Commercial Space",  col: "4 / 5", row: "1 / 2" },
-  { src: "/images/projects/project-wap-15.jpg", title: "Residential Villa Installation",     location: "Kokapet",      type: "Residential Villa", col: "3 / 5", row: "2 / 3" }, // wide — right mid
-  { src: "/images/projects/project-wap-18.jpg", title: "Luxury Villa Installation",     location: "Madhapur",     type: "Luxury Villa",       col: "1 / 2", row: "3 / 4" },
-  { src: "/images/projects/ZB1.jpg",            title: "Residential Home Installation",    location: "Banjara Hills", type: "Residential Home",  col: "2 / 4", row: "3 / 4" }, // wide — left-centre
-  { src: "/images/projects/project-wap-10.jpg", title: "Boutique Hotel Installation",  location: "Somajiguda",   type: "Boutique Hotel",     col: "4 / 5", row: "3 / 5" }, // tall — far right
-  { src: "/images/projects/project-wap-8.jpg",  title: "Service Apartment Installation",         location: "Banjara Hills", type: "Service Apartment", col: "1 / 3", row: "4 / 5" }, // wide — bottom left
-  { src: "/images/projects/ZB3.jpg",            title: "Luxury Villa Installation",  location: "Jubilee Hills", type: "Luxury Villa",       col: "3 / 4", row: "4 / 5" },
-  { src: "/images/projects/project-wap-20.jpg", title: "Residential Villa Installation",    location: "Jubilee Hills", type: "Residential Villa",  col: "1 / 2", row: "5 / 6" },
-  { src: "/images/projects/project-wap-4.jpg",  title: "Commercial Office Installation",     location: "Gachibowli",   type: "Commercial Office",  col: "2 / 4", row: "5 / 6" }, // wide — bottom
-  { src: "/images/projects/project-wap-9.jpg",  title: "Luxury Apartment Installation",       location: "Kokapet",      type: "Luxury Apartment",   col: "4 / 5", row: "5 / 6" },
+  { src: "/images/projects/project-wap-5.jpg",  title: "Residential Villa Installation",    type: "Residential Villa",    col: "1 / 3", row: "1 / 3" },
+  { src: "/images/projects/project-wap-12.jpg", title: "Water Heater Installation",          type: "Water Heater",         col: "3 / 4", row: "1 / 2" },
+  { src: "/images/projects/project-wap-22.jpg", title: "Commercial Installation",            type: "Commercial",           col: "4 / 5", row: "1 / 2" },
+  { src: "/images/projects/project-wap-15.jpg", title: "Residential Installation",           type: "Residential",          col: "3 / 5", row: "2 / 3" },
+  { src: "/images/projects/project-wap-18.jpg", title: "Luxury Bathroom Installation",       type: "Luxury Bathroom",      col: "1 / 2", row: "3 / 4" },
+  { src: "/images/projects/ZB1.jpg",            title: "Water Softener Installation",        type: "Water Softener",       col: "2 / 4", row: "3 / 4" },
+  { src: "/images/projects/project-wap-10.jpg", title: "Hotel Installation",                 type: "Hotel",                col: "4 / 5", row: "3 / 5" },
+  { src: "/images/projects/project-wap-8.jpg",  title: "Apartment Installation",             type: "Apartment",            col: "1 / 3", row: "4 / 5" },
+  { src: "/images/projects/ZB3.jpg",            title: "Water Treatment Installation",       type: "Water Treatment",      col: "3 / 4", row: "4 / 5" },
+  { src: "/images/projects/project-wap-20.jpg", title: "Residential Villa Installation",     type: "Residential Villa",    col: "1 / 2", row: "5 / 6" },
+  { src: "/images/projects/project-wap-4.jpg",  title: "Commercial Office Installation",     type: "Commercial Office",    col: "2 / 4", row: "5 / 6" },
+  { src: "/images/projects/project-wap-9.jpg",  title: "Luxury Apartment Installation",      type: "Luxury Apartment",     col: "4 / 5", row: "5 / 6" },
 ];
 
 /* ─────────────────────────────────────────────
    LIGHTBOX
 ───────────────────────────────────────────── */
-type SlideItem = { src: string; title: string; location: string; type: string };
+type SlideItem = { src: string; title: string; type: string };
 
 function Lightbox({
   slide, index, total, onClose, onPrev, onNext,
@@ -90,14 +88,14 @@ function Lightbox({
               transition={{ duration: 0.38, ease: E }}
               className="absolute inset-0"
             >
-              <Image src={slide.src} alt={`${slide.location} — ${slide.type}`} fill className="object-contain" sizes="90vw" priority />
+              <Image src={slide.src} alt={slide.title} fill className="object-contain" sizes="90vw" priority />
             </motion.div>
           </AnimatePresence>
         </div>
 
         <AnimatePresence mode="wait">
           <motion.div
-            key={slide.location}
+            key={slide.type}
             initial={{ opacity: 0, y: 8 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
@@ -105,11 +103,9 @@ function Lightbox({
             className="flex items-center justify-between w-full mt-4 px-1"
           >
             <div>
-              <p className="font-display font-medium text-white" style={{ fontSize: "clamp(14px, 2vw, 20px)" }}>{slide.location}</p>
+              <p className="font-display font-medium text-white" style={{ fontSize: "clamp(14px, 2vw, 20px)" }}>{slide.title}</p>
               <div className="flex items-center gap-2 mt-1">
-                <MapPin size={9} style={{ color: "var(--gold-primary)" }} />
-                <span className="text-[9px] font-bold uppercase tracking-[0.22em]" style={{ color: "var(--gold-primary)" }}>{slide.location}</span>
-                <span className="text-[9px] font-sans uppercase tracking-[0.15em]" style={{ color: "rgba(255,255,255,0.3)" }}>· {slide.type}</span>
+                <span className="text-[9px] font-bold uppercase tracking-[0.22em]" style={{ color: "var(--gold-primary)" }}>{slide.type}</span>
               </div>
             </div>
             <p className="font-display text-white/20" style={{ fontSize: "clamp(18px, 2.5vw, 26px)" }}>
@@ -135,7 +131,7 @@ function Lightbox({
       {/* Close */}
       <button onClick={onClose}
         className="absolute top-5 right-5 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
-        style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }} aria-label="Close">
+        style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }} aria-label="Close lightbox">
         <X size={16} className="text-white" />
       </button>
 
@@ -146,13 +142,11 @@ function Lightbox({
 }
 
 /* ─────────────────────────────────────────────
-   HERO — dark navy, grid layout matching about page
+   HERO
 ───────────────────────────────────────────── */
 function HeroSection() {
   return (
     <section className="bg-navy-dark text-white relative overflow-hidden">
-
-      {/* Grid line background — identical to about page hero */}
       <div
         aria-hidden
         className="absolute inset-0 opacity-[0.025]"
@@ -163,7 +157,6 @@ function HeroSection() {
         }}
       />
 
-      {/* Gold bottom line */}
       <motion.div
         className="absolute bottom-0 left-0 right-0 h-px"
         style={{ background: "linear-gradient(to right, transparent, rgba(201,165,76,0.45), transparent)" }}
@@ -173,8 +166,6 @@ function HeroSection() {
       />
 
       <div className="relative max-w-[1320px] mx-auto px-6 lg:px-12 py-16 md:py-24">
-
-        {/* Two-column header — matches about page layout exactly */}
         <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24">
           <div className="pt-1">
             <p className="text-[9px] uppercase tracking-[0.3em] font-bold mb-4" style={{ color: "var(--gold-primary)" }}>
@@ -188,16 +179,14 @@ function HeroSection() {
           </div>
           <div className="flex flex-col justify-center space-y-5 text-[13px] sm:text-[14px] leading-[1.9] font-sans" style={{ color: "rgba(255,255,255,0.5)" }}>
             <p>
-              Every photograph on this page is a completed installation carried out by our own certified
-              technicians — villas, apartments, hotels, and commercial spaces.
+              Every photograph on this page is a completed installation carried out by our
+              experienced installation specialists — villas, apartments, hotels, and commercial spaces.
             </p>
             <p className="text-white/70 font-medium">
-              No subcontractors. No handoffs. Every connection pressure-tested before we leave.
+              We visit your property, recommend the right system, install it properly, and stay available long after.
             </p>
           </div>
         </div>
-
-
       </div>
 
       {/* Clip-path ramp into next section */}
@@ -247,7 +236,7 @@ function GridCell({ item, index, onOpen }: { item: typeof GRID_IMAGES[number]; i
         transition={{ duration: 0.8, ease: E }}
       >
         <Image
-          src={item.src} alt={`${item.location} — ${item.type}`} fill className="object-cover"
+          src={item.src} alt={item.title} fill className="object-cover"
           sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
         />
       </motion.div>
@@ -270,26 +259,23 @@ function GridCell({ item, index, onOpen }: { item: typeof GRID_IMAGES[number]; i
         transition={{ duration: 0.45, ease: E }}
       />
 
-      {/* Label & Details */}
+      {/* Caption */}
       <div className="absolute bottom-0 left-0 right-0 p-5 z-10">
-        <motion.div 
-          animate={{ y: hovered ? -6 : 0 }} 
+        <motion.div
+          animate={{ y: hovered ? -6 : 0 }}
           transition={{ duration: 0.4, ease: E }}
           className="flex flex-col gap-2"
         >
-          <div className="flex items-center gap-1.5 text-white/90">
-            <MapPin size={11} style={{ color: "var(--gold-primary)" }} />
-            <p className="font-display font-medium text-white leading-none tracking-wide" style={{ fontSize: "clamp(15px, 1.8vw, 20px)" }}>
-              {item.location}
-            </p>
-          </div>
+          <p className="font-display font-medium text-white leading-none tracking-wide" style={{ fontSize: "clamp(13px, 1.5vw, 17px)" }}>
+            {item.title}
+          </p>
           <div className="flex">
-            <span 
+            <span
               className="text-[9px] font-bold uppercase tracking-[0.15em] px-2.5 py-1 rounded-full border border-gold-primary/30"
-              style={{ 
-                background: "rgba(201,165,76,0.12)", 
+              style={{
+                background: "rgba(201,165,76,0.12)",
                 color: "var(--gold-primary)",
-                backdropFilter: "blur(4px)" 
+                backdropFilter: "blur(4px)"
               }}
             >
               {item.type}
@@ -332,7 +318,7 @@ function PhotoGrid() {
     >
       <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12">
 
-        {/* Section header — matches about page */}
+        {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 18 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -341,25 +327,25 @@ function PhotoGrid() {
           className="mb-10"
         >
           <p className="text-[9px] uppercase tracking-[0.28em] font-bold mb-3" style={{ color: "var(--gold-primary)" }}>
-            All Installations
+            Happy Customers
           </p>
           <div className="flex flex-col sm:flex-row sm:items-end sm:justify-between gap-4">
             <h2
               className="font-display font-medium tracking-tight leading-tight"
               style={{ fontSize: "clamp(22px, 3.5vw, 38px)", color: "var(--navy-primary)" }}
             >
-              Happy Customers
+              Completed Installations
             </h2>
             <p
               className="font-sans leading-relaxed max-w-xs"
               style={{ fontSize: "clamp(11px, 1.2vw, 13px)", color: "var(--silver)" }}
             >
-              Click any image to view full size. Use arrow keys or buttons to navigate.
+              Click any image to view full size.
             </p>
           </div>
         </motion.div>
 
-        {/* Divider — matches about page */}
+        {/* Divider */}
         <motion.div
           className="mb-10 h-px"
           style={{ background: "rgba(11,35,65,0.08)" }}
@@ -369,17 +355,27 @@ function PhotoGrid() {
           transition={{ duration: 0.9, ease: E }}
         />
 
-        {/* Asymmetric collage */}
+        {/* Asymmetric collage grid */}
         <div
           className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6"
-          style={{
-            gridAutoRows: "clamp(240px, 20vw, 340px)",
-          }}
+          style={{ gridAutoRows: "clamp(240px, 20vw, 340px)" }}
         >
           {GRID_IMAGES.map((item, i) => (
             <GridCell key={i} item={item} index={i} onOpen={() => setLightboxIndex(i)} />
           ))}
         </div>
+
+        {/* Trust statement — per brief */}
+        <motion.p
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: E, delay: 0.2 }}
+          className="mt-16 text-center font-sans text-[13px] sm:text-[14px] leading-relaxed max-w-2xl mx-auto"
+          style={{ color: "var(--silver)" }}
+        >
+          Our installation specialists have completed installations for homes, villas, apartments, commercial spaces, hotels, and offices.
+        </motion.p>
       </div>
 
       <AnimatePresence>
@@ -432,12 +428,11 @@ function CTAStrip() {
             </p>
             <h2 className="font-display font-medium text-white leading-tight"
               style={{ fontSize: "clamp(20px, 3vw, 36px)", maxWidth: "420px" }}>
-              Ready for the Aqua Elite treatment?
+              Book a free site assessment.
             </h2>
             <p className="mt-3 font-sans leading-relaxed"
               style={{ fontSize: "clamp(11px, 1.3vw, 13px)", color: "rgba(255,255,255,0.4)", maxWidth: "360px" }}>
-              Book a free site assessment. Our technicians visit, audit, and design
-              the perfect system — before you commit to anything.
+              Our specialists visit, assess your property, and recommend the right system — before you commit to anything.
             </p>
           </div>
 

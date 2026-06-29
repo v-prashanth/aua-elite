@@ -62,9 +62,7 @@ export const RecentInstallations: React.FC = () => {
             viewport={{ once: true }}
             transition={{ duration: 0.7, ease: E, delay: 0.1 }}
             className="font-display font-medium tracking-tight leading-[1.15] text-navy-primary"
-            style={{
-              fontSize: "clamp(28px, 4vw, 48px)",
-            }}
+            style={{ fontSize: "clamp(28px, 4vw, 48px)" }}
           >
             Completed Installations.<br />
             <span style={{ color: "var(--gold-primary)" }}>Real Trust.</span>
@@ -81,7 +79,9 @@ export const RecentInstallations: React.FC = () => {
               color: "var(--silver)",
             }}
           >
-            We design and deliver bespoke water heating and treatment integrations across Hyderabad. Every project is handled end-to-end by our own certified technicians with zero compromises.
+            We deliver water heating and treatment installations across Hyderabad — for
+            homes, villas, apartments, hotels, and commercial spaces. Every installation
+            is handled end-to-end by our own experienced installation specialists.
           </motion.p>
 
           <motion.div
@@ -96,7 +96,7 @@ export const RecentInstallations: React.FC = () => {
               className="inline-flex items-center gap-3 group"
             >
               <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-navy-primary transition-opacity duration-300 group-hover:opacity-75">
-                Explore Our Portfolio
+                View Our Work
               </span>
               <motion.span
                 whileHover={{ x: 3, y: -3 }}

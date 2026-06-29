@@ -1,6 +1,5 @@
 "use client";
 
-// Force Next.js dev server cache invalidation for updated product images
 import * as React from "react";
 import { notFound } from "next/navigation";
 import Link from "next/link";
@@ -9,7 +8,7 @@ import { Container } from "@/components/ui/Container";
 import { Button } from "@/components/ui/Button";
 import { Reveal } from "@/components/ui/Reveal";
 import { products } from "@/data/products";
-import { ArrowRight, Check } from "lucide-react";
+import { ArrowRight, Check, ChevronRight } from "lucide-react";
 import { cn } from "@/lib/utils";
 
 export default function ProductDetailPage({ params }: { params: { slug: string } }) {
@@ -73,9 +72,23 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
     ? "Centralized Heat Pump"
     : "Water Treatment Purifier";
 
+  // Related products — same category, exclude current
+  const relatedProducts = products
+    .filter((p) => p.id !== product.id && p.category === product.category)
+    .slice(0, 3);
+
   return (
     <div className="relative min-h-screen bg-offwhite text-left font-sans pb-24 selection:bg-gold-primary/10">
       
+      {/* Breadcrumb */}
+      <nav aria-label="Breadcrumb" className="bg-purewhite border-b border-navy-primary/5 px-6 lg:px-12 py-4">
+        <div className="max-w-[1320px] mx-auto flex items-center gap-2 text-[10px] font-sans">
+          <Link href="/products" className="text-silver hover:text-navy-primary transition-colors duration-200">Products</Link>
+          <ChevronRight size={10} className="text-silver/40" />
+          <span className="text-navy-primary/60">{product.title}</span>
+        </div>
+      </nav>
+
       {/* ABOVE THE FOLD: Two-Column Layout */}
       <section className="pt-12 pb-16 md:pt-16 md:pb-20 bg-purewhite border-b border-navy-primary/5">
         <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12 w-full">
@@ -266,16 +279,70 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
         </div>
       </section>
 
-      {/* SECTION 5 — NEED HELP CHOOSING? (Stop page here) */}
+      {/* SECTION 5 — RELATED PRODUCTS */}
+      {relatedProducts.length > 0 && (
+        <section className="py-20 bg-offwhite border-b border-navy-primary/5" id="related-products">
+          <div className="max-w-[1320px] mx-auto px-6 sm:px-8 lg:px-12 w-full">
+            <Reveal>
+              <div className="mb-12">
+                <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block mb-2">
+                  Also Consider
+                </span>
+                <h2 className="font-display text-lg sm:text-xl font-medium text-navy-primary">
+                  Related Products
+                </h2>
+              </div>
+            </Reveal>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+              {relatedProducts.map((related, idx) => (
+                <Reveal key={related.id} delay={idx * 0.1}>
+                  <Link
+                    href={`/products/${related.slug}`}
+                    className="group flex flex-col h-full bg-purewhite border border-navy-primary/5 rounded-xl overflow-hidden hover:border-gold-primary/25 hover:shadow-raised transition-all duration-300"
+                  >
+                    <div className="relative w-full h-[200px] bg-offwhite overflow-hidden">
+                      <Image
+                        src={related.image}
+                        alt={related.title}
+                        fill
+                        className="object-cover transition-transform duration-700 group-hover:scale-105"
+                        sizes="(max-width: 1024px) 50vw, 33vw"
+                      />
+                    </div>
+                    <div className="p-6 flex flex-col flex-grow">
+                      <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold block mb-1">
+                        {related.brand}
+                      </span>
+                      <h3 className="font-display text-sm font-semibold text-navy-primary mb-2">
+                        {related.title}
+                      </h3>
+                      <p className="text-[11px] text-silver font-sans leading-relaxed flex-grow">
+                        {related.subtitle}
+                      </p>
+                      <span className="inline-flex items-center gap-1 text-[10px] font-bold uppercase tracking-wider text-gold-primary group-hover:text-navy-primary transition-colors mt-4">
+                        View Details
+                        <ArrowRight size={11} className="transition-transform group-hover:translate-x-0.5" />
+                      </span>
+                    </div>
+                  </Link>
+                </Reveal>
+              ))}
+            </div>
+          </div>
+        </section>
+      )}
+
+      {/* SECTION 6 — NEED HELP CHOOSING? */}
       <section className="py-20 bg-navy-dark text-white border-t border-gold-primary/20" id="consult-cta">
         <Container className="max-w-2xl text-center">
           <Reveal>
             <div className="space-y-6">
               <h2 className="font-display text-xl sm:text-2xl font-medium tracking-tight text-white leading-snug">
-                Need Help Sizing Your System?
+                Not sure which system is right for you?
               </h2>
               <p className="text-xs sm:text-sm text-white/70 leading-relaxed font-sans max-w-md mx-auto text-balance">
-                Every property has a unique cabling layout and hot water demand. Speak with a technical specialist today to plan a customized, zero-fault sizing.
+                Book a free site visit. Our installation specialists will assess your property and recommend the right solution — before you spend anything.
               </p>
               <div className="pt-4">
                 <Link href="/consultation">
@@ -284,7 +351,7 @@ export default function ProductDetailPage({ params }: { params: { slug: string }
                     size="lg"
                     className="text-xs font-bold uppercase tracking-wider px-8 py-3.5 bg-gold-primary text-navy-brand hover:bg-gold-primary/95 border-transparent rounded-full"
                   >
-                    Book Consultation
+                    Book Free Consultation
                     <ArrowRight size={14} className="ml-2" />
                   </Button>
                 </Link>
