@@ -4,6 +4,7 @@ import * as React from "react";
 import { useSearchParams } from "next/navigation";
 import { CheckCircle, AlertTriangle, Phone, Mail, MapPin, ArrowRight, Check } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Reveal } from "@/components/ui/Reveal";
 
 const E = [0.76, 0, 0.24, 1] as [number, number, number, number];
 
@@ -286,18 +287,24 @@ export default function ConsultationPage() {
         />
         <div className="relative max-w-[1320px] mx-auto px-6 lg:px-12 py-20 md:py-28">
           <div className="max-w-xl">
-            <p className="text-[9px] uppercase tracking-[0.3em] text-gold-primary font-bold mb-6">
-              Free Consultation
-            </p>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-[3.2rem] font-medium leading-[1.12] tracking-tight text-white mb-6">
-              Book a Free{" "}
-              <br className="hidden sm:block" />
-              Site Visit.
-            </h1>
-            <p className="text-[13px] sm:text-[15px] text-white/55 leading-relaxed font-sans max-w-md">
-              Our installation specialists will visit your property, assess your water and
-              electrical setup, and recommend the right solution — before you commit to anything.
-            </p>
+            <Reveal>
+              <p className="text-[9px] uppercase tracking-[0.3em] text-gold-primary font-bold mb-6">
+                Free Consultation
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h1 className="font-display text-4xl sm:text-5xl md:text-[3.2rem] font-medium leading-[1.12] tracking-tight text-white mb-6">
+                Book a Free{" "}
+                <br className="hidden sm:block" />
+                Site Visit.
+              </h1>
+            </Reveal>
+            <Reveal delay={0.18}>
+              <p className="text-[13px] sm:text-[15px] text-white/55 leading-relaxed font-sans max-w-md">
+                Our installation specialists will visit your property, assess your water and
+                electrical setup, and recommend the right solution — before you commit to anything.
+              </p>
+            </Reveal>
           </div>
         </div>
         <div
@@ -313,86 +320,90 @@ export default function ConsultationPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-16 lg:gap-24 items-start">
 
             {/* LEFT: Trust info */}
-            <div>
-              <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-8">
-                What&apos;s Included
-              </p>
-
-              {/* Trust checklist */}
-              <div className="space-y-7 mb-12">
-                {TRUST_POINTS.map((point) => (
-                  <div key={point.label} className="flex gap-4 items-start">
-                    <div className="w-5 h-5 rounded-full border border-gold-primary/40 flex items-center justify-center shrink-0 mt-0.5">
-                      <Check size={10} className="text-gold-primary" strokeWidth={2.5} />
-                    </div>
-                    <div>
-                      <span className="font-display text-[14px] font-medium text-navy-primary block leading-tight mb-1">
-                        {point.label}
-                      </span>
-                      <span className="font-sans text-[12px] text-silver leading-relaxed">
-                        {point.desc}
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-
-              {/* Divider */}
-              <div className="border-t border-navy-primary/8 pt-8">
-                <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-6">
-                  Prefer to Call?
+            <Reveal delay={0.1}>
+              <div>
+                <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-8">
+                  What&apos;s Included
                 </p>
-                <div className="space-y-4 text-[13px] font-sans">
-                  <a
-                    href="tel:+918555998216"
-                    className="flex items-center gap-3 text-navy-primary hover:text-gold-primary transition-colors duration-200 group"
-                  >
-                    <Phone size={13} className="text-gold-primary shrink-0" />
-                    +91 85559 98216
-                  </a>
-                  <a
-                    href="mailto:aquaelitesolution@gmail.com"
-                    className="flex items-center gap-3 text-navy-primary hover:text-gold-primary transition-colors duration-200"
-                  >
-                    <Mail size={13} className="text-gold-primary shrink-0" />
-                    aquaelitesolution@gmail.com
-                  </a>
-                  <div className="flex items-start gap-3 text-silver">
-                    <MapPin size={13} className="text-gold-primary shrink-0 mt-0.5" />
-                    <a
-                      href="https://maps.app.goo.gl/ZyP87vtqo5odNARb8?g_st=aw"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="hover:text-navy-primary transition-colors duration-200"
-                    >
-                      Hema Nagar, Boduppal<br />
-                      Hyderabad, Telangana — 500039
-                    </a>
-                  </div>
-                  <p className="text-[11px] text-silver/60 pt-2 border-t border-navy-primary/6">
-                    Mon – Sat: 9:00 AM – 7:00 PM
+
+                {/* Trust checklist */}
+                <div className="space-y-7 mb-12">
+                  {TRUST_POINTS.map((point) => (
+                    <div key={point.label} className="flex gap-4 items-start">
+                      <div className="w-5 h-5 rounded-full border border-gold-primary/40 flex items-center justify-center shrink-0 mt-0.5">
+                        <Check size={10} className="text-gold-primary" strokeWidth={2.5} />
+                      </div>
+                      <div>
+                        <span className="font-display text-[14px] font-medium text-navy-primary block leading-tight mb-1">
+                          {point.label}
+                        </span>
+                        <span className="font-sans text-[12px] text-silver leading-relaxed">
+                          {point.desc}
+                        </span>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Divider */}
+                <div className="border-t border-navy-primary/8 pt-8">
+                  <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-6">
+                    Prefer to Call?
                   </p>
+                  <div className="space-y-4 text-[13px] font-sans">
+                    <a
+                      href="tel:+918555998216"
+                      className="flex items-center gap-3 text-navy-primary hover:text-gold-primary transition-colors duration-200 group"
+                    >
+                      <Phone size={13} className="text-gold-primary shrink-0" />
+                      +91 85559 98216
+                    </a>
+                    <a
+                      href="mailto:aquaelitesolution@gmail.com"
+                      className="flex items-center gap-3 text-navy-primary hover:text-gold-primary transition-colors duration-200"
+                    >
+                      <Mail size={13} className="text-gold-primary shrink-0" />
+                      aquaelitesolution@gmail.com
+                    </a>
+                    <div className="flex items-start gap-3 text-silver">
+                      <MapPin size={13} className="text-gold-primary shrink-0 mt-0.5" />
+                      <a
+                        href="https://maps.app.goo.gl/ZyP87vtqo5odNARb8?g_st=aw"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="hover:text-navy-primary transition-colors duration-200"
+                      >
+                        Hema Nagar, Boduppal<br />
+                        Hyderabad, Telangana — 500039
+                      </a>
+                    </div>
+                    <p className="text-[11px] text-silver/60 pt-2 border-t border-navy-primary/6">
+                      Mon – Sat: 9:00 AM – 7:00 PM
+                    </p>
+                  </div>
                 </div>
               </div>
-            </div>
+            </Reveal>
 
             {/* RIGHT: Form */}
-            <div>
-              <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-2">
-                Book Your Visit
-              </p>
-              <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight mb-8">
-                Tell us about your property.
-              </h2>
+            <Reveal delay={0.2}>
+              <div>
+                <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-2">
+                  Book Your Visit
+                </p>
+                <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight mb-8">
+                  Tell us about your property.
+                </h2>
 
-              <React.Suspense fallback={
-                <div className="py-10 text-center text-silver text-[13px] font-sans">
-                  Loading form…
-                </div>
-              }>
-                <ConsultationFormContent />
-              </React.Suspense>
-            </div>
+                <React.Suspense fallback={
+                  <div className="py-10 text-center text-silver text-[13px] font-sans">
+                    Loading form…
+                  </div>
+                }>
+                  <ConsultationFormContent />
+                </React.Suspense>
+              </div>
+            </Reveal>
 
           </div>
         </div>

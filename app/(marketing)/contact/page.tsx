@@ -4,6 +4,7 @@ import * as React from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/ui/Reveal";
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
@@ -71,17 +72,23 @@ export default function ContactPage() {
         />
         <div className="relative max-w-[1320px] mx-auto px-6 lg:px-12 py-28 md:py-36">
           <div className="max-w-xl">
-            <p className="text-[9px] uppercase tracking-[0.3em] text-gold-primary font-bold mb-6">
-              Get In Touch
-            </p>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-[3.4rem] font-medium leading-[1.12] tracking-tight text-white mb-6">
-              Let&apos;s talk about{" "}
-              <br className="hidden sm:block" />
-              your property.
-            </h1>
-            <p className="text-[13px] sm:text-[15px] text-white/50 leading-relaxed font-sans">
-              Leave your details below and we&apos;ll call you within 4 hours. Or reach us directly.
-            </p>
+            <Reveal>
+              <p className="text-[9px] uppercase tracking-[0.3em] text-gold-primary font-bold mb-6">
+                Get In Touch
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h1 className="font-display text-4xl sm:text-5xl md:text-[3.4rem] font-medium leading-[1.12] tracking-tight text-white mb-6">
+                Let&apos;s talk about{" "}
+                <br className="hidden sm:block" />
+                your property.
+              </h1>
+            </Reveal>
+            <Reveal delay={0.18}>
+              <p className="text-[13px] sm:text-[15px] text-white/55 leading-relaxed font-sans font-normal">
+                Leave your details below and we&apos;ll call you within 4 hours. Or reach us directly.
+              </p>
+            </Reveal>
           </div>
         </div>
         <div
@@ -99,91 +106,94 @@ export default function ContactPage() {
           <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-16 lg:gap-24 items-start">
 
             {/* ── LEFT: Direct contact info ── */}
-            <div>
-              <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-8">
-                Direct Contact
-              </p>
+            <Reveal delay={0.1}>
+              <div>
+                <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-8">
+                  Direct Contact
+                </p>
 
-              {/* Contact lines — no icons, no cards, just clean text */}
-              <div className="divide-y divide-navy-primary/8">
-                <div className="py-6">
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-silver/60 font-sans font-medium block mb-1.5">
-                    Telephone
-                  </span>
-                  <a
-                    href="tel:+918555998216"
-                    className="font-display text-[1.35rem] sm:text-[1.55rem] font-medium text-navy-primary hover:text-gold-primary transition-colors duration-200"
-                  >
-                    +91 85559 98216
-                  </a>
+                {/* Contact lines — no icons, no cards, just clean text */}
+                <div className="divide-y divide-navy-primary/8">
+                  <div className="py-6">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-silver/60 font-sans font-medium block mb-1.5">
+                      Telephone
+                    </span>
+                    <a
+                      href="tel:+918555998216"
+                      className="font-display text-[1.35rem] sm:text-[1.55rem] font-medium text-navy-primary hover:text-gold-primary transition-colors duration-200"
+                    >
+                      +91 85559 98216
+                    </a>
+                  </div>
+
+                  <div className="py-6">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-silver/60 font-sans font-medium block mb-1.5">
+                      Email
+                    </span>
+                    <a
+                      href="mailto:aquaelitesolution@gmail.com"
+                      className="font-display text-[1.1rem] sm:text-[1.25rem] font-medium text-navy-primary hover:text-gold-primary transition-colors duration-200"
+                    >
+                      aquaelitesolution@gmail.com
+                    </a>
+                  </div>
+
+                  <div className="py-6">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-silver/60 font-sans font-medium block mb-1.5">
+                      Office
+                    </span>
+                    <a
+                      href="https://maps.app.goo.gl/ZyP87vtqo5odNARb8?g_st=aw"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="block text-[14px] text-navy-primary hover:text-gold-primary font-sans leading-relaxed transition-colors duration-200"
+                    >
+                      Hema Nagar, Boduppal<br />
+                      Hyderabad, Telangana 500039
+                    </a>
+                  </div>
+
+                  <div className="py-6">
+                    <span className="text-[10px] uppercase tracking-[0.2em] text-silver/60 font-sans font-medium block mb-1.5">
+                      Consultation Hours
+                    </span>
+                    <p className="text-[14px] text-navy-primary font-sans">
+                      Monday – Saturday<br />
+                      <span className="text-silver">9:00 AM – 7:00 PM</span>
+                    </p>
+                  </div>
                 </div>
 
-                <div className="py-6">
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-silver/60 font-sans font-medium block mb-1.5">
-                    Email
-                  </span>
+                {/* WhatsApp — plain text link, no box */}
+                <div className="mt-8 pt-8 border-t border-navy-primary/8">
+                  <p className="text-[12px] text-silver font-sans mb-4 leading-relaxed">
+                    Prefer a faster response? Message us directly on WhatsApp.
+                  </p>
                   <a
-                    href="mailto:aquaelitesolution@gmail.com"
-                    className="font-display text-[1.1rem] sm:text-[1.25rem] font-medium text-navy-primary hover:text-gold-primary transition-colors duration-200"
-                  >
-                    aquaelitesolution@gmail.com
-                  </a>
-                </div>
-
-                <div className="py-6">
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-silver/60 font-sans font-medium block mb-1.5">
-                    Office
-                  </span>
-                  <a
-                    href="https://maps.app.goo.gl/ZyP87vtqo5odNARb8?g_st=aw"
+                    href={waLink}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="block text-[14px] text-navy-primary hover:text-gold-primary font-sans leading-relaxed transition-colors duration-200"
+                    className="inline-flex items-center gap-2.5 text-[10px] font-bold uppercase tracking-[0.18em] text-navy-primary hover:text-gold-primary transition-colors duration-200 group"
                   >
-                    Hema Nagar, Boduppal<br />
-                    Hyderabad, Telangana 500039
+                    <span className="w-5 h-5 rounded-full bg-[#25D366] flex items-center justify-center shrink-0">
+                      <svg viewBox="0 0 24 24" className="w-3 h-3 fill-white">
+                        <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
+                        <path d="M11.989 0C5.368 0 0 5.368 0 11.989c0 2.09.537 4.099 1.558 5.87L0 24l6.3-1.53A11.93 11.93 0 0 0 11.99 24C18.61 24 24 18.632 24 12.011 24 5.39 18.61 0 11.989 0zm.011 21.818a9.842 9.842 0 0 1-5.018-1.37l-.36-.214-3.732.978.995-3.643-.235-.374A9.826 9.826 0 0 1 2.18 12c0-5.418 4.41-9.827 9.82-9.827 5.413 0 9.822 4.41 9.822 9.827 0 5.417-4.41 9.818-9.822 9.818z"/>
+                      </svg>
+                    </span>
+                    WhatsApp Us
+                    <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform duration-200" />
                   </a>
                 </div>
-
-                <div className="py-6">
-                  <span className="text-[10px] uppercase tracking-[0.2em] text-silver/60 font-sans font-medium block mb-1.5">
-                    Consultation Hours
-                  </span>
-                  <p className="text-[14px] text-navy-primary font-sans">
-                    Monday – Saturday<br />
-                    <span className="text-silver">9:00 AM – 7:00 PM</span>
-                  </p>
-                </div>
               </div>
-
-              {/* WhatsApp — plain text link, no box */}
-              <div className="mt-8 pt-8 border-t border-navy-primary/8">
-                <p className="text-[12px] text-silver font-sans mb-4 leading-relaxed">
-                  Prefer a faster response? Message us directly on WhatsApp.
-                </p>
-                <a
-                  href={waLink}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-2.5 text-[10px] font-bold uppercase tracking-[0.18em] text-navy-primary hover:text-gold-primary transition-colors duration-200 group"
-                >
-                  <span className="w-5 h-5 rounded-full bg-[#25D366] flex items-center justify-center shrink-0">
-                    <svg viewBox="0 0 24 24" className="w-3 h-3 fill-white">
-                      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347z"/>
-                      <path d="M11.989 0C5.368 0 0 5.368 0 11.989c0 2.09.537 4.099 1.558 5.87L0 24l6.3-1.53A11.93 11.93 0 0 0 11.99 24C18.61 24 24 18.632 24 12.011 24 5.39 18.61 0 11.989 0zm.011 21.818a9.842 9.842 0 0 1-5.018-1.37l-.36-.214-3.732.978.995-3.643-.235-.374A9.826 9.826 0 0 1 2.18 12c0-5.418 4.41-9.827 9.82-9.827 5.413 0 9.822 4.41 9.822 9.827 0 5.417-4.41 9.818-9.822 9.818z"/>
-                    </svg>
-                  </span>
-                  WhatsApp Us
-                  <ArrowRight size={12} className="group-hover:translate-x-0.5 transition-transform duration-200" />
-                </a>
-              </div>
-            </div>
+            </Reveal>
 
             {/* ── RIGHT: Inquiry form ── */}
-            <div>
-              <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-8">
-                Send an Inquiry
-              </p>
+            <Reveal delay={0.2}>
+              <div>
+                <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-8">
+                  Send an Inquiry
+                </p>
 
               <AnimatePresence mode="wait">
                 {success ? (
@@ -310,6 +320,7 @@ export default function ContactPage() {
                 )}
               </AnimatePresence>
             </div>
+          </Reveal>
 
           </div>
         </div>

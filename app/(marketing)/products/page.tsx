@@ -8,6 +8,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, ArrowUpRight, X } from "lucide-react";
 import { products } from "@/data/products";
 import { cn } from "@/lib/utils";
+import { Reveal } from "@/components/ui/Reveal";
 
 // ─── Types ────────────────────────────────────────────────────────────────────
 
@@ -152,29 +153,37 @@ export default function ProductsPage() {
 
         <div className="relative max-w-[1320px] mx-auto px-6 lg:px-12 py-28 md:py-36">
           <div className="max-w-2xl">
-            <p className="text-[9px] uppercase tracking-[0.3em] text-gold-primary font-bold mb-6">
-              Water Heating & Treatment · Hyderabad
-            </p>
-            <h1 className="font-display text-4xl sm:text-5xl md:text-[3.4rem] font-medium leading-[1.12] tracking-tight text-white mb-8">
-              Not every system{" "}
-              <br className="hidden sm:block" />
-              fits every property.
-            </h1>
-            <p className="text-[13px] sm:text-[15px] text-white/55 leading-relaxed max-w-lg font-sans font-normal mb-10">
-              We visit your site, measure your requirements, and recommend
-              the exact system — sized correctly, installed properly, and
-              supported long-term.
-            </p>
-            <Link href="/consultation">
-              <motion.button
-                whileHover={{ y: -2 }}
-                whileTap={{ scale: 0.97 }}
-                className="inline-flex items-center gap-2.5 bg-gold-primary text-navy-brand px-7 py-3.5 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] hover:bg-white transition-colors duration-300"
-              >
-                Book a Site Visit
-                <ArrowRight size={13} strokeWidth={2.5} />
-              </motion.button>
-            </Link>
+            <Reveal>
+              <p className="text-[9px] uppercase tracking-[0.3em] text-gold-primary font-bold mb-6">
+                Water Heating & Treatment · Hyderabad
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h1 className="font-display text-4xl sm:text-5xl md:text-[3.4rem] font-medium leading-[1.12] tracking-tight text-white mb-8">
+                Not every system{" "}
+                <br className="hidden sm:block" />
+                fits every property.
+              </h1>
+            </Reveal>
+            <Reveal delay={0.18}>
+              <p className="text-[13px] sm:text-[15px] text-white/55 leading-relaxed max-w-lg font-sans font-normal mb-10">
+                We visit your site, measure your requirements, and recommend
+                the exact system — sized correctly, installed properly, and
+                supported long-term.
+              </p>
+            </Reveal>
+            <Reveal delay={0.25}>
+              <Link href="/consultation">
+                <motion.button
+                  whileHover={{ y: -2 }}
+                  whileTap={{ scale: 0.97 }}
+                  className="inline-flex items-center gap-2.5 bg-gold-primary text-navy-brand px-7 py-3.5 rounded-full text-[10px] font-bold uppercase tracking-[0.18em] hover:bg-white transition-colors duration-300"
+                >
+                  Book a Site Visit
+                  <ArrowRight size={13} strokeWidth={2.5} />
+                </motion.button>
+              </Link>
+            </Reveal>
           </div>
         </div>
 
@@ -193,12 +202,16 @@ export default function ProductsPage() {
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
 
           <div className="mb-12">
-            <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
-              Find Your Solution
-            </p>
-            <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight">
-              What are you solving for?
-            </h2>
+            <Reveal>
+              <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
+                Find Your Solution
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight">
+                What are you solving for?
+              </h2>
+            </Reveal>
           </div>
 
           {/* Large interactive rows — not cards */}
@@ -207,46 +220,48 @@ export default function ProductsPage() {
               const isActive = activeSolution === sol.id;
               return (
                 <React.Fragment key={sol.id}>
-                  <button
-                    onClick={() => handleSelect(sol.id)}
-                    className={cn(
-                      "w-full text-left border-b border-navy-primary/10 group transition-all duration-300 outline-none",
-                      "grid grid-cols-[1fr_auto] items-center gap-4",
-                      "py-5 md:py-6 px-0",
-                      isActive ? "bg-transparent" : "hover:bg-navy-primary/[0.02]"
-                    )}
-                  >
-                    <div className="flex items-baseline gap-5 md:gap-8">
-                      <span className={cn(
-                        "font-display text-[11px] font-bold tabular-nums transition-colors duration-300 w-5 shrink-0",
-                        isActive ? "text-gold-primary" : "text-navy-primary/25 group-hover:text-gold-primary/60"
-                      )}>
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
-                      <div>
+                  <Reveal delay={i * 0.05}>
+                    <button
+                      onClick={() => handleSelect(sol.id)}
+                      className={cn(
+                        "w-full text-left border-b border-navy-primary/10 group transition-all duration-300 outline-none",
+                        "grid grid-cols-[1fr_auto] items-center gap-4",
+                        "py-5 md:py-6 px-0",
+                        isActive ? "bg-transparent" : "hover:bg-navy-primary/[0.02]"
+                      )}
+                    >
+                      <div className="flex items-baseline gap-5 md:gap-8">
                         <span className={cn(
-                          "font-display text-[1.1rem] sm:text-[1.3rem] md:text-[1.5rem] font-medium tracking-tight transition-colors duration-300 block",
-                          isActive ? "text-navy-primary" : "text-navy-primary/75 group-hover:text-navy-primary"
+                          "font-display text-[11px] font-bold tabular-nums transition-colors duration-300 w-5 shrink-0",
+                          isActive ? "text-gold-primary" : "text-navy-primary/25 group-hover:text-gold-primary/60"
                         )}>
-                          {sol.label}
+                          {String(i + 1).padStart(2, "0")}
                         </span>
-                        <span className={cn(
-                          "text-[11px] font-sans transition-colors duration-300 block mt-0.5",
-                          isActive ? "text-silver" : "text-silver/60 group-hover:text-silver"
-                        )}>
-                          {sol.sub}
-                        </span>
+                        <div>
+                          <span className={cn(
+                            "font-display text-[1.1rem] sm:text-[1.3rem] md:text-[1.5rem] font-medium tracking-tight transition-colors duration-300 block",
+                            isActive ? "text-navy-primary" : "text-navy-primary/75 group-hover:text-navy-primary"
+                          )}>
+                            {sol.label}
+                          </span>
+                          <span className={cn(
+                            "text-[11px] font-sans transition-colors duration-300 block mt-0.5",
+                            isActive ? "text-silver" : "text-silver/60 group-hover:text-silver"
+                          )}>
+                            {sol.sub}
+                          </span>
+                        </div>
                       </div>
-                    </div>
-                    <div className={cn(
-                      "w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 shrink-0",
-                      isActive
-                        ? "border-navy-primary bg-navy-primary text-white rotate-45"
-                        : "border-navy-primary/20 text-navy-primary/40 group-hover:border-navy-primary/50 group-hover:text-navy-primary"
-                    )}>
-                      <ArrowRight size={12} strokeWidth={2} />
-                    </div>
-                  </button>
+                      <div className={cn(
+                        "w-8 h-8 rounded-full border flex items-center justify-center transition-all duration-300 shrink-0",
+                        isActive
+                          ? "border-navy-primary bg-navy-primary text-white rotate-45"
+                          : "border-navy-primary/20 text-navy-primary/40 group-hover:border-navy-primary/50 group-hover:text-navy-primary"
+                      )}>
+                        <ArrowRight size={12} strokeWidth={2} />
+                      </div>
+                    </button>
+                  </Reveal>
 
                   {/* Inline drawer — opens below the selected row */}
                   <AnimatePresence>
@@ -343,80 +358,85 @@ export default function ProductsPage() {
       <section id="collections" className="py-20 md:py-28 bg-purewhite border-t border-navy-primary/5">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
           <div className="mb-16">
-            <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
-              System Architecture
-            </p>
-            <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight">
-              Three categories of solution
-            </h2>
+            <Reveal>
+              <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
+                System Architecture
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight">
+                Three categories of solution
+              </h2>
+            </Reveal>
           </div>
 
           <div className="space-y-24 md:space-y-32">
             {COLLECTIONS.map((col, idx) => (
-              <div
-                key={col.id}
-                className={cn(
-                  "grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center",
-                  idx % 2 === 1 ? "lg:[direction:rtl]" : ""
-                )}
-              >
-                {/* Image stage */}
-                <div className={cn(
-                  "relative rounded-2xl overflow-hidden bg-offwhite border border-navy-primary/5 aspect-[4/3] group",
-                  idx % 2 === 1 ? "lg:[direction:ltr]" : ""
-                )}>
-                  <Image
-                    src={col.image}
-                    alt={col.title}
-                    fill
-                    className="object-cover object-center transition-transform duration-700 hover:scale-105"
-                    sizes="(max-width: 1024px) 100vw, 50vw"
-                    priority={idx === 0}
-                  />
-                  {/* Label overlay */}
-                  <div className="absolute top-5 left-5">
-                    <span className="font-display text-[10px] font-bold text-navy-primary/30 uppercase tracking-[0.2em]">
-                      {col.label}
-                    </span>
+              <Reveal key={col.id} delay={idx * 0.1}>
+                <div
+                  className={cn(
+                    "grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center",
+                    idx % 2 === 1 ? "lg:[direction:rtl]" : ""
+                  )}
+                >
+                  {/* Image stage */}
+                  <div className={cn(
+                    "relative rounded-2xl overflow-hidden bg-offwhite border border-navy-primary/5 aspect-[4/3] group",
+                    idx % 2 === 1 ? "lg:[direction:ltr]" : ""
+                  )}>
+                    <Image
+                      src={col.image}
+                      alt={col.title}
+                      fill
+                      className="object-cover object-center transition-transform duration-700 hover:scale-105"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                      priority={idx === 0}
+                    />
+                    {/* Label overlay */}
+                    <div className="absolute top-5 left-5">
+                      <span className="font-display text-[10px] font-bold text-navy-primary/30 uppercase tracking-[0.2em]">
+                        {col.label}
+                      </span>
+                    </div>
                   </div>
-                </div>
 
-                {/* Text */}
-                <div className={cn(idx % 2 === 1 ? "lg:[direction:ltr]" : "")}>
-                  <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-4">
-                    {col.label} / {col.title}
-                  </p>
-                  <h3 className="font-display text-[1.8rem] sm:text-[2.2rem] font-medium text-navy-primary leading-tight tracking-tight mb-5">
-                    {col.title}
-                  </h3>
-                  <p className="text-[13px] sm:text-[14px] text-silver leading-relaxed mb-8 max-w-md font-sans">
-                    {col.body}
-                  </p>
+                  {/* Text */}
+                  <div className={cn(idx % 2 === 1 ? "lg:[direction:ltr]" : "")}>
+                    <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-4">
+                      {col.label} / {col.title}
+                    </p>
+                    <h3 className="font-display text-[1.8rem] sm:text-[2.2rem] font-medium text-navy-primary leading-tight tracking-tight mb-5">
+                      {col.title}
+                    </h3>
+                    <p className="text-[13px] sm:text-[14px] text-silver leading-relaxed mb-8 max-w-md font-sans">
+                      {col.body}
+                    </p>
 
-                  {/* Model chips — subtle, not cards */}
-                  <div className="flex flex-wrap gap-2 mb-8">
-                    {col.models.map((m) => (
-                      <Link
-                        key={m.id}
-                        href={`/products/${m.slug}`}
-                        className="px-3 py-1.5 rounded-full border border-navy-primary/12 text-[10px] font-sans font-semibold text-navy-primary/65 hover:border-gold-primary/40 hover:text-navy-primary hover:bg-gold-primary/5 transition-all duration-200"
+                    {/* Model chips — subtle, not cards */}
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      {col.models.map((m) => (
+                        <Link
+                          key={m.id}
+                          href={`/products/${m.slug}`}
+                          className="px-3 py-1.5 rounded-full border border-navy-primary/12 text-[10px] font-sans font-semibold text-navy-primary/65 hover:border-gold-primary/40 hover:text-navy-primary hover:bg-gold-primary/5 transition-all duration-200"
+                        >
+                          {m.title}
+                        </Link>
+                      ))}
+                    </div>
+
+                    <Link href={col.href}>
+                      <motion.button
+                        whileHover={{ x: 3 }}
+                        className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-navy-primary hover:text-gold-primary transition-colors duration-200 group"
                       >
-                        {m.title}
-                      </Link>
-                    ))}
+                        View Details
+                        <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform duration-200" />
+                      </motion.button>
+                    </Link>
                   </div>
-
-                  <Link href={col.href}>
-                    <motion.button
-                      whileHover={{ x: 3 }}
-                      className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-navy-primary hover:text-gold-primary transition-colors duration-200 group"
-                    >
-                      View Details
-                      <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform duration-200" />
-                    </motion.button>
-                  </Link>
                 </div>
-              </div>
+              </Reveal>
             ))}
           </div>
         </div>
@@ -427,35 +447,42 @@ export default function ProductsPage() {
       ────────────────────────────────────────────────────────── */}
       <section id="brands" className="py-20 md:py-28 bg-offwhite border-t border-navy-primary/5">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
-          <div className="max-w-xl mb-14">
-            <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
-              Independent Advisory
-            </p>
-            <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight mb-4">
-              Brands we work with
-            </h2>
-            <p className="text-[13px] text-silver leading-relaxed font-sans">
-              We are not tied to any single manufacturer. We recommend based on
-              your property&apos;s requirements — nothing else.
-            </p>
+          <div className="max-w-xl mb-14 text-left">
+            <Reveal>
+              <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
+                Independent Advisory
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight mb-4">
+                Brands we work with
+              </h2>
+            </Reveal>
+            <Reveal delay={0.18}>
+              <p className="text-[13px] text-silver leading-relaxed font-sans">
+                We are not tied to any single manufacturer. We recommend based on
+                your property&apos;s requirements — nothing else.
+              </p>
+            </Reveal>
           </div>
 
           <div className="divide-y divide-navy-primary/8">
-            {BRANDS.map((brand) => (
-              <div
-                key={brand.name}
-                className="py-6 md:py-8 grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-2 md:gap-8 items-baseline group"
-              >
-                <span className="font-display text-[1.25rem] sm:text-[1.45rem] font-medium text-navy-primary tracking-tight">
-                  {brand.name}
-                </span>
-                <span className="text-[11px] text-silver/70 font-sans uppercase tracking-wider font-medium">
-                  {brand.origin}
-                </span>
-                <span className="text-[12px] text-silver font-sans leading-relaxed max-w-xs md:text-right">
-                  {brand.note}
-                </span>
-              </div>
+            {BRANDS.map((brand, i) => (
+              <Reveal key={brand.name} delay={i * 0.05}>
+                <div
+                  className="py-6 md:py-8 grid grid-cols-1 md:grid-cols-[1fr_1fr_auto] gap-2 md:gap-8 items-baseline group text-left"
+                >
+                  <span className="font-display text-[1.25rem] sm:text-[1.45rem] font-medium text-navy-primary tracking-tight">
+                    {brand.name}
+                  </span>
+                  <span className="text-[11px] text-silver/70 font-sans uppercase tracking-wider font-medium">
+                    {brand.origin}
+                  </span>
+                  <span className="text-[12px] text-silver font-sans leading-relaxed max-w-xs md:text-right">
+                    {brand.note}
+                  </span>
+                </div>
+              </Reveal>
             ))}
           </div>
         </div>
