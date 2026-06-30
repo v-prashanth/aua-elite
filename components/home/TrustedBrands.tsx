@@ -3,10 +3,10 @@
 import * as React from "react";
 import { Container } from "@/components/ui/Container";
 import { Reveal } from "@/components/ui/Reveal";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 
 export const TrustedBrands: React.FC = () => {
-  const [activeIndex, setActiveIndex] = React.useState(0);
+  const [activeTab, setActiveTab] = React.useState(0);
 
   const brands = [
     {
@@ -43,6 +43,8 @@ export const TrustedBrands: React.FC = () => {
     }
   ];
 
+  const E = [0.76, 0, 0.24, 1] as [number, number, number, number];
+
   return (
     <section id="trusted-brands" className="py-14 md:py-20 lg:py-28 bg-offwhite border-t border-navy-primary/5" aria-label="Brands We Work With">
       <Container className="max-w-5xl text-center">
@@ -64,69 +66,84 @@ export const TrustedBrands: React.FC = () => {
           </p>
         </Reveal>
 
-        {/* Dynamic Interactive Flex Accordion Showcase */}
-        <div className="flex flex-col lg:flex-row gap-5 max-w-4xl mx-auto w-full h-auto lg:h-[320px] text-left">
+        {/* Tab Menu */}
+        <div className="flex flex-wrap justify-center border-b border-navy-primary/10 mb-10 max-w-2xl mx-auto gap-y-2">
           {brands.map((brand, idx) => {
-            const isActive = activeIndex === idx;
-
+            const isActive = activeTab === idx;
             return (
-              <Reveal key={idx} delay={idx * 0.08} className="w-full h-full lg:flex-grow lg:flex-shrink">
-                <div
-                  onMouseEnter={() => setActiveIndex(idx)}
-                  onClick={() => setActiveIndex(idx)}
-                  className={`relative flex flex-col justify-between p-6 sm:p-8 rounded-xl border bg-purewhite cursor-pointer transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden h-[110px] sm:h-[120px] lg:h-full select-none ${
-                    isActive
-                      ? "lg:flex-[2.4] flex-grow border-gold-primary/20 shadow-raised"
-                      : "lg:flex-[0.8] border-navy-primary/5 bg-purewhite/70 opacity-80"
-                  }`}
-                >
-                  {/* Subtle dynamic background watermark letter */}
-                  <span className={`absolute bottom-2 right-4 font-display font-black text-7xl sm:text-8xl select-none pointer-events-none transition-all duration-500 ${
-                    isActive ? "text-[rgba(201,165,76,0.065)] scale-110 rotate-3" : "text-[rgba(11,35,65,0.02)] scale-100 rotate-0"
-                  }`}>
-                    {brand.letter}
-                  </span>
-
-                  {/* Active sliding gold top accent indicator */}
-                  {isActive && (
-                    <motion.div
-                      layoutId="activeBrandGlow"
-                      className="absolute top-0 left-0 right-0 h-[2px] bg-gradient-to-r from-gold-primary to-transparent"
-                      transition={{ type: "spring", stiffness: 300, damping: 25 }}
-                    />
-                  )}
-
-                  <div className="w-full">
-                    {/* Header info */}
-                    <div className="flex items-center justify-between border-b border-navy-primary/5 pb-4 w-full">
-                      <div>
-                        <h3 className="font-display font-semibold text-xs sm:text-sm tracking-wide text-navy-primary uppercase">
-                          {brand.name}
-                        </h3>
-                        <span className="text-[9px] text-navy-primary/60 uppercase tracking-widest font-sans font-bold mt-1 block">
-                          {brand.origin} &bull; Est. {brand.established}
-                        </span>
-                      </div>
-                      <span className={`px-2 py-0.5 bg-offwhite border border-navy-primary/5 rounded font-sans text-[7px] font-bold text-gold-primary uppercase tracking-wide transition-all duration-300 ${
-                        isActive ? "opacity-100 scale-100" : "opacity-0 scale-95"
-                      }`}>
-                        {brand.focus}
-                      </span>
-                    </div>
-
-                    {/* Fading text description */}
-                    <div className={`transition-all duration-500 overflow-hidden ${
-                      isActive ? "opacity-100 max-h-40 mt-5 sm:mt-6" : "opacity-0 max-h-0"
-                    }`}>
-                      <p className="text-[11px] sm:text-xs text-navy-primary/70 leading-relaxed font-sans pr-4">
-                        {brand.description}
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </Reveal>
+              <button
+                key={idx}
+                onMouseEnter={() => setActiveTab(idx)}
+                onClick={() => setActiveTab(idx)}
+                className={`relative px-5 sm:px-6 py-4 font-display text-xs sm:text-sm font-semibold uppercase tracking-wider transition-colors duration-300 focus:outline-none select-none ${
+                  isActive ? "text-gold-primary" : "text-navy-primary/60 hover:text-navy-primary"
+                }`}
+              >
+                {brand.name}
+                {isActive && (
+                  <motion.div
+                    layoutId="activeBrandTabLine"
+                    className="absolute bottom-0 left-0 right-0 h-[2.5px] bg-gold-primary"
+                    transition={{ type: "spring", stiffness: 350, damping: 25 }}
+                  />
+                )}
+              </button>
             );
           })}
+        </div>
+
+        {/* Brand Showcase Details Card */}
+        <div className="max-w-4xl mx-auto bg-purewhite border border-navy-primary/5 rounded-2xl p-8 sm:p-12 shadow-raised relative overflow-hidden text-left h-auto min-h-[260px] md:min-h-[220px]">
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeTab}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.45, ease: E }}
+              className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center"
+            >
+              {/* Left Side: Brand Details */}
+              <div className="md:col-span-8 space-y-4">
+                <div className="space-y-1">
+                  <span className="text-[9px] font-bold uppercase tracking-[0.25em] text-gold-primary">
+                    {brands[activeTab].focus}
+                  </span>
+                  <h3 className="font-display font-medium text-xl sm:text-2xl text-navy-primary leading-none">
+                    {brands[activeTab].name}
+                  </h3>
+                  <span className="text-[10px] text-navy-primary/60 uppercase tracking-widest font-sans font-bold block pt-1">
+                    {brands[activeTab].origin} &bull; Est. {brands[activeTab].established}
+                  </span>
+                </div>
+                
+                <p className="text-xs sm:text-sm text-navy-primary/75 leading-relaxed font-sans pr-4">
+                  {brands[activeTab].description}
+                </p>
+              </div>
+
+              {/* Right Side: Visual Watermark Initials */}
+              <div className="md:col-span-4 flex items-center justify-center md:justify-end relative">
+                {/* Visual circle frame */}
+                <div className="relative w-28 h-28 sm:w-32 sm:h-32 rounded-full border border-gold-primary/15 flex items-center justify-center bg-offwhite shadow-resting">
+                  <span className="font-display font-black text-5xl sm:text-6xl text-gold-primary/10 select-none">
+                    {brands[activeTab].letter}
+                  </span>
+                  
+                  {/* Fine technical ticks overlay */}
+                  <div className="absolute inset-2 rounded-full border border-dashed border-gold-primary/10" />
+                  <div className="absolute top-0 bottom-0 left-1/2 w-px bg-gold-primary/5 -translate-x-1/2 pointer-events-none" />
+                  <div className="absolute left-0 right-0 top-1/2 h-px bg-gold-primary/5 -translate-y-1/2 pointer-events-none" />
+                </div>
+              </div>
+            </motion.div>
+          </AnimatePresence>
+
+          {/* Decorative corner lines on the card */}
+          <div className="absolute -top-px -left-px w-6 h-px bg-gold-primary/30" />
+          <div className="absolute -top-px -left-px w-px h-6 bg-gold-primary/30" />
+          <div className="absolute -bottom-px -right-px w-6 h-px bg-gold-primary/30" />
+          <div className="absolute -bottom-px -right-px w-px h-6 bg-gold-primary/30" />
         </div>
       </Container>
     </section>

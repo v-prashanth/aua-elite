@@ -100,7 +100,7 @@ function Lightbox({
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -4 }}
             transition={{ duration: 0.3, ease: E }}
-            className="flex items-center justify-between w-full mt-4 px-1"
+            className="flex flex-col sm:flex-row sm:items-center justify-between w-full mt-4 px-1 gap-4 text-left"
           >
             <div>
               <p className="font-display font-medium text-white" style={{ fontSize: "clamp(14px, 2vw, 20px)" }}>{slide.title}</p>
@@ -108,7 +108,47 @@ function Lightbox({
                 <span className="text-[9px] font-bold uppercase tracking-[0.22em]" style={{ color: "var(--gold-primary)" }}>{slide.type}</span>
               </div>
             </div>
-            <p className="font-display text-white/20" style={{ fontSize: "clamp(18px, 2.5vw, 26px)" }}>
+
+            {/* Social Redirect Buttons Capsule */}
+            <div className="flex flex-wrap items-center gap-3">
+              <a
+                href={`https://wa.me/918555998216?text=${encodeURIComponent(
+                  `Hi, I saw your project "${slide.title}" (${slide.type}) on your website and would like to know more about it.`
+                )}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200 hover:scale-105 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 text-white"
+              >
+                <MessageCircle size={14} className="text-[#25D366] shrink-0" />
+                <span className="font-sans font-bold tracking-wider uppercase text-[9px] text-[#25D366] whitespace-nowrap">Enquire on WhatsApp</span>
+              </a>
+
+              <a
+                href="https://instagram.com/aquaelitesolution"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200 hover:scale-105 bg-[#E1306C]/10 hover:bg-[#E1306C]/20 border border-[#E1306C]/30 text-white"
+              >
+                <svg
+                  viewBox="0 0 24 24"
+                  width={14}
+                  height={14}
+                  fill="none"
+                  stroke="#E1306C"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  className="shrink-0"
+                >
+                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                </svg>
+                <span className="font-sans font-bold tracking-wider uppercase text-[9px] text-[#E1306C] whitespace-nowrap">Instagram</span>
+              </a>
+            </div>
+
+            <p className="font-display text-white/20 sm:text-right" style={{ fontSize: "clamp(18px, 2.5vw, 26px)" }}>
               {String(index + 1).padStart(2, "0")}
               <span className="text-[10px] font-sans ml-1" style={{ color: "rgba(255,255,255,0.15)" }}>/ {String(total).padStart(2, "0")}</span>
             </p>
@@ -128,58 +168,15 @@ function Lightbox({
         <ChevronRightIcon size={18} className="text-white" />
       </button>
 
-      {/* Action Buttons Top-Right */}
-      <div className="absolute top-5 right-5 z-10 flex items-center gap-3">
-        {/* WhatsApp Redirect */}
-        <a
-          href={`https://wa.me/918555998216?text=${encodeURIComponent(
-            `Hi, I saw your project "${slide.title}" (${slide.type}) on your website and would like to know more about it.`
-          )}`}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-[#25D366]/20 group"
-          style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }}
-          aria-label="Enquire on WhatsApp"
-        >
-          <MessageCircle size={16} className="text-[#25D366] transition-colors" />
-        </a>
-
-        {/* Instagram Redirect */}
-        <a
-          href="https://instagram.com/aquaelitesolution"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-[#E1306C]/20 group"
-          style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }}
-          aria-label="Visit Instagram"
-        >
-          <svg
-            viewBox="0 0 24 24"
-            width={16}
-            height={16}
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            className="text-white group-hover:text-[#E1306C] transition-colors shrink-0"
-          >
-            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-          </svg>
-        </a>
-
-        {/* Close */}
-        <button
-          onClick={onClose}
-          className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-white/10"
-          style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }}
-          aria-label="Close lightbox"
-        >
-          <X size={16} className="text-white" />
-        </button>
-      </div>
+      {/* Close button Top-Right */}
+      <button
+        onClick={onClose}
+        className="absolute top-5 right-5 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-white/10"
+        style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }}
+        aria-label="Close lightbox"
+      >
+        <X size={16} className="text-white" />
+      </button>
 
       <div className="absolute bottom-0 left-0 right-0 h-px pointer-events-none"
         style={{ background: "linear-gradient(to right, transparent, rgba(201,165,76,0.4), transparent)" }} />
