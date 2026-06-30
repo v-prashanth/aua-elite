@@ -117,17 +117,17 @@ function Lightbox({
                 )}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200 hover:scale-105 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 text-white"
+                className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 rounded-full transition-all duration-200 hover:scale-105 bg-[#25D366]/10 hover:bg-[#25D366]/20 border border-[#25D366]/30 text-white"
               >
                 <MessageCircle size={14} className="text-[#25D366] shrink-0" />
-                <span className="font-sans font-bold tracking-wider uppercase text-[9px] text-[#25D366] whitespace-nowrap">Enquire on WhatsApp</span>
+                <span className="font-sans font-bold tracking-wider uppercase text-[9px] text-[#25D366] whitespace-nowrap hidden sm:inline">Enquire on WhatsApp</span>
               </a>
 
               <a
                 href="https://instagram.com/aquaelitesolution"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-4 py-2 rounded-full transition-all duration-200 hover:scale-105 bg-[#E1306C]/10 hover:bg-[#E1306C]/20 border border-[#E1306C]/30 text-white"
+                className="inline-flex items-center justify-center gap-2 p-2.5 sm:px-4 sm:py-2 rounded-full transition-all duration-200 hover:scale-105 bg-[#E1306C]/10 hover:bg-[#E1306C]/20 border border-[#E1306C]/30 text-white"
               >
                 <svg
                   viewBox="0 0 24 24"
@@ -144,7 +144,7 @@ function Lightbox({
                   <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
                   <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
                 </svg>
-                <span className="font-sans font-bold tracking-wider uppercase text-[9px] text-[#E1306C] whitespace-nowrap">Instagram</span>
+                <span className="font-sans font-bold tracking-wider uppercase text-[9px] text-[#E1306C] whitespace-nowrap hidden sm:inline">Instagram</span>
               </a>
             </div>
 
