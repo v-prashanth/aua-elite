@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
@@ -107,40 +108,79 @@ export default function AboutPage() {
       </section>
 
       {/* ──────────────────────────────────────────────────────────
-          WHO WE ARE — editorial text, no cards
+          WHO WE ARE — editorial text with team photo
       ────────────────────────────────────────────────────────── */}
       <section className="py-20 md:py-28 bg-purewhite border-b border-navy-primary/5">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
-          <div className="grid grid-cols-1 lg:grid-cols-[1fr_2fr] gap-12 lg:gap-24">
-            <div className="pt-1">
-              <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
-                Our Background
-              </p>
-              <h2 className="font-display text-[1.5rem] sm:text-[1.8rem] font-medium text-navy-primary leading-tight tracking-tight">
-                Why consultation matters
-              </h2>
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center">
+            {/* Left side: Editorial text */}
+            <div className="space-y-6">
+              <div>
+                <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
+                  Our Background
+                </p>
+                <h2 className="font-display text-[1.8rem] sm:text-[2.2rem] font-medium text-navy-primary leading-tight tracking-tight mb-6">
+                  Why consultation matters
+                </h2>
+              </div>
+              <div className="space-y-6 text-[13px] sm:text-[14px] text-silver leading-[1.9] font-sans">
+                <p>
+                  Aqua Elite Solutions was started by a hands-on field technician who saw firsthand
+                  how homeowners were routinely overpaying for poorly matched water systems. Having
+                  spent years on-site fixing incorrectly configured systems, our founder realized
+                  that what families needed wasn&apos;t a standard sales pitch — it was honest,
+                  professional guidance and direct, fair pricing.
+                </p>
+                <p>
+                  The industry was filled with retailers selling expensive systems that did not perform
+                  as expected because nobody assessed the property&apos;s actual water quality, hardness,
+                  or plumbing setup beforehand.
+                </p>
+                <p className="text-navy-primary font-medium">
+                  We believe the right product for the wrong property is still the wrong product. That
+                  is why we start with a site visit — not a catalog — to deliver a custom-fit solution
+                  at realistic, transparent rates.
+                </p>
+                <p>
+                  We are not a manufacturer or a dealer tied to any single brand. We are an independent
+                  advisory and service-first company. We assess your requirements, select from multiple
+                  trusted brands, install it with our own team, and stay available for the life of the system.
+                </p>
+              </div>
             </div>
-            <div className="space-y-6 text-[13px] sm:text-[14px] text-silver leading-[1.9] font-sans">
-              <p>
-                Aqua Elite Solutions was founded to solve a specific problem: water heating
-                and treatment systems were being sold and installed without anyone properly
-                assessing whether they were the right fit for the property.
-              </p>
-              <p>
-                The result was homeowners investing in expensive systems that did not perform
-                as expected — undersized for the load, incorrectly specified for the
-                water hardness, or incompatible with the electrical supply.
-              </p>
-              <p className="text-navy-primary font-medium">
-                The right product for the wrong property is still the wrong product. That
-                is why we start with a site visit — not a product catalogue.
-              </p>
-              <p>
-                We are not a manufacturer, not a showroom, and not a dealer tied to any
-                single brand. We are an independent advisory and installation company. We
-                assess your property, recommend the right system, install it with our own
-                team, and stay available for the life of the system.
-              </p>
+            {/* Right side: Premium image with corner accents */}
+            <div className="relative w-full h-[320px] sm:h-[420px] lg:h-[480px]">
+              <div
+                className="absolute inset-0 rounded-2xl overflow-hidden"
+                style={{
+                  border: "1px solid rgba(201,165,76,0.18)",
+                  boxShadow: "0 20px 60px rgba(11,35,65,0.08), 0 2px 8px rgba(11,35,65,0.04)",
+                }}
+              >
+                <Image
+                  src="/images/professional_team.png"
+                  alt="Aqua Elite Solutions expert technician team"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to top, rgba(11,35,65,0.15) 0%, transparent 60%)",
+                  }}
+                />
+              </div>
+              {/* Corner accents */}
+              <div
+                className="absolute -top-px -left-px w-[60px] h-[3px]"
+                style={{ background: "linear-gradient(to right, var(--gold-primary), transparent)" }}
+              />
+              <div
+                className="absolute -top-px -left-px w-[3px] h-[60px]"
+                style={{ background: "linear-gradient(to bottom, var(--gold-primary), transparent)" }}
+              />
             </div>
           </div>
         </div>
@@ -178,6 +218,86 @@ export default function AboutPage() {
                 </p>
               </div>
             ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ──────────────────────────────────────────────────────────
+          TRUST IN ACTION — expert installation and happy customer
+      ────────────────────────────────────────────────────────── */}
+      <section className="py-20 md:py-28 bg-offwhite border-b border-navy-primary/5">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
+          
+          <div className="mb-16 text-center max-w-2xl mx-auto">
+            <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
+              Trust in Action
+            </p>
+            <h2 className="font-display text-[1.6rem] sm:text-[2.2rem] font-medium text-navy-primary leading-tight tracking-tight">
+              Real Work. Real Relationships.
+            </h2>
+            <p className="text-[13px] text-silver mt-4 font-sans leading-relaxed">
+              We don&apos;t use subcontractors or cut corners. Every team member you meet is an in-house expert committed to your system&apos;s longevity.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 lg:gap-12">
+            
+            {/* Card 1: Expert Installation */}
+            <div className="bg-purewhite rounded-2xl overflow-hidden border border-navy-primary/5 shadow-raised hover:border-gold-primary/20 transition-all duration-300 flex flex-col">
+              <div className="relative w-full h-[260px] sm:h-[320px]">
+                <Image
+                  src="/images/technician_working.png"
+                  alt="Aqua Elite technician performing a professional water filtration system installation"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                {/* Accent line */}
+                <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-gold-primary to-transparent" />
+              </div>
+              <div className="p-8 sm:p-10 flex-1 flex flex-col justify-between">
+                <div>
+                  <span className="text-[9px] font-bold text-gold-primary uppercase tracking-wider block mb-2">
+                    Expert Installation
+                  </span>
+                  <h3 className="font-display text-[1.25rem] font-medium text-navy-primary mb-4 leading-tight">
+                    Professional, clean, and compliant work
+                  </h3>
+                  <p className="text-[12px] sm:text-[13px] text-silver leading-[1.85] font-sans">
+                    Our technicians are certified professionals who take pride in neat layouts and secure plumbing connections. We map out service zones carefully, ensuring that your filtration or heating systems are both easy to access and completely out of sight.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            {/* Card 2: Happy Homeowner */}
+            <div className="bg-purewhite rounded-2xl overflow-hidden border border-navy-primary/5 shadow-raised hover:border-gold-primary/20 transition-all duration-300 flex flex-col">
+              <div className="relative w-full h-[260px] sm:h-[320px]">
+                <Image
+                  src="/images/happy_customer.png"
+                  alt="Aqua Elite technician explaining water softener metrics to a happy customer"
+                  fill
+                  className="object-cover object-center"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                {/* Accent line */}
+                <div className="absolute bottom-0 left-0 right-0 h-[3px] bg-gradient-to-r from-gold-primary to-transparent" />
+              </div>
+              <div className="p-8 sm:p-10 flex-1 flex flex-col justify-between">
+                <div>
+                  <span className="text-[9px] font-bold text-gold-primary uppercase tracking-wider block mb-2">
+                    Customer Centricity
+                  </span>
+                  <h3 className="font-display text-[1.25rem] font-medium text-navy-primary mb-4 leading-tight">
+                    Honest advice you can rely on
+                  </h3>
+                  <p className="text-[12px] sm:text-[13px] text-silver leading-[1.85] font-sans">
+                    Building long-term trust starts with open communication. We walk you through system configurations, explain exact water hardness levels, and show you how to manage filters and settings. You will always know what is recommended and why.
+                  </p>
+                </div>
+              </div>
+            </div>
+
           </div>
         </div>
       </section>
