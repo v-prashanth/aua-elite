@@ -4,7 +4,7 @@ import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUpRight, ChevronRight, X, ChevronLeft, ChevronRight as ChevronRightIcon } from "lucide-react";
+import { ArrowUpRight, ChevronRight, X, ChevronLeft, ChevronRight as ChevronRightIcon, MessageCircle } from "lucide-react";
 
 /* ─────────────────────────────────────────────
    EASING
@@ -128,12 +128,58 @@ function Lightbox({
         <ChevronRightIcon size={18} className="text-white" />
       </button>
 
-      {/* Close */}
-      <button onClick={onClose}
-        className="absolute top-5 right-5 z-10 w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110"
-        style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }} aria-label="Close lightbox">
-        <X size={16} className="text-white" />
-      </button>
+      {/* Action Buttons Top-Right */}
+      <div className="absolute top-5 right-5 z-10 flex items-center gap-3">
+        {/* WhatsApp Redirect */}
+        <a
+          href={`https://wa.me/918555998216?text=${encodeURIComponent(
+            `Hi, I saw your project "${slide.title}" (${slide.type}) on your website and would like to know more about it.`
+          )}`}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-[#25D366]/20 group"
+          style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }}
+          aria-label="Enquire on WhatsApp"
+        >
+          <MessageCircle size={16} className="text-[#25D366] transition-colors" />
+        </a>
+
+        {/* Instagram Redirect */}
+        <a
+          href="https://instagram.com/aquaelitesolution"
+          target="_blank"
+          rel="noopener noreferrer"
+          className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-[#E1306C]/20 group"
+          style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }}
+          aria-label="Visit Instagram"
+        >
+          <svg
+            viewBox="0 0 24 24"
+            width={16}
+            height={16}
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            className="text-white group-hover:text-[#E1306C] transition-colors shrink-0"
+          >
+            <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+            <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+            <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+          </svg>
+        </a>
+
+        {/* Close */}
+        <button
+          onClick={onClose}
+          className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-200 hover:scale-110 hover:bg-white/10"
+          style={{ background: "rgba(255,255,255,0.08)", border: "1px solid rgba(255,255,255,0.1)" }}
+          aria-label="Close lightbox"
+        >
+          <X size={16} className="text-white" />
+        </button>
+      </div>
 
       <div className="absolute bottom-0 left-0 right-0 h-px pointer-events-none"
         style={{ background: "linear-gradient(to right, transparent, rgba(201,165,76,0.4), transparent)" }} />
