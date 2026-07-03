@@ -102,7 +102,7 @@ export const TrustedBrands: React.FC<TrustedBrandsProps> = ({ initialBrands }) =
 
         <Reveal delay={0.15}>
           <p className="text-xs sm:text-sm text-navy-primary/70 dark:text-white/40 font-sans leading-relaxed max-w-2xl mx-auto mb-12">
-            We work with trusted brands to supply the right products for your home. We recommend based on what suits your situation — not based on what is easiest for us to sell.
+            We proudly recommend, install, and support globally trusted brands known for premium tankless water heating systems and advanced water treatment technologies. Our recommendations are strictly based on engineering suitability — not sales targets.
           </p>
         </Reveal>
 

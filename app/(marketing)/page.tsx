@@ -1,6 +1,7 @@
 import * as React from "react";
 import { Hero } from "@/components/home/Hero";
 import { FeaturedSolutions } from "@/components/home/FeaturedSolutions";
+import { TanklessEditorial } from "@/components/home/TanklessEditorial";
 import { AquaEliteApproach } from "@/components/home/AquaEliteApproach";
 import { FeaturedProducts } from "@/components/home/FeaturedProducts";
 import { TrustedBrands } from "@/components/home/TrustedBrands";
@@ -66,6 +67,7 @@ export default async function Home() {
       <WaterRibbon />
       <Hero content={heroContent} />
       <FeaturedSolutions />
+      <TanklessEditorial />
       <AquaEliteApproach quote={howWeWorkQuote} />
       <FeaturedProducts />
       <TrustedBrands initialBrands={brandsData} />

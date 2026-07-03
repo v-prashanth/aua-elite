@@ -135,6 +135,19 @@ export const FinalCTA: React.FC = () => {
                 </motion.button>
               </a>
             </div>
+
+            {/* Subtle, confident trust points */}
+            <div className="pt-6 flex flex-wrap items-center justify-center gap-x-8 gap-y-2 text-[9px] font-bold uppercase tracking-[0.25em] text-navy-primary/60 border-t border-navy-primary/5 mt-6 w-full">
+              <span className="flex items-center gap-1.5">
+                <span className="w-1 h-1 bg-gold-primary rotate-45" style={{ background: "var(--gold-primary)" }} /> Free Site Inspection
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-1 h-1 bg-gold-primary rotate-45" style={{ background: "var(--gold-primary)" }} /> Best Price Assurance
+              </span>
+              <span className="flex items-center gap-1.5">
+                <span className="w-1 h-1 bg-gold-primary rotate-45" style={{ background: "var(--gold-primary)" }} /> Professional Recommendations
+              </span>
+            </div>
           </div>
         </motion.div>
       </Container>

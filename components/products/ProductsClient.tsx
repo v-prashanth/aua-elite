@@ -155,9 +155,7 @@ export function ProductsClient({ products, brands }: ProductsClientProps) {
             </Reveal>
             <Reveal delay={0.18}>
               <p className="text-[13px] sm:text-[15px] text-white/55 leading-relaxed max-w-lg font-sans font-normal mb-10">
-                We visit your site, measure your requirements, and recommend
-                the exact system — sized correctly, installed properly, and
-                supported long-term.
+                The products we recommend represent professionally selected, engineered solutions for modern properties — not simply products for sale. From advanced central water treatment to specialized premium tankless water heating systems, we visit your site, custom-size the solution, ensure perfect installation, and provide dedicated after-sales support.
               </p>
             </Reveal>
             <Reveal delay={0.25}>

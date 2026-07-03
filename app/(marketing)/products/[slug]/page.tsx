@@ -230,7 +230,7 @@ export default async function ProductDetailPage({ params }: { params: { slug: st
 
             {/* Right: Premium Information */}
             <div className="space-y-6 text-left">
-              <div className="flex flex-wrap items-center gap-3">
+              <div className="flex flex-wrap items-center gap-2">
                 <span className="text-[8px] uppercase tracking-widest text-gold-primary font-bold border border-gold-primary/20 px-2 py-0.5 rounded bg-offwhite">
                   {product.brand} &bull; Sized & Verified
                 </span>
@@ -239,6 +239,20 @@ export default async function ProductDetailPage({ params }: { params: { slug: st
                   <span className="text-[8px] uppercase tracking-widest font-bold bg-navy-primary/5 text-navy-primary px-2 py-0.5 rounded">
                     Made in Germany
                   </span>
+                )}
+
+                {product.category?.startsWith("tankless") && (
+                  <>
+                    <span className="text-[8px] uppercase tracking-widest font-bold bg-gold-primary/10 text-gold-primary px-2 py-0.5 rounded border border-gold-primary/20">
+                      Tankless Water Heating Solution
+                    </span>
+                    <span className="text-[8px] uppercase tracking-widest font-bold bg-navy-primary/5 text-navy-primary/80 px-2 py-0.5 rounded">
+                      Ideal for Continuous Hot Water
+                    </span>
+                    <span className="text-[8px] uppercase tracking-widest font-bold bg-navy-primary/5 text-navy-primary/80 px-2 py-0.5 rounded">
+                      Engineered for Modern Bathrooms
+                    </span>
+                  </>
                 )}
               </div>
 

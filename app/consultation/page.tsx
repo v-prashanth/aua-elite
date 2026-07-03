@@ -301,8 +301,7 @@ export default function ConsultationPage() {
             </Reveal>
             <Reveal delay={0.18}>
               <p className="text-[13px] sm:text-[15px] text-white/55 leading-relaxed font-sans max-w-md">
-                Our installation specialists will visit your property, assess your water and
-                electrical setup, and recommend the right solution — before you commit to anything.
+                Planning a premium tankless water heating system or need a centralized water solution? Our engineers will visit your property, assess your electrical load and water layout, and recommend the exact systems tailored to your usage.
               </p>
             </Reveal>
           </div>
