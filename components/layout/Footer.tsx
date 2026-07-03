@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { Phone, Mail, MapPin, ExternalLink } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { useSettings } from "@/components/shared/SettingsProvider";
@@ -16,13 +17,23 @@ export const Footer: React.FC = () => {
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8 mb-12">
           {/* Brand Info */}
           <div className="flex flex-col space-y-4">
-            <Link href="/" className="flex flex-col">
-              <span className="font-display text-xl font-semibold tracking-wide text-[#FFFFFF] dark:text-[#F3F4F6]">
-                AQUA ELITE
-              </span>
-              <span className="text-[10px] uppercase tracking-widest text-gold-primary -mt-0.5">
-                Water Heating &amp; Water Treatment
-              </span>
+            <Link href="/" className="flex items-center gap-3.5 group">
+              <div className="relative w-10 h-10 rounded-xl overflow-hidden border border-white/10 shrink-0 bg-white shadow-[0_2px_12px_rgba(0,0,0,0.06)]">
+                <Image
+                  src="/images/logo.png"
+                  alt="Aqua Elite Logo"
+                  fill
+                  className="object-contain p-1"
+                />
+              </div>
+              <div className="flex flex-col">
+                <span className="font-display text-lg font-semibold tracking-wide text-[#FFFFFF] dark:text-[#F3F4F6] group-hover:text-gold-primary transition-colors duration-200">
+                  AQUA ELITE
+                </span>
+                <span className="text-[9px] uppercase tracking-widest text-gold-primary -mt-0.5">
+                  Water Heating &amp; Treatment
+                </span>
+              </div>
             </Link>
             <p className="text-xs text-silver leading-relaxed max-w-xs">
               Water heating and water treatment solutions for homes and commercial properties in Hyderabad. We supply products from trusted brands, install them properly, and provide long-term support.

@@ -1,8 +1,9 @@
 'use client'
 
 import React from 'react'
+import Image from 'next/image'
 import { login } from '@/app/admin/actions/auth'
-import { Droplets, Eye, EyeOff, AlertCircle } from 'lucide-react'
+import { Eye, EyeOff, AlertCircle } from 'lucide-react'
 
 export default function AdminLoginPage() {
   const [showPassword, setShowPassword] = React.useState(false)
@@ -39,8 +40,13 @@ export default function AdminLoginPage() {
       <div className="relative w-full max-w-[350px]">
         {/* Brand Logo & Header (Floating above card, very neat) */}
         <div className="text-center mb-6">
-          <div className="inline-flex items-center justify-center w-10 h-10 rounded-xl bg-navy-primary text-gold-primary mb-3 shadow-[0_4px_12px_rgba(11,35,65,0.15)]">
-            <Droplets className="w-5 h-5" strokeWidth={2} />
+          <div className="relative inline-flex items-center justify-center w-12 h-12 rounded-xl border border-navy-primary/10 overflow-hidden bg-white mb-3 shadow-[0_4px_12px_rgba(11,35,65,0.1)]">
+            <Image
+              src="/images/logo.png"
+              alt="Aqua Elite Logo"
+              fill
+              className="object-contain p-1.5"
+            />
           </div>
           <p className="text-[9px] uppercase tracking-[0.25em] text-navy-primary/40 font-bold font-sans">
             Aqua Elite Solutions

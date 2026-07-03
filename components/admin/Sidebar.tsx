@@ -2,6 +2,7 @@
 
 import React from 'react'
 import Link from 'next/link'
+import NextImage from 'next/image'
 import { usePathname } from 'next/navigation'
 import { motion, AnimatePresence } from 'framer-motion'
 import {
@@ -17,7 +18,6 @@ import {
   Settings,
   Zap,
   User,
-  Droplets,
   X,
   ChevronRight,
   LucideIcon,
@@ -141,8 +141,13 @@ function SidebarContent({ onLinkClick }: { onLinkClick?: () => void }) {
     <div className="flex flex-col h-full p-4">
       {/* Logo */}
       <div className="flex items-center gap-2.5 px-3 py-3 mb-6">
-        <div className="w-8 h-8 rounded-lg bg-navy-primary flex items-center justify-center shrink-0">
-          <Droplets size={15} className="text-gold-primary" strokeWidth={1.75} />
+        <div className="relative w-8 h-8 rounded-lg border border-navy-primary/10 overflow-hidden bg-white shrink-0 shadow-[0_1px_4px_rgba(0,0,0,0.04)]">
+          <NextImage
+            src="/images/logo.png"
+            alt="Aqua Elite Logo"
+            fill
+            className="object-contain p-0.5"
+          />
         </div>
         <div>
           <p className="text-[11px] font-bold text-navy-primary font-sans leading-tight">

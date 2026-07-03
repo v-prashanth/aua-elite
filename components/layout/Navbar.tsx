@@ -2,6 +2,7 @@
 
 import * as React from "react";
 import Link from "next/link";
+import Image from "next/image";
 import { usePathname, useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Menu } from "lucide-react";
@@ -100,8 +101,16 @@ export const Navbar: React.FC = () => {
             <Link
               href="/"
               aria-label="Aqua Elite Solutions — Home"
-              className="flex-shrink-0 group outline-none"
+              className="flex-shrink-0 group outline-none flex items-center gap-3"
             >
+              <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-lg overflow-hidden border border-navy-primary/10 dark:border-white/10 shrink-0 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
+                <Image
+                  src="/images/logo.png"
+                  alt="Aqua Elite Logo"
+                  fill
+                  className="object-contain p-0.5"
+                />
+              </div>
               <motion.div animate={scrolled ? { scale: 0.95 } : { scale: 1 }} transition={{ type: "spring", stiffness: 300, damping: 30 }}>
                 <span className="font-display font-semibold tracking-[0.18em] uppercase text-[13px] sm:text-[14px] block transition-colors duration-300 text-navy-primary dark:text-white group-hover:text-gold-primary">
                   Aqua Elite
