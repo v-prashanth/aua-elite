@@ -178,7 +178,15 @@ export const Footer: React.FC = () => {
         {/* Bottom Bar */}
         <div className="border-t border-silver/10 pt-8 mt-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-silver/70">
           <p>
-            &copy; {currentYear} Aqua Elite Solutions. All rights reserved. Authorized Stiebel Eltron Sales & Service Partner.
+            &copy; {currentYear} Aqua Elite Solutions. All rights reserved. Authorized Stiebel Eltron Sales & Service Partner. | Website by{" "}
+            <a
+              href="https://prashanthv.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors underline decoration-gold-primary/30 underline-offset-2"
+            >
+              Prashanth V
+            </a>
           </p>
           <div className="flex space-x-6 mt-4 md:mt-0">
             <Link href="/privacy" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
