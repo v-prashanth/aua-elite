@@ -241,7 +241,7 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
             initial={{ opacity: 0, scale: 1.03, y: 12 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
             transition={{ duration: 1.1, ease: EASE, delay: 0.12 }}
-            className="relative w-full order-first md:order-last"
+            className="relative w-full"
             style={{ height: "clamp(260px, 46vw, 500px)" }}
           >
             {/* Floating wrapper */}

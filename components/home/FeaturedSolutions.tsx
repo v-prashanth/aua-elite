@@ -116,7 +116,7 @@ export const FeaturedSolutions: React.FC = () => {
         <motion.div
           whileHover={{ y: -6, scale: 1.008 }}
           transition={hoverTransition}
-          className="lg:col-span-8 min-w-0 relative w-full h-[260px] sm:h-[380px] md:h-[460px] rounded-xl p-1 bg-purewhite dark:bg-navy-dark border border-gold-primary/20 shadow-raised hover:border-gold-primary/45 transition-colors duration-500 lg:z-0 group"
+          className="order-2 lg:order-1 lg:col-span-8 min-w-0 relative w-full h-[260px] sm:h-[380px] md:h-[460px] rounded-xl p-1 bg-purewhite dark:bg-navy-dark border border-gold-primary/20 shadow-raised hover:border-gold-primary/45 transition-colors duration-500 lg:z-0 group"
         >
           {/* Subtle light leak on hover */}
           <div className="absolute inset-0 bg-gradient-to-br from-gold-primary/8 via-transparent to-water/10 rounded-xl opacity-0 group-hover:opacity-100 blur-xl transition-opacity duration-700 pointer-events-none -z-10" />
@@ -141,7 +141,7 @@ export const FeaturedSolutions: React.FC = () => {
         <motion.div
           whileHover={{ y: -10, scale: 1.015 }}
           transition={hoverTransition}
-          className="lg:col-span-4 min-w-0 flex flex-col text-left space-y-6 lg:-ml-16 lg:z-10 bg-purewhite dark:bg-navy-light p-6 sm:p-8 md:p-10 rounded-xl border border-navy-primary/5 dark:border-white/5 shadow-raised group"
+          className="order-1 lg:order-2 lg:col-span-4 min-w-0 flex flex-col text-left space-y-6 lg:-ml-16 lg:z-10 lg:bg-purewhite lg:dark:bg-navy-light p-0 lg:p-10 lg:rounded-xl lg:border lg:border-navy-primary/5 lg:dark:border-white/5 lg:shadow-raised group"
         >
           {/* Subtle light leak on hover */}
           <div className="absolute inset-0 bg-gradient-to-tr from-gold-primary/5 via-transparent to-transparent rounded-xl opacity-0 group-hover:opacity-100 blur-lg transition-opacity duration-700 pointer-events-none -z-10" />
