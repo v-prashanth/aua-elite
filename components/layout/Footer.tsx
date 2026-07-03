@@ -176,19 +176,16 @@ export const Footer: React.FC = () => {
         </div>
 
         {/* Bottom Bar */}
-        <div className="border-t border-silver/10 pt-8 mt-8 flex flex-col md:flex-row items-center justify-between text-[11px] text-silver/70">
-          <p>
-            &copy; {currentYear} Aqua Elite Solutions. All rights reserved. Authorized Stiebel Eltron Sales & Service Partner. | Website by{" "}
-            <a
-              href="https://prashanthv.vercel.app"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors underline decoration-gold-primary/30 underline-offset-2"
-            >
-              Prashanth V
-            </a>
-          </p>
-          <div className="flex space-x-6 mt-4 md:mt-0">
+        <div className="border-t border-silver/10 pt-8 mt-8 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 text-[11px] text-silver/70">
+          <div className="space-y-1 text-left">
+            <p>
+              &copy; {currentYear} Aqua Elite Solutions. All rights reserved.
+            </p>
+            <p className="text-[10px] text-silver/50">
+              Authorized Stiebel Eltron Sales & Service Partner.
+            </p>
+          </div>
+          <div className="flex flex-wrap items-center gap-x-6 gap-y-2 mt-2 md:mt-0">
             <Link href="/privacy" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
               Privacy Policy
             </Link>
@@ -203,6 +200,15 @@ export const Footer: React.FC = () => {
             >
               <span>Stiebel Eltron India</span>
               <ExternalLink size={10} />
+            </a>
+            <span className="text-silver/20 hidden md:inline">|</span>
+            <a
+              href="https://prashanthv.vercel.app"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors text-silver/50 text-[10px]"
+            >
+              Website by Prashanth V
             </a>
           </div>
         </div>
