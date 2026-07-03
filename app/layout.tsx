@@ -1,8 +1,5 @@
 import type { Metadata } from "next";
 import { Inter, Fraunces } from "next/font/google";
-import { Navbar } from "@/components/layout/Navbar";
-import { Footer } from "@/components/layout/Footer";
-import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 import { defaultMetadata } from "@/lib/seo";
 import "./globals.css";
 
@@ -23,6 +20,13 @@ const fraunces = Fraunces({
 
 export const metadata: Metadata = defaultMetadata;
 
+/**
+ * Root layout — shared by ALL routes (marketing + admin).
+ * Contains only the HTML shell and font variables.
+ *
+ * Navbar, Footer, and WhatsApp are in the (marketing)/layout.tsx route group.
+ * The admin shell is in app/admin/layout.tsx.
+ */
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -31,12 +35,7 @@ export default function RootLayout({
   return (
     <html lang="en" className={`${inter.variable} ${fraunces.variable} scroll-smooth`}>
       <body className="antialiased min-h-screen flex flex-col justify-between bg-offwhite text-navy-primary">
-        <Navbar />
-        <main className="flex-grow">
-          {children}
-        </main>
-        <Footer />
-        <WhatsAppButton />
+        {children}
       </body>
     </html>
   );

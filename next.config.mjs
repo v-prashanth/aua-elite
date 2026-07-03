@@ -44,12 +44,12 @@ const nextConfig = {
               "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
               // Scripts: self + Next.js runtime inline scripts
               "script-src 'self' 'unsafe-inline' 'unsafe-eval'",
+              // API calls: self + Supabase
+              "connect-src 'self' https://*.supabase.co wss://*.supabase.co",
+              // Images: self + data URIs + Supabase Storage
+              "img-src 'self' data: blob: https://*.supabase.co https://*.supabase.in",
               // Fonts from Google Fonts
               "font-src 'self' https://fonts.gstatic.com",
-              // Images: self + data URIs (for inline SVGs)
-              "img-src 'self' data: blob:",
-              // API calls only to our own origin
-              "connect-src 'self'",
               // Disallow all object embeds
               "object-src 'none'",
               // Prevent form submissions to external origins

@@ -3,9 +3,12 @@
 import * as React from "react";
 import { motion } from "framer-motion";
 import { whatsAppPulse } from "@/lib/animations";
+import { useSettings } from "@/components/shared/SettingsProvider";
 
 export const WhatsAppButton: React.FC = () => {
-  const whatsappNumber = "918555998216"; // Hyderabad office contact
+  const settings = useSettings();
+  const rawNum = settings.whatsapp || "918555998216";
+  const whatsappNumber = rawNum.replace(/[^0-9]/g, ""); // Clean any spaces or signs
   const message = encodeURIComponent(
     "Hello Aqua Elite Solutions, I would like to schedule a water & heating consultation for my property."
   );

@@ -98,12 +98,36 @@ export const FeaturedProducts: React.FC = () => {
                         </span>
                         <h3 className="font-display text-xs sm:text-sm font-semibold tracking-wide text-navy-primary">
                           {product.title}
-                        </h3>
-                        <p className={`text-[11px] text-silver leading-relaxed font-sans transition-all duration-300 ${
-                          isActive ? "opacity-100 max-h-20 mt-2" : "opacity-0 max-h-0 overflow-hidden"
+                        </h3>                         <div className={`transition-all duration-300 overflow-hidden ${
+                          isActive ? "opacity-100 max-h-[500px] mt-2 space-y-3" : "opacity-0 max-h-0"
                         }`}>
-                          {benefit}
-                        </p>
+                          <p className="text-[11px] text-silver leading-relaxed font-sans">
+                            {benefit}
+                          </p>
+                          
+                          {/* Image container inside the card — mobile/tablet only (no overlapping text) */}
+                          <div className="lg:hidden relative w-full h-[200px] sm:h-[280px] rounded-xl overflow-hidden bg-offwhite border border-gold-primary/10">
+                            <Image
+                              src={`${imageMap[product.id] || "/images/products/dhb-e-18-24.jpg"}?v=2`}
+                              alt={product.title}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 1024px) 100vw, 50vw"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+                          </div>
+
+                          {/* Technical specification redirect link below the image */}
+                          <div className="lg:hidden pt-1">
+                            <Link
+                              href={`/products/${product.slug}`}
+                              className="inline-flex items-center text-[10px] font-bold uppercase tracking-wider text-gold-primary hover:text-navy-primary transition-colors"
+                            >
+                              Explore technical specifications
+                              <ArrowRight size={10} className="ml-1.5" />
+                            </Link>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -111,8 +135,8 @@ export const FeaturedProducts: React.FC = () => {
               })}
             </div>
 
-            {/* Button */}
-            <div className="pt-2">
+            {/* Button (Desktop only) */}
+            <div className="hidden lg:block pt-2">
               <Link href="/products" className="inline-flex items-center gap-3 group">
                 <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-navy-primary transition-opacity duration-300 group-hover:opacity-75">
                   View All Products
@@ -124,8 +148,8 @@ export const FeaturedProducts: React.FC = () => {
             </div>
           </div>
 
-          {/* Right Column: Dynamic Visual Showcase Canvas (Col Span 7) */}
-          <div className="lg:col-span-7">
+          {/* Right Column: Dynamic Visual Showcase Canvas (Col Span 7) — Desktop Only */}
+          <div className="hidden lg:block lg:col-span-7">
             <div className="relative w-full aspect-[4/3] rounded-2xl p-1 bg-purewhite border border-gold-primary/20 shadow-raised overflow-hidden">
               <div className="relative w-full h-full rounded-xl overflow-hidden bg-offwhite">
                 
@@ -181,6 +205,18 @@ export const FeaturedProducts: React.FC = () => {
                 <div className="absolute -bottom-px -right-px w-px h-8 bg-gold-primary/30 z-20" />
               </div>
             </div>
+          </div>
+
+          {/* Button (Mobile only) */}
+          <div className="lg:hidden flex justify-center pt-2 w-full">
+            <Link href="/products" className="inline-flex items-center gap-3 group">
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-navy-primary dark:text-white transition-opacity duration-300 group-hover:opacity-75">
+                View All Products
+              </span>
+              <span className="w-8 h-8 rounded-full flex items-center justify-center bg-gold-primary transition-transform duration-300 group-hover:translate-x-1">
+                <ArrowRight size={13} className="text-white" strokeWidth={2.5} />
+              </span>
+            </Link>
           </div>
 
         </div>

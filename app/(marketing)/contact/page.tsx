@@ -5,10 +5,12 @@ import { motion, AnimatePresence } from "framer-motion";
 import { ArrowRight, Check } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { Reveal } from "@/components/ui/Reveal";
+import { useSettings } from "@/components/shared/SettingsProvider";
 
 // ─── Page ─────────────────────────────────────────────────────────────────────
 
 export default function ContactPage() {
+  const settings = useSettings();
   const [formData, setFormData] = React.useState({
     fullName: "",
     phone: "",
@@ -50,7 +52,8 @@ export default function ContactPage() {
     }
   };
 
-  const waLink = `https://wa.me/918555998216?text=${encodeURIComponent(
+  const cleanWa = (settings.whatsapp || "918555998216").replace(/[^0-9]/g, "");
+  const waLink = `https://wa.me/${cleanWa}?text=${encodeURIComponent(
     "Hello Aqua Elite, I'd like to discuss a water heating or treatment project for my property."
   )}`;
 
@@ -119,10 +122,10 @@ export default function ContactPage() {
                       Telephone
                     </span>
                     <a
-                      href="tel:+918555998216"
+                      href={`tel:${settings.phone_primary.replace(/[^0-9+]/g, "")}`}
                       className="font-display text-[1.35rem] sm:text-[1.55rem] font-medium text-navy-primary hover:text-gold-primary transition-colors duration-200"
                     >
-                      +91 85559 98216
+                      {settings.phone_primary}
                     </a>
                   </div>
 
@@ -131,10 +134,10 @@ export default function ContactPage() {
                       Email
                     </span>
                     <a
-                      href="mailto:aquaelitesolution@gmail.com"
+                      href={`mailto:${settings.email}`}
                       className="font-display text-[1.1rem] sm:text-[1.25rem] font-medium text-navy-primary hover:text-gold-primary transition-colors duration-200"
                     >
-                      aquaelitesolution@gmail.com
+                      {settings.email}
                     </a>
                   </div>
 
@@ -143,13 +146,13 @@ export default function ContactPage() {
                       Office
                     </span>
                     <a
-                      href="https://maps.app.goo.gl/ZyP87vtqo5odNARb8?g_st=aw"
+                      href={settings.google_maps_url || "https://maps.app.goo.gl/ZyP87vtqo5odNARb8?g_st=aw"}
                       target="_blank"
                       rel="noopener noreferrer"
                       className="block text-[14px] text-navy-primary hover:text-gold-primary font-sans leading-relaxed transition-colors duration-200"
                     >
-                      Hema Nagar, Boduppal<br />
-                      Hyderabad, Telangana 500039
+                      {settings.address_line1}<br />
+                      {settings.address_line2}
                     </a>
                   </div>
 
@@ -157,10 +160,9 @@ export default function ContactPage() {
                     <span className="text-[10px] uppercase tracking-[0.2em] text-silver/60 font-sans font-medium block mb-1.5">
                       Consultation Hours
                     </span>
-                    <p className="text-[14px] text-navy-primary font-sans">
-                      Monday – Saturday<br />
-                      <span className="text-silver">9:00 AM – 7:00 PM</span>
-                    </p>
+                    <div className="text-[14px] text-navy-primary font-sans leading-relaxed">
+                      {settings.business_hours}
+                    </div>
                   </div>
                 </div>
 

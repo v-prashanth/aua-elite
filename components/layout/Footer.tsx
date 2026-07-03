@@ -4,9 +4,11 @@ import * as React from "react";
 import Link from "next/link";
 import { Phone, Mail, MapPin, ExternalLink } from "lucide-react";
 import { Container } from "@/components/ui/Container";
+import { useSettings } from "@/components/shared/SettingsProvider";
 
 export const Footer: React.FC = () => {
   const currentYear = new Date().getFullYear();
+  const settings = useSettings();
 
   return (
     <footer className="bg-[#0B2341] dark:bg-[#121316] text-[#FFFFFF] dark:text-[#F3F4F6] border-t border-gold-primary/20 pt-16 pb-8 font-sans">
@@ -29,30 +31,32 @@ export const Footer: React.FC = () => {
               Stiebel Eltron ● AO Smith ● ZeroB ● Zanskar
             </div>
             <div className="flex items-center space-x-3 pt-1">
-              <a
-                href="https://instagram.com/aquaelitesolution"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-silver hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors flex items-center space-x-1.5 text-xs"
-                aria-label="Aqua Elite Solutions on Instagram"
-              >
-                <svg
-                  viewBox="0 0 24 24"
-                  width={14}
-                  height={14}
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2.5"
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  className="text-gold-primary shrink-0"
+              {settings.instagram_url && (
+                <a
+                  href={settings.instagram_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-silver hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors flex items-center space-x-1.5 text-xs"
+                  aria-label="Aqua Elite Solutions on Instagram"
                 >
-                  <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
-                  <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
-                  <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
-                </svg>
-                <span>@aquaelitesolution</span>
-              </a>
+                  <svg
+                    viewBox="0 0 24 24"
+                    width={14}
+                    height={14}
+                    fill="none"
+                    stroke="currentColor"
+                    strokeWidth="2.5"
+                    strokeLinecap="round"
+                    strokeLinejoin="round"
+                    className="text-gold-primary shrink-0"
+                  >
+                    <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+                    <line x1="17.5" y1="6.5" x2="17.51" y2="6.5" />
+                  </svg>
+                  <span>@{settings.instagram_url.replace(/\/$/, '').split('/').pop() || 'aquaelitesolution'}</span>
+                </a>
+              )}
             </div>
           </div>
 
@@ -143,29 +147,29 @@ export const Footer: React.FC = () => {
               <li className="flex items-start space-x-2.5">
                 <MapPin size={14} className="text-gold-primary shrink-0 mt-0.5" />
                 <a
-                  href="https://maps.app.goo.gl/ZyP87vtqo5odNARb8?g_st=aw"
+                  href={settings.google_maps_url || "https://maps.app.goo.gl/ZyP87vtqo5odNARb8?g_st=aw"}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors duration-200"
                 >
-                  Hema Nagar, Boduppal,<br />
-                  Hyderabad, Telangana - 500039
+                  {settings.address_line1},<br />
+                  {settings.address_line2}
                 </a>
               </li>
               <li className="flex items-center space-x-2.5">
                 <Phone size={14} className="text-gold-primary shrink-0" />
-                <a href="tel:+918555998216" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
-                  +91 85559 98216
+                <a href={`tel:${settings.phone_primary.replace(/[^0-9+]/g, "")}`} className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
+                  {settings.phone_primary}
                 </a>
               </li>
               <li className="flex items-center space-x-2.5">
                 <Mail size={14} className="text-gold-primary shrink-0" />
-                <a href="mailto:aquaelitesolution@gmail.com" className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
-                  aquaelitesolution@gmail.com
+                <a href={`mailto:${settings.email}`} className="hover:text-[#FFFFFF] dark:hover:text-[#F3F4F6] transition-colors">
+                  {settings.email}
                 </a>
               </li>
               <li className="pt-2 border-t border-silver/10 text-[11px] text-silver/80">
-                <strong>Hours:</strong> Mon - Sat: 9:00 AM - 7:00 PM
+                <strong>Hours:</strong> {settings.business_hours}
               </li>
             </ul>
           </div>

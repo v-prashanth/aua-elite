@@ -98,8 +98,17 @@ function FlashRibbon() {
   );
 }
 
-// ─── Hero ──────────────────────────────────────────────────────────────────────
-export const Hero: React.FC = () => {
+interface HeroProps {
+  content?: {
+    heading: string;
+    subheading: string;
+    tagline: string;
+    cta_text: string;
+    cta_link: string;
+  } | null;
+}
+
+export const Hero: React.FC<HeroProps> = ({ content }) => {
   return (
     <section
       className="relative flex flex-col bg-offwhite overflow-hidden"
@@ -146,7 +155,7 @@ export const Hero: React.FC = () => {
               className="block text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.38em] mb-5"
               style={{ color: "var(--gold-primary)" }}
             >
-              Aqua Elite Solutions · Hyderabad
+              {content?.tagline || "Aqua Elite Solutions · Hyderabad"}
             </motion.span>
 
             {/* Headline */}
@@ -157,14 +166,25 @@ export const Hero: React.FC = () => {
               className="font-display font-medium tracking-tight text-navy-primary leading-[1.06] mb-5"
               style={{ fontSize: "clamp(2.1rem, 5.2vw, 3.75rem)" }}
             >
-              The Right Water Solution —{" "}
-              <br className="hidden sm:block" />
-              <span
-                className="italic font-serif font-normal"
-                style={{ color: "var(--gold-primary)" }}
-              >
-                Chosen, Installed &amp; Supported.
-              </span>
+              {(() => {
+                const heading = content?.heading || "The Right Water Solution — Chosen, Installed & Supported.";
+                if (heading.includes("—")) {
+                  const parts = heading.split("—");
+                  return (
+                    <>
+                      {parts[0]} —{" "}
+                      <br className="hidden sm:block" />
+                      <span
+                        className="italic font-serif font-normal"
+                        style={{ color: "var(--gold-primary)" }}
+                      >
+                        {parts.slice(1).join("—")}
+                      </span>
+                    </>
+                  );
+                }
+                return heading;
+              })()}
             </motion.h1>
 
             {/* Supporting paragraph */}
@@ -175,9 +195,7 @@ export const Hero: React.FC = () => {
               className="font-sans leading-relaxed text-navy-primary/65 mb-8 max-w-[500px]"
               style={{ fontSize: "clamp(13px, 1.5vw, 15px)" }}
             >
-              We visit your property, measure your requirements, and recommend the
-              exact water heating or treatment system — sized correctly, installed
-              properly, and supported long-term.
+              {content?.subheading || "We visit your property, measure your requirements, and recommend the exact water heating or treatment system — sized correctly, installed properly, and supported long-term."}
             </motion.p>
 
             {/* CTA buttons */}
@@ -187,7 +205,7 @@ export const Hero: React.FC = () => {
               transition={{ duration: 0.75, ease: EASE, delay: 0.28 }}
               className="flex flex-col sm:flex-row items-stretch sm:items-center gap-3"
             >
-              <Link href="/consultation">
+              <Link href={content?.cta_link || "/consultation"}>
                 <motion.button
                   whileHover={{ y: -2, boxShadow: "0 8px 28px rgba(201,165,76,0.28)" }}
                   whileTap={{ scale: 0.97 }}
@@ -195,7 +213,7 @@ export const Hero: React.FC = () => {
                   className="inline-flex items-center justify-center gap-2.5 px-7 py-3.5 rounded-full text-[10px] sm:text-[11px] font-bold uppercase tracking-[0.18em] w-full sm:w-auto"
                   style={{ background: "var(--gold-primary)", color: "#fff" }}
                 >
-                  Book Consultation
+                  {content?.cta_text || "Book Consultation"}
                   <ArrowRight size={13} strokeWidth={2.5} />
                 </motion.button>
               </Link>
@@ -226,30 +244,43 @@ export const Hero: React.FC = () => {
             className="relative w-full order-first md:order-last"
             style={{ height: "clamp(260px, 46vw, 500px)" }}
           >
-            {/* Image frame */}
-            <div
-              className="absolute inset-0 rounded-2xl overflow-hidden"
-              style={{
-                border: "1px solid rgba(201,165,76,0.18)",
-                boxShadow: "0 20px 60px rgba(11,35,65,0.1), 0 2px 8px rgba(11,35,65,0.06)",
+            {/* Floating wrapper */}
+            <motion.div
+              className="absolute inset-0"
+              animate={{
+                y: [0, -8, 0],
+              }}
+              transition={{
+                duration: 6,
+                repeat: Infinity,
+                ease: "easeInOut",
               }}
             >
-              <Image
-                src="/images/hero_villa.png"
-                alt="Premium residential villa — water heating and treatment installation by Aqua Elite Solutions"
-                fill
-                className="object-cover object-center"
-                priority
-                sizes="(max-width: 768px) 100vw, 50vw"
-              />
+              {/* Image frame */}
               <div
-                className="absolute inset-0 pointer-events-none"
+                className="absolute inset-0 rounded-2xl overflow-hidden"
                 style={{
-                  background:
-                    "linear-gradient(to top, rgba(11,35,65,0.2) 0%, rgba(11,35,65,0.03) 40%, transparent 70%)",
+                  border: "1px solid rgba(201,165,76,0.18)",
+                  boxShadow: "0 20px 60px rgba(11,35,65,0.1), 0 2px 8px rgba(11,35,65,0.06)",
                 }}
-              />
-            </div>
+              >
+                <Image
+                  src="/images/hero_villa.png"
+                  alt="Premium residential villa — water heating and treatment installation by Aqua Elite Solutions"
+                  fill
+                  className="object-cover object-center"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
+                <div
+                  className="absolute inset-0 pointer-events-none"
+                  style={{
+                    background:
+                      "linear-gradient(to top, rgba(11,35,65,0.2) 0%, rgba(11,35,65,0.03) 40%, transparent 70%)",
+                  }}
+                />
+              </div>
+            </motion.div>
 
             {/* Gold corner accents */}
             <motion.div

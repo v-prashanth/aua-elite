@@ -153,11 +153,30 @@ export const RecentInstallations: React.FC = () => {
                         <h3 className="font-display text-xs sm:text-sm font-semibold tracking-wide text-navy-primary">
                           {item.title}
                         </h3>
-                        <p className={`text-[11px] text-silver leading-relaxed font-sans transition-all duration-300 ${
-                          isActive ? "opacity-100 max-h-20 mt-2" : "opacity-0 max-h-0 overflow-hidden"
+                        <div className={`transition-all duration-300 overflow-hidden ${
+                          isActive ? "opacity-100 max-h-[500px] mt-2 space-y-3" : "opacity-0 max-h-0"
                         }`}>
-                          {item.desc}
-                        </p>
+                          <p className="text-[11px] text-silver leading-relaxed font-sans">
+                            {item.desc}
+                          </p>
+                          
+                          {/* Image container inside the card — mobile/tablet only (no overlapping text) */}
+                          <div className="lg:hidden relative w-full h-[200px] sm:h-[280px] rounded-xl overflow-hidden bg-offwhite border border-gold-primary/10">
+                            <Image
+                              src={item.src}
+                              alt={item.alt}
+                              fill
+                              className="object-cover"
+                              sizes="(max-width: 1024px) 100vw, 50vw"
+                            />
+                            <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent pointer-events-none" />
+                          </div>
+
+                          {/* Detail statement rendered cleanly below the image */}
+                          <p className="lg:hidden text-[10px] text-silver/80 font-sans leading-relaxed pt-1">
+                            💡 {item.floating}
+                          </p>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -165,13 +184,13 @@ export const RecentInstallations: React.FC = () => {
               })}
             </div>
 
-            {/* CTA Button */}
+            {/* CTA Button (Desktop only) */}
             <motion.div
               initial={{ opacity: 0, y: 16 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.7, ease: E, delay: 0.28 }}
-              className="pt-2"
+              className="hidden lg:block pt-2"
             >
               <Link href="/projects" className="inline-flex items-center gap-3 group">
                 <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-navy-primary transition-opacity duration-300 group-hover:opacity-75">
@@ -184,8 +203,8 @@ export const RecentInstallations: React.FC = () => {
             </motion.div>
           </div>
 
-          {/* Right Column: Dynamic Visual Showcase Canvas (Col Span 7) */}
-          <div className="lg:col-span-7">
+          {/* Right Column: Dynamic Visual Showcase Canvas (Col Span 7) — Desktop Only */}
+          <div className="hidden lg:block lg:col-span-7">
             <div className="relative w-full aspect-[4/3] rounded-2xl p-1 bg-purewhite border border-gold-primary/20 shadow-raised overflow-hidden">
               <div className="relative w-full h-full rounded-xl overflow-hidden bg-offwhite">
                 
@@ -237,6 +256,24 @@ export const RecentInstallations: React.FC = () => {
               </div>
             </div>
           </div>
+
+          {/* CTA Button (Mobile only) */}
+          <motion.div
+            initial={{ opacity: 0, y: 16 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, ease: E, delay: 0.28 }}
+            className="lg:hidden flex justify-center pt-2 w-full"
+          >
+            <Link href="/projects" className="inline-flex items-center gap-3 group">
+              <span className="text-[10px] font-bold uppercase tracking-[0.25em] text-navy-primary dark:text-white transition-opacity duration-300 group-hover:opacity-75">
+                View Our Work
+              </span>
+              <span className="w-8 h-8 rounded-full flex items-center justify-center bg-gold-primary transition-transform duration-300 group-hover:translate-x-1">
+                <ArrowUpRight size={13} className="text-white" strokeWidth={2.5} />
+              </span>
+            </Link>
+          </motion.div>
 
         </div>
       </div>

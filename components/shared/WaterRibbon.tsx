@@ -1,7 +1,7 @@
 "use client";
 
 import * as React from "react";
-import { useScroll, useSpring, useReducedMotion } from "framer-motion";
+import { motion, useScroll, useSpring, useReducedMotion } from "framer-motion";
 
 export const WaterRibbon: React.FC = () => {
   const containerRef = React.useRef<HTMLDivElement>(null);
@@ -70,17 +70,24 @@ export const WaterRibbon: React.FC = () => {
         />
 
         {/* 2. Main Scroll-Linked Active Path (Draws/erases as user scrolls) */}
-        <path
+        <motion.path
           d="M 600 0 C 650 400, 300 800, 350 1200 C 400 1600, 900 2000, 850 2400 C 800 2800, 200 3200, 250 3600 C 300 4000, 1000 4400, 950 4800 C 900 5200, 250 5600, 300 6000 C 350 6400, 850 6800, 800 7200 C 750 7600, 600 7900, 600 8000"
           stroke="url(#premium-flow-grad)"
-          strokeOpacity="0.85"
-          strokeWidth="3"
+          animate={{
+            strokeWidth: [2.8, 3.6, 2.8],
+            strokeOpacity: [0.75, 0.95, 0.75],
+          }}
+          transition={{
+            duration: 4,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
           strokeLinecap="round"
           strokeDasharray={totalLength}
           strokeDashoffset={dashOffset}
           className="transition-[stroke-dashoffset] duration-150 ease-out"
           style={{
-            filter: "drop-shadow(0 0 6px rgba(46, 111, 149, 0.2))",
+            filter: "drop-shadow(0 0 6px rgba(46, 111, 149, 0.25))",
           }}
         />
       </svg>

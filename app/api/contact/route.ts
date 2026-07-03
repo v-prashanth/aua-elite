@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import nodemailer from "nodemailer";
 import { z } from "zod";
+import { createClient } from "@supabase/supabase-js";
 
 // ── In-memory rate limiter ─────────────────────────────────────────────────
 // Keeps a sliding window of submissions per IP.
@@ -337,6 +338,28 @@ export async function POST(request: NextRequest) {
   } catch (err) {
     // Non-fatal: log but don't fail the response
     console.warn("[contact/api] Auto-reply failed (non-fatal):", err);
+  }
+
+  // ── 7. Persist lead to Supabase (non-fatal) ────────────────────────────
+  try {
+    const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL;
+    const supabaseKey = process.env.SUPABASE_SERVICE_ROLE_KEY;
+    if (supabaseUrl && supabaseKey) {
+      const supabase = createClient(supabaseUrl, supabaseKey);
+      await supabase.from("leads").insert({
+        name: data.fullName,
+        phone: data.phone,
+        email: data.email,
+        message: data.message,
+        property_type: data.propertyType,
+        bathrooms: data.bathrooms || null,
+        source: data.isConsultation ? "consultation" : "contact",
+        status: "new",
+      });
+    }
+  } catch (err) {
+    // Non-fatal: log but don't fail the response
+    console.warn("[contact/api] Failed to persist lead to Supabase (non-fatal):", err);
   }
 
   return NextResponse.json({ success: true }, { status: 200 });
