@@ -222,10 +222,25 @@ CREATE POLICY "Authenticated users can manage hero_content" ON hero_content FOR 
 -- Allow inserting leads from anonymous (contact form)
 CREATE POLICY "Anyone can insert leads" ON leads FOR INSERT WITH CHECK (true);
 
--- ─── Storage Buckets (run separately in Supabase Dashboard → Storage) ─────────
--- Create these buckets manually in Storage:
---   products   (public)
---   gallery    (public)
---   brands     (public)
---   media      (public)
---   settings   (public)
+-- ─── Storage Buckets Setup ────────────────────────────────────────────────────
+-- Create these public buckets manually in Supabase Dashboard → Storage:
+--
+-- 1. products (public)
+--    - Allowed MIME types: image/* (Only images, no videos)
+--    - Max file size: 10MB (10,485,760 bytes)
+--
+-- 2. gallery (public)
+--    - Allowed MIME types: image/* (Only images, no videos)
+--    - Max file size: 10MB (10,485,760 bytes)
+--
+-- 3. brands (public)
+--    - Allowed MIME types: image/* (Only images, no videos)
+--    - Max file size: 2MB (2,097,152 bytes)
+--
+-- 4. media (public)
+--    - Allowed MIME types: image/*, video/* (Allows both images and videos)
+--    - Max file size: 50MB (52,428,800 bytes)
+--
+-- 5. settings (public)
+--    - Allowed MIME types: image/* (Only images, no videos)
+--    - Max file size: 5MB (5,242,880 bytes)

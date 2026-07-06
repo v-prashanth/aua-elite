@@ -9,6 +9,11 @@ import type { Database } from '@/lib/supabase/database.types'
 type ProductInsert = Database['public']['Tables']['products']['Insert']
 type ProductUpdate = Database['public']['Tables']['products']['Update']
 
+/**
+ * Validates that the request is authenticated.
+ * Throws an error if no active session is found.
+ * Safe for server action verification.
+ */
 async function requireAuth() {
   const supabase = await createClient()
   const { data: { user } } = await supabase.auth.getUser()
@@ -18,6 +23,12 @@ async function requireAuth() {
 
 // ─── Create product ───────────────────────────────────────────────────────────
 
+/**
+ * Inserts a new product record into the database.
+ * Bypasses public RLS write constraints using the Admin service-role client.
+ *
+ * @param data - The fields required to create a new product.
+ */
 export async function createProduct(data: ProductInsert) {
   await requireAuth()
   const admin = createAdminClient()
@@ -30,13 +41,22 @@ export async function createProduct(data: ProductInsert) {
 
   if (error) return { error: error.message }
 
+  // Clear statically cached pages for lists to reflect the new product immediately
   revalidatePath('/admin/products')
   revalidatePath('/products')
+  
+  // Navigate back to the admin product edit/details view
   redirect(`/admin/products/${product.id}`)
 }
 
 // ─── Update product ───────────────────────────────────────────────────────────
 
+/**
+ * Updates an existing product record in the database.
+ * 
+ * @param id - The UUID of the product to update.
+ * @param data - The changed product fields.
+ */
 export async function updateProduct(id: string, data: ProductUpdate) {
   await requireAuth()
   const admin = createAdminClient()
@@ -48,9 +68,12 @@ export async function updateProduct(id: string, data: ProductUpdate) {
 
   if (error) return { error: error.message }
 
+  // Revalidate specific page caches affected by the update
   revalidatePath('/admin/products')
   revalidatePath(`/admin/products/${id}`)
   revalidatePath('/products')
+  
+  // If the product slug changed, revalidate the old/new detail route cache
   if (data.slug) {
     revalidatePath(`/products/${data.slug}`)
   }
@@ -59,6 +82,11 @@ export async function updateProduct(id: string, data: ProductUpdate) {
 
 // ─── Delete product ───────────────────────────────────────────────────────────
 
+/**
+ * Deletes a product record from the database.
+ * 
+ * @param id - The UUID of the product to delete.
+ */
 export async function deleteProduct(id: string) {
   await requireAuth()
   const admin = createAdminClient()
@@ -67,6 +95,7 @@ export async function deleteProduct(id: string) {
 
   if (error) return { error: error.message }
 
+  // Invalidate list caches so the deleted product is removed from display
   revalidatePath('/admin/products')
   revalidatePath('/products')
   return { success: true }
@@ -74,6 +103,12 @@ export async function deleteProduct(id: string) {
 
 // ─── Toggle featured ──────────────────────────────────────────────────────────
 
+/**
+ * Toggles whether a product is featured on the homepage solutions section.
+ * 
+ * @param id - The UUID of the product.
+ * @param featured - The boolean featured state to set.
+ */
 export async function toggleProductFeatured(id: string, featured: boolean) {
   await requireAuth()
   const admin = createAdminClient()
@@ -85,6 +120,7 @@ export async function toggleProductFeatured(id: string, featured: boolean) {
 
   if (error) return { error: error.message }
 
+  // Revalidate lists (the homepage depends on the products list for showcase)
   revalidatePath('/admin/products')
   revalidatePath('/products')
   return { success: true }
@@ -92,6 +128,12 @@ export async function toggleProductFeatured(id: string, featured: boolean) {
 
 // ─── Toggle status ────────────────────────────────────────────────────────────
 
+/**
+ * Changes a product's market availability status.
+ * 
+ * @param id - The UUID of the product.
+ * @param status - The availability tier ('available' or 'coming-soon').
+ */
 export async function updateProductStatus(
   id: string,
   status: 'available' | 'coming-soon'

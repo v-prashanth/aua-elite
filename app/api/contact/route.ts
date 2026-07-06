@@ -249,13 +249,23 @@ function buildAutoReplyHtml(name: string, isConsultation: boolean): string {
 }
 
 // ── Main handler ───────────────────────────────────────────────────────────
+/**
+ * Handles contact form and consultation request submissions.
+ * Performs rate limiting, validates payload, triggers Gmail notifications,
+ * sends customer auto-replies, and logs the leads inside Supabase.
+ * 
+ * @param request - Incoming NextRequest object.
+ * @returns JSON response with status codes reflecting processing outcome.
+ */
 export async function POST(request: NextRequest) {
   // ── 1. Rate limiting ────────────────────────────────────────────────────
+  // Extract client IP address from proxy forwarding headers
   const ip =
     request.headers.get("x-forwarded-for")?.split(",")[0]?.trim() ??
     request.headers.get("x-real-ip") ??
     "unknown";
 
+  // Check sliding window threshold to prevent abuse/spam
   const { allowed, retryAfterSecs } = checkRateLimit(ip);
   if (!allowed) {
     return NextResponse.json(
@@ -275,6 +285,7 @@ export async function POST(request: NextRequest) {
     return NextResponse.json({ error: "Invalid request body." }, { status: 400 });
   }
 
+  // Verify fields align with the exact Zod schema criteria (e.g. valid Indian mobile format)
   const parsed = ContactSchema.safeParse(raw);
   if (!parsed.success) {
     const fieldErrors = parsed.error.flatten().fieldErrors;
@@ -298,6 +309,7 @@ export async function POST(request: NextRequest) {
   }
 
   // ── 4. Create transporter ───────────────────────────────────────────────
+  // Setup Nodemailer configuration using Gmail's specialized App Passwords
   const transporter = nodemailer.createTransport({
     service: "gmail",
     auth: {
@@ -336,7 +348,7 @@ export async function POST(request: NextRequest) {
       html: buildAutoReplyHtml(data.fullName, data.isConsultation ?? false),
     });
   } catch (err) {
-    // Non-fatal: log but don't fail the response
+    // Non-fatal: log but don't fail the response since the staff notification succeeded
     console.warn("[contact/api] Auto-reply failed (non-fatal):", err);
   }
 
@@ -358,14 +370,16 @@ export async function POST(request: NextRequest) {
       });
     }
   } catch (err) {
-    // Non-fatal: log but don't fail the response
+    // Non-fatal: database connectivity drops shouldn't stop the client from seeing confirmation
     console.warn("[contact/api] Failed to persist lead to Supabase (non-fatal):", err);
   }
 
   return NextResponse.json({ success: true }, { status: 200 });
 }
 
-// Block all other HTTP methods
+/**
+ * Rejects GET requests since this endpoint only processes form submissions.
+ */
 export async function GET() {
   return NextResponse.json({ error: "Method not allowed." }, { status: 405 });
 }
