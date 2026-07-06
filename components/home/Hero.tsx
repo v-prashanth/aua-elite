@@ -321,24 +321,24 @@ export const Hero: React.FC<HeroProps> = ({ content }) => {
           </div>
 
           {/* Hero Feature Strip */}
-          <div className="pt-8 border-t border-navy-primary/10 w-full flex flex-wrap justify-between items-center gap-y-4 gap-x-6 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.18em] text-navy-primary/75">
+          <div className="pt-8 border-t border-navy-primary/10 w-full flex flex-wrap items-center gap-y-3 gap-x-5 sm:gap-x-6 text-[9px] sm:text-[10px] font-bold uppercase tracking-[0.18em] text-navy-primary/75">
             <span className="flex items-center gap-2">
-              <Check size={11} strokeWidth={2.5} className="text-gold-primary" /> Tankless Water Heating
+              <Check size={11} strokeWidth={2.5} className="text-gold-primary shrink-0" /> Tankless Water Heating
             </span>
             <span className="flex items-center gap-2">
-              <Check size={11} strokeWidth={2.5} className="text-gold-primary" /> Water Softening
+              <Check size={11} strokeWidth={2.5} className="text-gold-primary shrink-0" /> Water Purification
             </span>
             <span className="flex items-center gap-2">
-              <Check size={11} strokeWidth={2.5} className="text-gold-primary" /> Water Purification
+              <Check size={11} strokeWidth={2.5} className="text-gold-primary shrink-0" /> Free Site Inspection
             </span>
-            <span className="flex items-center gap-2">
-              <Check size={11} strokeWidth={2.5} className="text-gold-primary" /> Free Site Inspection
+            <span className="hidden sm:flex items-center gap-2">
+              <Check size={11} strokeWidth={2.5} className="text-gold-primary shrink-0" /> Water Softening
             </span>
-            <span className="flex items-center gap-2">
-              <Check size={11} strokeWidth={2.5} className="text-gold-primary" /> Best Price Assurance
+            <span className="hidden sm:flex items-center gap-2">
+              <Check size={11} strokeWidth={2.5} className="text-gold-primary shrink-0" /> Best Price Assurance
             </span>
-            <span className="flex items-center gap-2">
-              <Check size={11} strokeWidth={2.5} className="text-gold-primary" /> Professional Installation
+            <span className="hidden sm:flex items-center gap-2">
+              <Check size={11} strokeWidth={2.5} className="text-gold-primary shrink-0" /> Professional Installation
             </span>
           </div>
 

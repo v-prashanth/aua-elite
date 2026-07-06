@@ -3,94 +3,149 @@
 import * as React from "react";
 import Image from "next/image";
 import { Container } from "@/components/ui/Container";
-import { Reveal } from "@/components/ui/Reveal";
+
+const FEATURES = [
+  {
+    num: "01",
+    title: "Continuous Hot Water",
+    body: "Water is heated instantaneously on demand — a constant, temperature-stable flow for multiple consecutive showers, with zero standby waiting.",
+    badge: "Unlimited Flow · 42°C Dynamic Stability",
+  },
+  {
+    num: "02",
+    title: "Space-Saving Footprint",
+    body: "Concealed behind walls or under-sink cabinets, these units maintain a minimal footprint that keeps your interior architecture clean.",
+    badge: "Zero Floor Space · Fully Concealed",
+  },
+  {
+    num: "03",
+    title: "Energy & Thermal Efficiency",
+    body: "Energy is consumed only while the tap runs, eliminating standby heat loss entirely and maximizing long-term efficiency.",
+    badge: "99% Thermal Yield · ERP Class A",
+  },
+  {
+    num: "04",
+    title: "Professional Sizing & Engineering",
+    body: "Our team performs full site evaluations — pressure, load, and flow — to guarantee seamless performance tailored to your property.",
+    badge: "Certified Engineering · Site Analysis",
+  },
+];
 
 export const TanklessEditorial: React.FC = () => {
+  const [activeIdx, setActiveIdx] = React.useState(0);
+
   return (
-    <section className="py-20 md:py-28 bg-offwhite dark:bg-[#03050c] border-t border-navy-primary/5 dark:border-white/5 select-none">
-      <Container className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 items-center">
+    <section className="py-16 md:py-24 lg:py-32 bg-offwhite dark:bg-[#03050c] border-t border-navy-primary/5 dark:border-white/5 overflow-hidden select-none">
+      <Container className="relative z-10">
         
-        {/* Left Side: Editorial Image */}
-        <div className="lg:col-span-6 relative w-full h-[320px] sm:h-[420px] md:h-[500px] rounded-2xl overflow-hidden border border-gold-primary/20 shadow-raised group">
-          <Image
-            src="/images/tankless_editorial.png"
-            alt="Concealed wall-mounted premium tankless water heating installation in a modern minimalist bathroom"
-            fill
-            className="object-cover object-center transition-transform duration-[1200ms] ease-out group-hover:scale-[1.03]"
-            sizes="(max-width: 1024px) 100vw, 50vw"
-          />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0b2341]/25 via-transparent to-transparent pointer-events-none" />
+        {/* ── HEADER SECTION ── */}
+        <div className="max-w-4xl mb-12 sm:mb-16 space-y-4 text-left">
+          <span className="text-[9px] font-bold uppercase tracking-[0.35em] text-gold-primary block">
+            Premium Specialization
+          </span>
+          <h2 className="font-display font-medium leading-[1.15] tracking-tight text-navy-primary dark:text-white text-[2rem] sm:text-[2.5rem] lg:text-[2.75rem] xl:text-[3.25rem]">
+            Modern Water Heating Without Compromise
+          </h2>
+          <p className="text-[14px] sm:text-[15.5px] text-navy-primary/65 dark:text-white/55 font-sans leading-[1.8] max-w-[800px] pt-2">
+            Standard storage geysers dictate the terms of your shower and monopolize space. Modern architectural homes transition to tankless solutions to align convenience with aesthetic restraint.
+          </p>
         </div>
 
-        {/* Right Side: Editorial Copy */}
-        <div className="lg:col-span-6 space-y-8 flex flex-col text-left lg:pl-4">
-          <Reveal>
-            <span className="text-[9px] font-bold uppercase tracking-[0.3em] text-gold-primary block">
-              Premium Specialization
-            </span>
-          </Reveal>
-
-          <Reveal delay={0.1}>
-            <h2 className="font-display text-2xl sm:text-3xl lg:text-[2.2rem] font-medium text-navy-primary dark:text-white leading-tight tracking-tight">
-              Modern Water Heating <br />
-              Without Compromise
-            </h2>
-          </Reveal>
-
-          <Reveal delay={0.15}>
-            <p className="text-xs sm:text-sm text-navy-primary/75 dark:text-white/60 font-sans leading-relaxed">
-              Standard storage geysers dictate the terms of your shower and monopolize valuable space. Modern architectural homes are transitioning to tankless solutions to align convenience with aesthetic restraint.
-            </p>
-          </Reveal>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-6 pt-2 font-sans">
-            <Reveal delay={0.2}>
-              <div className="space-y-2">
-                <h4 className="text-[10px] font-bold uppercase tracking-wider text-navy-primary dark:text-white">
-                  Continuous Hot Water
-                </h4>
-                <p className="text-[11px] text-navy-primary/65 dark:text-white/55 leading-relaxed">
-                  Water is heated instantaneously on demand. You enjoy a constant, temperature-stable flow for multiple consecutive showers, with zero standby waiting.
-                </p>
+        {/* ── CONTENT SECTION ── */}
+        <div className="flex flex-col lg:flex-row gap-12 lg:gap-16 items-start w-full">
+          
+          {/* Left Column: Image Canvas (42% width) */}
+          <div className="w-full lg:w-[42%] shrink-0 lg:min-w-0">
+            {/* Outer Border/Card Wrapper */}
+            <div className="relative w-full aspect-[4/3] rounded-2xl overflow-hidden border border-gold-primary/20 shadow-[0_16px_50px_-16px_rgba(11,35,65,0.22)] bg-purewhite dark:bg-[#121316] p-1.5 group">
+              {/* Inner Image Frame */}
+              <div className="relative w-full h-full rounded-xl overflow-hidden">
+                <Image
+                  src="/images/tankless_editorial.png"
+                  alt="Premium concealed tankless water heater in a modern bathroom"
+                  fill
+                  priority
+                  className="object-cover object-center transition-transform duration-[1600ms] ease-out group-hover:scale-[1.03]"
+                  sizes="(max-width: 1024px) 100vw, 42vw"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-navy-brand/60 via-navy-brand/20 to-transparent pointer-events-none" />
               </div>
-            </Reveal>
 
-            <Reveal delay={0.25}>
-              <div className="space-y-2">
-                <h4 className="text-[10px] font-bold uppercase tracking-wider text-navy-primary dark:text-white">
-                  Space-Saving Footprint
-                </h4>
-                <p className="text-[11px] text-navy-primary/65 dark:text-white/55 leading-relaxed">
-                  Concealed behind walls or neatly tucked inside under-sink vanity cabinets, these units maintain a minimal footprint that keeps your interior architecture clean.
-                </p>
-              </div>
-            </Reveal>
+              {/* Decorative Corner Accents */}
+              <div className="absolute -top-px -left-px w-8 h-px bg-gold-primary/50 z-20" />
+              <div className="absolute -top-px -left-px w-px h-8 bg-gold-primary/50 z-20" />
+              <div className="absolute -bottom-px -right-px w-8 h-px bg-gold-primary/50 z-20" />
+              <div className="absolute -bottom-px -right-px w-px h-8 bg-gold-primary/50 z-20" />
+            </div>
 
-            <Reveal delay={0.3}>
-              <div className="space-y-2">
-                <h4 className="text-[10px] font-bold uppercase tracking-wider text-navy-primary dark:text-white">
-                  Energy & Thermal Efficiency
-                </h4>
-                <p className="text-[11px] text-navy-primary/65 dark:text-white/55 leading-relaxed">
-                  By eliminating storage tanks, you completely eliminate standby heat loss. Energy is consumed only while the tap is actively running, maximizing long-term efficiency.
-                </p>
+            {/* Editorial Caption below the image */}
+            <div className="mt-4 flex flex-col sm:flex-row sm:items-center sm:justify-between text-left px-1 gap-2 sm:gap-0">
+              <div className="space-y-1 min-w-0">
+                <span className="text-[8px] uppercase font-bold tracking-[0.25em] text-gold-primary block">
+                  System Specification
+                </span>
+                <span className="text-[12px] sm:text-[12.5px] font-sans font-medium text-navy-primary/75 dark:text-white/60 leading-tight block truncate">
+                  {FEATURES[activeIdx].badge}
+                </span>
               </div>
-            </Reveal>
-
-            <Reveal delay={0.35}>
-              <div className="space-y-2">
-                <h4 className="text-[10px] font-bold uppercase tracking-wider text-navy-primary dark:text-white">
-                  Professional Sizing & Engineering
-                </h4>
-                <p className="text-[11px] text-navy-primary/65 dark:text-white/55 leading-relaxed">
-                  Tankless systems require precise calculations for incoming water pressure and electrical load. Our team performs full site evaluations to guarantee seamless performance.
-                </p>
-              </div>
-            </Reveal>
+              <div className="h-px bg-gold-primary/20 flex-grow mx-4 hidden sm:block shrink" />
+              <span className="text-[9px] font-sans font-bold text-navy-primary/45 dark:text-white/30 hidden sm:block whitespace-nowrap shrink-0">
+                Premium Concealed Installation
+              </span>
+            </div>
           </div>
-        </div>
 
+          {/* Right Column: Interactive Accordion Stack */}
+          <div className="flex-grow w-full lg:w-auto lg:min-w-0 flex flex-col gap-2 text-left">
+            <div className="space-y-4">
+              {FEATURES.map(({ num, title, body }, idx) => {
+                const isActive = activeIdx === idx;
+                
+                return (
+                  <div
+                    key={title}
+                    onMouseEnter={() => setActiveIdx(idx)}
+                    onClick={() => setActiveIdx(idx)}
+                    className="group/item relative cursor-pointer border-b border-navy-primary/5 dark:border-white/5 pb-4 transition-all duration-300"
+                    style={{ opacity: isActive ? 1 : 0.45 }}
+                  >
+                    {/* Vertical gold progress indicator (pure CSS transition) */}
+                    <div
+                      className={`absolute left-0 top-0 bottom-4 w-[2.5px] bg-gold-primary rounded-full transition-all duration-300 transform origin-top ${
+                        isActive ? "opacity-100 scale-y-100" : "opacity-0 scale-y-0"
+                      }`}
+                    />
+
+                    <div className="pl-6 flex items-start gap-4">
+                      {/* Serial number */}
+                      <span className={`font-display text-xs font-bold transition-colors duration-300 ${isActive ? "text-gold-primary" : "text-silver/50"}`}>
+                        {num}
+                      </span>
+                      
+                      {/* Text content block */}
+                      <div className="space-y-2">
+                        <h4 className="text-[10px] sm:text-[10.5px] font-bold uppercase tracking-[0.2em] text-navy-primary dark:text-white transition-colors duration-300 group-hover/item:text-gold-primary">
+                          {title}
+                        </h4>
+                        
+                        {/* Dynamic height expansion */}
+                        <div className={`transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] overflow-hidden ${isActive ? "max-h-[200px] opacity-100 mt-2" : "max-h-0 opacity-0"}`}>
+                          <p className="text-[12.5px] text-navy-primary/65 dark:text-white/55 font-sans leading-relaxed max-w-[620px]">
+                            {body}
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
+
+        </div>
       </Container>
     </section>
   );
 };
+
+export default TanklessEditorial;

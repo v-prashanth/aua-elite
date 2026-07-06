@@ -56,8 +56,8 @@ export const Navbar: React.FC = () => {
 
   return (
     <>
-      {/* ── Wrapper — sticky, full-width, transparent background ─────── */}
-      <div className="sticky top-0 z-50 w-full flex justify-center pointer-events-none">
+      {/* ── Wrapper — fixed, full-width, transparent background ─────── */}
+      <div className="fixed top-0 z-50 w-full flex justify-center pointer-events-none">
         <motion.header
           layout
           role="banner"
@@ -66,6 +66,7 @@ export const Navbar: React.FC = () => {
           variants={{
             top: {
               width: "100%",
+              maxWidth: "100%",
               marginTop: 0,
               borderRadius: 0,
               paddingLeft: 0,
@@ -74,6 +75,7 @@ export const Navbar: React.FC = () => {
             },
             scrolled: {
               width: "calc(100% - 48px)",
+              maxWidth: "1280px",
               marginTop: 16,
               borderRadius: 9999,
               paddingLeft: 8,
@@ -84,16 +86,16 @@ export const Navbar: React.FC = () => {
           transition={{ type: "spring", stiffness: 260, damping: 28 }}
           className={cn(
             "pointer-events-auto overflow-hidden",
-            "transition-colors duration-300",
+            "transition-[background-color,border-color,backdrop-filter] duration-500",
             scrolled
-              ? "bg-white/90 dark:bg-[#0E0F13]/90 backdrop-blur-2xl border border-navy-primary/8 dark:border-white/8"
-              : "bg-white/80 dark:bg-[#0E0F13]/80 backdrop-blur-md border-b border-navy-primary/6 dark:border-white/6"
+              ? "bg-white/92 dark:bg-[#0E0F13]/92 backdrop-blur-2xl border border-navy-primary/10 dark:border-white/10"
+              : "bg-white/0 dark:bg-[#0E0F13]/0 backdrop-blur-0 border-b border-transparent"
           )}
         >
           <div
             className={cn(
               "flex items-center justify-between transition-all duration-300",
-              "px-6 lg:px-10",
+              "px-3 sm:px-4 lg:px-6 xl:px-8",
               scrolled ? "h-[60px] lg:h-[68px]" : "h-[72px] lg:h-[84px]"
             )}
           >
@@ -101,7 +103,7 @@ export const Navbar: React.FC = () => {
             <Link
               href="/"
               aria-label="Aqua Elite Solutions — Home"
-              className="flex-shrink-0 group outline-none flex items-center gap-3"
+              className="flex-shrink-0 group outline-none flex items-center gap-2 lg:gap-3"
             >
               <div className="relative w-8 h-8 sm:w-9 sm:h-9 rounded-lg overflow-hidden border border-navy-primary/10 dark:border-white/10 shrink-0 bg-white shadow-[0_2px_8px_rgba(0,0,0,0.04)]">
                 <Image
@@ -122,7 +124,7 @@ export const Navbar: React.FC = () => {
             </Link>
 
             {/* Desktop Nav */}
-            <nav className="hidden lg:flex items-center gap-10 xl:gap-14" aria-label="Primary navigation">
+            <nav className="hidden lg:flex items-center gap-4 xl:gap-6" aria-label="Primary navigation">
               {NAV_LINKS.map(({ label, href }) => {
                 const isActive = href === "/" ? pathname === "/" : pathname === href || pathname.startsWith(href + "/");
                 return (
@@ -154,29 +156,29 @@ export const Navbar: React.FC = () => {
             </nav>
 
             {/* Right side — toggle + CTA + hamburger */}
-            <div className="flex items-center gap-3 sm:gap-4">
+            <div className="flex items-center gap-2 lg:gap-3">
               {/* Dark/Light toggle */}
               <ThemeToggle />
 
-              {/* Book CTA — desktop */}
-              <Link href="/consultation" className="hidden sm:block">
+              {/* Book CTA — desktop only (matches nav breakpoint) */}
+              <Link href="/contact#contact-form" className="hidden lg:block">
                 <motion.button
                   whileHover={{ y: -1, scale: 1.02 }}
                   whileTap={{ scale: 0.96 }}
                   animate={{ scale: scrolled ? 0.92 : 1 }}
                   transition={{ type: "spring", stiffness: 260, damping: 28 }}
-                  className="rounded-full text-[10px] font-sans font-bold uppercase tracking-[0.16em] bg-gold-primary text-navy-brand hover:bg-navy-primary hover:text-white dark:hover:bg-white dark:hover:text-navy-primary transition-colors duration-300 outline-none focus-visible:ring-2 focus-visible:ring-gold-primary whitespace-nowrap px-6 py-2.5"
+                  className="rounded-full text-[10px] font-sans font-bold uppercase tracking-[0.16em] bg-gold-primary text-navy-brand hover:bg-navy-primary hover:text-white dark:hover:bg-white dark:hover:text-navy-primary transition-colors duration-300 outline-none focus-visible:ring-2 focus-visible:ring-gold-primary whitespace-nowrap px-5 xl:px-6 py-2.5"
                 >
                   Book Consultation
                 </motion.button>
               </Link>
 
-              {/* Hamburger — mobile only */}
+              {/* Hamburger — below lg only */}
               <button
                 onClick={() => setMobileOpen(true)}
                 aria-label="Open navigation menu"
                 aria-expanded={mobileOpen}
-                className="flex lg:hidden items-center justify-center w-11 h-11 rounded-full text-navy-primary/60 dark:text-white/60 hover:text-navy-primary dark:hover:text-white hover:bg-navy-primary/5 dark:hover:bg-white/5 transition-all duration-200 -mr-2"
+                className="flex lg:hidden items-center justify-center w-10 h-10 rounded-full text-navy-primary/60 dark:text-white/60 hover:text-navy-primary dark:hover:text-white hover:bg-navy-primary/5 dark:hover:bg-white/5 transition-all duration-200"
               >
                 <Menu size={20} strokeWidth={1.75} />
               </button>
@@ -271,7 +273,7 @@ export const Navbar: React.FC = () => {
                   <ThemeToggle />
                 </div>
                 <button
-                  onClick={() => { setMobileOpen(false); router.push("/consultation"); }}
+                  onClick={() => { setMobileOpen(false); router.push("/contact#contact-form"); }}
                   className="w-full py-4 rounded-full bg-gold-primary text-navy-primary text-[10px] font-sans font-bold uppercase tracking-[0.18em] hover:bg-navy-primary hover:text-white transition-colors duration-300"
                 >
                   Book Consultation

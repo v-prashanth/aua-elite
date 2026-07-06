@@ -77,6 +77,14 @@ body {
   }
 }
 
+/* ── Global Interactive Transitions ──────────────────────────────────────── */
+a,
+button {
+  transition-property: color, background-color, border-color, opacity;
+  transition-duration: 200ms;
+  transition-timing-function: ease;
+}
+
 /* ── Reduced Motion ───────────────────────────────────────────────────────── */
 @media (prefers-reduced-motion: reduce) {
   *,
@@ -96,10 +104,7 @@ body {
   border-radius: 4px;
 }
 
-/* ── Smooth Scroll ────────────────────────────────────────────────────────── */
-html {
-  scroll-behavior: smooth;
-}
+/* scroll-behavior is already set on the first html{} block above */
 
 @layer components {
   /* 

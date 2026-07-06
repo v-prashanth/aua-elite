@@ -104,7 +104,7 @@ export default function ContactPage() {
       {/* ──────────────────────────────────────────────────────────
           MAIN — info left, form right
       ────────────────────────────────────────────────────────── */}
-      <section className="py-20 md:py-28">
+      <section id="contact-form" className="py-20 md:py-28 scroll-mt-24">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
           <div className="grid grid-cols-1 lg:grid-cols-[5fr_7fr] gap-16 lg:gap-24 items-start">
 

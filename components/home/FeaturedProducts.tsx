@@ -29,7 +29,7 @@ export const FeaturedProducts: React.FC = () => {
   };
 
   return (
-    <section id="featured-products" className="py-14 md:py-20 lg:py-28 bg-purewhite relative overflow-hidden" aria-label="Featured Products">
+    <section id="featured-products" className="py-16 md:py-24 lg:py-32 bg-purewhite relative overflow-hidden" aria-label="Featured Products">
       {/* Subtle blueprint grid pattern */}
       <div
         aria-hidden
@@ -40,7 +40,7 @@ export const FeaturedProducts: React.FC = () => {
           backgroundSize: "80px 80px",
         }}
       />
-      <Container className="relative z-10 max-w-5xl">
+      <Container className="relative z-10">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16 items-center">
           
           {/* Left Column: Interactive Product List (Col Span 5) */}
@@ -106,7 +106,7 @@ export const FeaturedProducts: React.FC = () => {
                           </p>
                           
                           {/* Image container inside the card — mobile/tablet only (no overlapping text) */}
-                          <div className="lg:hidden relative w-full h-[200px] sm:h-[280px] rounded-xl overflow-hidden bg-offwhite border border-gold-primary/10">
+                          <div className="lg:hidden relative w-full h-[160px] xs:h-[200px] sm:h-[240px] rounded-xl overflow-hidden bg-offwhite border border-gold-primary/10">
                             <Image
                               src={`${imageMap[product.id] || "/images/products/dhb-e-18-24.jpg"}?v=2`}
                               alt={product.title}

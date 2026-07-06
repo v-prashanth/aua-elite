@@ -35,7 +35,7 @@ export default async function MarketingLayout({
   return (
     <SettingsProvider initialSettings={contactMap}>
       <Navbar />
-      <main className="flex-grow">
+      <main className="flex-grow pt-[72px] lg:pt-[84px]">
         {children}
       </main>
       <Footer />
