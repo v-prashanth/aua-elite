@@ -254,7 +254,7 @@ function RequirementsPicker({
         Suitable For (Product Finder Tags)
       </span>
       <span className="text-[10px] text-navy-primary/30 font-sans block mb-3">
-        These tags control which customer scenarios match this product in the "Find Your Solution" section.
+        These tags control which customer scenarios match this product in the &quot;Find Your Solution&quot; section.
       </span>
       <div className="flex flex-wrap gap-2">
         {REQUIREMENT_TAGS.map(tag => {
