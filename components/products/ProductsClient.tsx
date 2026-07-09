@@ -180,8 +180,91 @@ export function ProductsClient({ products, brands }: ProductsClientProps) {
         />
       </section>
 
+      {/* COLLECTIONS — System Architecture */}
+      <section id="collections" className="py-20 md:py-28 bg-purewhite border-t border-navy-primary/5">
+        <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
+          <div className="mb-16">
+            <Reveal>
+              <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
+                System Architecture
+              </p>
+            </Reveal>
+            <Reveal delay={0.1}>
+              <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight">
+                Three categories of solution
+              </h2>
+            </Reveal>
+          </div>
+
+          <div className="space-y-24 md:space-y-32">
+            {collections.map((col, idx) => (
+              <Reveal key={col.id} delay={idx * 0.1}>
+                <div
+                  className={cn(
+                    "grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center",
+                    idx % 2 === 1 ? "lg:[direction:rtl]" : ""
+                  )}
+                >
+                  <div className={cn(
+                    "relative rounded-2xl overflow-hidden bg-offwhite border border-navy-primary/5 aspect-[4/3] group",
+                    idx % 2 === 1 ? "lg:[direction:ltr]" : ""
+                  )}>
+                    <Image
+                      src={col.image}
+                      alt={col.title}
+                      fill
+                      className="object-cover object-center transition-transform duration-700 hover:scale-105"
+                      sizes="(max-width: 1024px) 100vw, 50vw"
+                    />
+                    <div className="absolute top-5 left-5">
+                      <span className="font-display text-[10px] font-bold text-navy-primary/30 uppercase tracking-[0.2em]">
+                        {col.label}
+                      </span>
+                    </div>
+                  </div>
+
+                  <div className={cn(idx % 2 === 1 ? "lg:[direction:ltr]" : "")}>
+                    <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-4">
+                      {col.label} / {col.title}
+                    </p>
+                    <h3 className="font-display text-[1.8rem] sm:text-[2.2rem] font-medium text-navy-primary leading-tight tracking-tight mb-5">
+                      {col.title}
+                    </h3>
+                    <p className="text-[13px] sm:text-[14px] text-silver leading-relaxed mb-8 max-w-md font-sans">
+                      {col.body}
+                    </p>
+
+                    <div className="flex flex-wrap gap-2 mb-8">
+                      {col.models.map((m) => (
+                        <Link
+                          key={m.id}
+                          href={`/products/${m.slug}`}
+                          className="px-3 py-1.5 rounded-full border border-navy-primary/12 text-[10px] font-sans font-semibold text-navy-primary/65 hover:border-gold-primary/40 hover:text-navy-primary hover:bg-gold-primary/5 transition-all duration-200"
+                        >
+                          {m.title}
+                        </Link>
+                      ))}
+                    </div>
+
+                    <Link href={col.href}>
+                      <motion.button
+                        whileHover={{ x: 3 }}
+                        className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-navy-primary hover:text-gold-primary transition-colors duration-200 group"
+                      >
+                        View Details
+                        <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform duration-200" />
+                      </motion.button>
+                    </Link>
+                  </div>
+                </div>
+              </Reveal>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* FIND YOUR SOLUTION */}
-      <section id="solutions" className="pt-20 pb-16 md:pb-24">
+      <section id="solutions" className="pt-20 pb-16 md:pb-24 bg-offwhite border-t border-navy-primary/5">
         <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
           <div className="mb-12">
             <Reveal>
@@ -333,89 +416,6 @@ export function ProductsClient({ products, brands }: ProductsClientProps) {
                 </React.Fragment>
               );
             })}
-          </div>
-        </div>
-      </section>
-
-      {/* COLLECTIONS */}
-      <section id="collections" className="py-20 md:py-28 bg-purewhite border-t border-navy-primary/5">
-        <div className="max-w-[1320px] mx-auto px-6 lg:px-12">
-          <div className="mb-16">
-            <Reveal>
-              <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-3">
-                System Architecture
-              </p>
-            </Reveal>
-            <Reveal delay={0.1}>
-              <h2 className="font-display text-[1.6rem] sm:text-[2rem] font-medium text-navy-primary leading-tight tracking-tight">
-                Three categories of solution
-              </h2>
-            </Reveal>
-          </div>
-
-          <div className="space-y-24 md:space-y-32">
-            {collections.map((col, idx) => (
-              <Reveal key={col.id} delay={idx * 0.1}>
-                <div
-                  className={cn(
-                    "grid grid-cols-1 lg:grid-cols-2 gap-10 lg:gap-20 items-center",
-                    idx % 2 === 1 ? "lg:[direction:rtl]" : ""
-                  )}
-                >
-                  <div className={cn(
-                    "relative rounded-2xl overflow-hidden bg-offwhite border border-navy-primary/5 aspect-[4/3] group",
-                    idx % 2 === 1 ? "lg:[direction:ltr]" : ""
-                  )}>
-                    <Image
-                      src={col.image}
-                      alt={col.title}
-                      fill
-                      className="object-cover object-center transition-transform duration-700 hover:scale-105"
-                      sizes="(max-width: 1024px) 100vw, 50vw"
-                    />
-                    <div className="absolute top-5 left-5">
-                      <span className="font-display text-[10px] font-bold text-navy-primary/30 uppercase tracking-[0.2em]">
-                        {col.label}
-                      </span>
-                    </div>
-                  </div>
-
-                  <div className={cn(idx % 2 === 1 ? "lg:[direction:ltr]" : "")}>
-                    <p className="text-[9px] uppercase tracking-[0.28em] text-gold-primary font-bold mb-4">
-                      {col.label} / {col.title}
-                    </p>
-                    <h3 className="font-display text-[1.8rem] sm:text-[2.2rem] font-medium text-navy-primary leading-tight tracking-tight mb-5">
-                      {col.title}
-                    </h3>
-                    <p className="text-[13px] sm:text-[14px] text-silver leading-relaxed mb-8 max-w-md font-sans">
-                      {col.body}
-                    </p>
-
-                    <div className="flex flex-wrap gap-2 mb-8">
-                      {col.models.map((m) => (
-                        <Link
-                          key={m.id}
-                          href={`/products/${m.slug}`}
-                          className="px-3 py-1.5 rounded-full border border-navy-primary/12 text-[10px] font-sans font-semibold text-navy-primary/65 hover:border-gold-primary/40 hover:text-navy-primary hover:bg-gold-primary/5 transition-all duration-200"
-                        >
-                          {m.title}
-                        </Link>
-                      ))}
-                    </div>
-
-                    <Link href={col.href}>
-                      <motion.button
-                        whileHover={{ x: 3 }}
-                        className="inline-flex items-center gap-2 text-[11px] font-bold uppercase tracking-[0.2em] text-navy-primary hover:text-gold-primary transition-colors duration-200 group"
-                      >
-                        View Details
-                        <ArrowRight size={13} className="group-hover:translate-x-0.5 transition-transform duration-200" />
-                      </motion.button>
-                    </Link>
-                  </div>
-                </div>
-              </Reveal>
-            ))}
           </div>
         </div>
       </section>

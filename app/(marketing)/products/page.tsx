@@ -73,12 +73,14 @@ export default async function ProductsPage() {
       .order("display_order", { ascending: true });
 
     if (!brandError && dbBrands && dbBrands.length > 0) {
+      // DB is the source of truth — all defaults were seeded via seed_brands.js
       displayBrands = dbBrands.map(b => ({
         name: b.name,
         origin: b.origin || "",
         note: b.note || "",
       }));
     }
+    // If DB returns empty, displayBrands stays as DEFAULT_BRANDS (safety fallback)
   } catch (err) {
     console.warn("Failed to fetch products or brands from Supabase. Falling back to local data.", err);
   }

@@ -139,9 +139,9 @@ export function FAQClient({ initialFaqs }: FAQClientProps) {
               FAQ ({faqs.length})
             </h2>
             <p className="text-[13px] text-navy-primary/40 font-sans mt-0.5">
-              Changes reflect on the website immediately.
+              Changes reflect on the website immediately. Use the handle (⠿) to drag and reorder questions.
               {reordering && (
-                <span className="ml-2 text-gold-primary">Saving order…</span>
+                <span className="ml-2 text-gold-primary font-semibold">Saving new order…</span>
               )}
             </p>
           </div>

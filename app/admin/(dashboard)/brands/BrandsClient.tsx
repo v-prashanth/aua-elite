@@ -185,7 +185,7 @@ export function BrandsClient({ initialBrands }: BrandsClientProps) {
       <AdminModal
         open={addOpen || editBrand !== null}
         onClose={() => { setAddOpen(false); setEditBrand(null) }}
-        title={editBrand ? 'Edit Brand' : 'Add Brand'}
+        title={editBrand ? 'Edit Brand Details' : 'Add New Brand'}
         footer={
           <>
             <AdminButton variant="ghost" onClick={() => { setAddOpen(false); setEditBrand(null) }} disabled={saving}>Cancel</AdminButton>
@@ -194,13 +194,13 @@ export function BrandsClient({ initialBrands }: BrandsClientProps) {
         }
       >
         <div className="space-y-4">
-          <AdminInput label="Brand Name" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="Stiebel Eltron" required />
-          <ImageUploader bucket="brands" label="Brand Logo" value={form.logo} onChange={url => setForm(f => ({ ...f, logo: url }))} hint="Upload brand logo. Clear background or transparent logo preferred." />
-          <AdminInput label="Origin" value={form.origin} onChange={e => setForm(f => ({ ...f, origin: e.target.value }))} placeholder="Germany · Est. 1924" />
-          <AdminInput label="Website URL" value={form.website} onChange={e => setForm(f => ({ ...f, website: e.target.value }))} placeholder="https://www.stiebel-eltron.com" />
-          <AdminTextarea label="Short Note" value={form.note} onChange={e => setForm(f => ({ ...f, note: e.target.value }))} placeholder="Global leader in tankless heating and air-source heat pumps." rows={2} />
-          <AdminTextarea label="Description" value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} placeholder="Longer brand description…" rows={3} />
-          <AdminToggle label="Visible on Website" description="Show this brand on the homepage and products page." checked={form.visible} onChange={v => setForm(f => ({ ...f, visible: v }))} />
+          <AdminInput label="Brand Name" value={form.name} onChange={e => setForm(f => ({ ...f, name: e.target.value }))} placeholder="Stiebel Eltron" required hint="The display name of the manufacturer." />
+          <ImageUploader bucket="brands" label="Brand Logo" value={form.logo} onChange={url => setForm(f => ({ ...f, logo: url }))} hint="Upload logo image. Clean transparent background preferred." />
+          <AdminInput label="Origin (Country & Est.)" value={form.origin} onChange={e => setForm(f => ({ ...f, origin: e.target.value }))} placeholder="Germany · Est. 1924" hint="Format: Country · Est. Year" />
+          <AdminInput label="Website URL" value={form.website} onChange={e => setForm(f => ({ ...f, website: e.target.value }))} placeholder="https://www.stiebel-eltron.com" hint="Link to the brand's official global website." />
+          <AdminTextarea label="Brief Summary" value={form.note} onChange={e => setForm(f => ({ ...f, note: e.target.value }))} placeholder="Global leader in tankless heating and air-source heat pumps." rows={2} hint="Short 1-sentence highlight shown on the homepage list." />
+          <AdminTextarea label="Full Description" value={form.description} onChange={e => setForm(f => ({ ...f, description: e.target.value }))} placeholder="Describe the history, specialties, and quality of the brand..." rows={3} hint="Detailed paragraph for search engines and brand profiling." />
+          <AdminToggle label="Visible on Website" description="Turn off to temporarily hide this brand and its details from the website." checked={form.visible} onChange={v => setForm(f => ({ ...f, visible: v }))} />
         </div>
       </AdminModal>
 
@@ -209,7 +209,7 @@ export function BrandsClient({ initialBrands }: BrandsClientProps) {
         onClose={() => setDeleteId(null)}
         onConfirm={handleDelete}
         title="Delete Brand"
-        message="This brand will be permanently deleted. Any products associated will lose their brand reference."
+        message="This brand and its uploaded logo image will be permanently deleted from the database and storage. Any products associated with this brand will lose their brand label. This cannot be undone."
         confirmLabel="Delete Brand"
         danger
         loading={deleting}

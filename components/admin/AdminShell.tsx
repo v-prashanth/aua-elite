@@ -10,17 +10,17 @@ import { Toaster } from 'react-hot-toast'
 function getPageTitle(pathname: string): string {
   const map: Record<string, string> = {
     '/admin/dashboard': 'Dashboard',
-    '/admin/website': 'Website',
-    '/admin/products': 'Products',
-    '/admin/brands': 'Brands',
-    '/admin/customers': 'Happy Customers',
-    '/admin/leads': 'Leads',
-    '/admin/faq': 'FAQ',
+    '/admin/website': 'Page Content',
+    '/admin/products': 'Products & Catalog',
+    '/admin/brands': 'Brands & Partners',
+    '/admin/customers': 'Customer Gallery',
+    '/admin/leads': 'Leads & Inquiries',
+    '/admin/faq': 'FAQs',
     '/admin/media': 'Media Library',
-    '/admin/seo': 'SEO',
-    '/admin/settings': 'Settings',
+    '/admin/seo': 'Google & SEO',
+    '/admin/settings': 'System Settings',
     '/admin/integrations': 'Integrations',
-    '/admin/account': 'Account',
+    '/admin/account': 'Account Profile',
   }
 
   // Handle dynamic routes
@@ -45,12 +45,13 @@ export function AdminShell({ children, userEmail }: AdminShellProps) {
   return (
     <div className="min-h-screen bg-[#F8F9FB] flex">
       {/* Desktop sidebar */}
-      <DesktopSidebar />
+      <DesktopSidebar userEmail={userEmail} />
 
       {/* Mobile sidebar */}
       <MobileSidebar
         mobileOpen={mobileOpen}
         onMobileClose={() => setMobileOpen(false)}
+        userEmail={userEmail}
       />
 
       {/* Main content area */}

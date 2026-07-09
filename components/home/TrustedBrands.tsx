@@ -50,7 +50,7 @@ const defaultBrands = [
 export const TrustedBrands: React.FC<TrustedBrandsProps> = ({ initialBrands }) => {
   const [activeTab, setActiveTab] = React.useState(0);
 
-  // Map database brands (if any) or fallback to defaults
+  // DB is source of truth — defaultBrands is a safety fallback only
   const brands = React.useMemo(() => {
     if (initialBrands && initialBrands.length > 0) {
       return initialBrands.map((b) => ({
@@ -62,8 +62,11 @@ export const TrustedBrands: React.FC<TrustedBrandsProps> = ({ initialBrands }) =
         description: b.description || "Trusted water solutions recommended and integrated.",
       }));
     }
+    // Only shown if DB is completely empty (e.g. no connection)
     return defaultBrands;
   }, [initialBrands]);
+
+
 
   // Keep active tab safe if brands list changes
   React.useEffect(() => {

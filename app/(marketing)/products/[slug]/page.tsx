@@ -36,11 +36,21 @@ export default async function ProductDetailPage({ params }: { params: { slug: st
 
   try {
     const supabase = await createClient();
-    const { data: dbProduct } = await supabase
+
+    // Try by slug first (most common case), then fall back to id
+    const { data: bySlug } = await supabase
       .from("products")
       .select("*")
-      .or(`slug.eq.${params.slug},id.eq.${params.slug}`)
-      .single();
+      .eq("slug", params.slug)
+      .maybeSingle();
+
+    const dbProduct = bySlug ?? (
+      await supabase
+        .from("products")
+        .select("*")
+        .eq("id", params.slug)
+        .maybeSingle()
+    ).data;
 
     if (dbProduct) {
       product = {

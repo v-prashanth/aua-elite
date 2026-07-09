@@ -122,14 +122,14 @@ export function GalleryClient({ initialImages }: GalleryClientProps) {
         <div className="flex items-center justify-between">
           <div>
             <h2 className="text-[20px] font-sans font-semibold text-navy-primary">
-              Happy Customers ({images.length})
+              Installation Gallery ({images.length})
             </h2>
             <p className="text-[13px] text-navy-primary/40 font-sans mt-0.5">
-              Customer installation photos shown in the gallery.
+              Upload photos of your completed installations. These appear in the Happy Customers gallery on the website.
             </p>
           </div>
           <AdminButton onClick={openAdd} icon={<Plus size={14} />}>
-            Add Image
+            Add Photo
           </AdminButton>
         </div>
 
@@ -138,9 +138,9 @@ export function GalleryClient({ initialImages }: GalleryClientProps) {
           <AdminCard>
             <AdminEmptyState
               icon={<Heart size={24} strokeWidth={1.5} />}
-              title="No gallery images yet"
-              description="Upload customer installation photos to showcase your work."
-              action={<AdminButton onClick={openAdd} icon={<Plus size={14} />}>Add Image</AdminButton>}
+              title="No installation photos yet"
+              description="Add photos of your completed installations — they'll appear on the website gallery to build trust with new customers."
+              action={<AdminButton onClick={openAdd} icon={<Plus size={14} />}>Add First Photo</AdminButton>}
             />
           </AdminCard>
         ) : (
@@ -187,7 +187,7 @@ export function GalleryClient({ initialImages }: GalleryClientProps) {
                   <button
                     onClick={() => handleToggle(img)}
                     className="w-8 h-8 rounded-full bg-white/90 flex items-center justify-center text-navy-primary hover:bg-white transition-colors"
-                    title={img.visible ? 'Hide' : 'Show'}
+                    title={img.visible ? 'Hide from website' : 'Show on website'}
                   >
                     {img.visible ? <Eye size={13} /> : <EyeOff size={13} />}
                   </button>
@@ -222,7 +222,7 @@ export function GalleryClient({ initialImages }: GalleryClientProps) {
       <AdminModal
         open={addOpen || editImage !== null}
         onClose={() => { setAddOpen(false); setEditImage(null) }}
-        title={editImage ? 'Edit Image' : 'Add Gallery Image'}
+        title={editImage ? 'Edit Photo Details' : 'Add Installation Photo'}
         footer={
           <>
             <AdminButton variant="ghost" onClick={() => { setAddOpen(false); setEditImage(null) }} disabled={saving}>Cancel</AdminButton>
@@ -236,22 +236,24 @@ export function GalleryClient({ initialImages }: GalleryClientProps) {
             label="Installation Photo"
             value={form.image}
             onChange={url => setForm(f => ({ ...f, image: url }))}
-            hint="Upload photo of installation. JPG, PNG or WEBP up to 5MB."
+            hint="Upload a photo of the installed system. Clear, well-lit photos work best."
           />
           <AdminInput
             label="Caption (optional)"
             value={form.caption}
             onChange={e => setForm(f => ({ ...f, caption: e.target.value }))}
-            placeholder="Stiebel Eltron heat pump installation at Jubilee Hills villa"
+            placeholder="e.g. Stiebel Eltron heat pump installed at Jubilee Hills villa"
+            hint="A short description shown on hover. Helps customers understand what they're looking at."
           />
           <AdminSelect
-            label="Category"
+            label="Property Type"
             value={form.category}
             onChange={e => setForm(f => ({ ...f, category: e.target.value }))}
             options={CATEGORY_OPTIONS}
           />
           <AdminToggle
             label="Visible on Website"
+            description="Turn off to temporarily hide this photo without deleting it."
             checked={form.visible}
             onChange={v => setForm(f => ({ ...f, visible: v }))}
           />
@@ -262,9 +264,9 @@ export function GalleryClient({ initialImages }: GalleryClientProps) {
         open={deleteId !== null}
         onClose={() => setDeleteId(null)}
         onConfirm={handleDelete}
-        title="Delete Image"
-        message="This image will be permanently removed from the gallery. The file in storage will not be deleted."
-        confirmLabel="Delete Image"
+        title="Delete Photo"
+        message="This photo will be permanently removed from the gallery and deleted from storage. This cannot be undone."
+        confirmLabel="Delete Photo"
         danger
         loading={deleting}
       />

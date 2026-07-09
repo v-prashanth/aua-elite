@@ -5,6 +5,7 @@ import { redirect } from 'next/navigation'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { createClient } from '@/lib/supabase/server'
 import type { Database } from '@/lib/supabase/database.types'
+import { deleteStorageFiles } from './storage'
 
 type ProductInsert = Database['public']['Tables']['products']['Insert']
 type ProductUpdate = Database['public']['Tables']['products']['Update']
@@ -91,9 +92,22 @@ export async function deleteProduct(id: string) {
   await requireAuth()
   const admin = createAdminClient()
 
+  // Fetch the product first to get its image URLs
+  const { data: product } = await admin
+    .from('products')
+    .select('image, gallery_images')
+    .eq('id', id)
+    .single()
+
   const { error } = await admin.from('products').delete().eq('id', id)
 
   if (error) return { error: error.message }
+
+  // Clean up uploaded images from Supabase Storage
+  if (product) {
+    const urls = [product.image, ...(product.gallery_images || [])]
+    await deleteStorageFiles('products', urls)
+  }
 
   // Invalidate list caches so the deleted product is removed from display
   revalidatePath('/admin/products')

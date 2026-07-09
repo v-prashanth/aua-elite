@@ -4,6 +4,7 @@ import { revalidatePath } from 'next/cache'
 import { createAdminClient } from '@/lib/supabase/admin'
 import { createClient } from '@/lib/supabase/server'
 import type { Database, Json } from '@/lib/supabase/database.types'
+import { deleteStorageFiles } from './storage'
 
 type BrandInsert = Database['public']['Tables']['brands']['Insert']
 type BrandUpdate = Database['public']['Tables']['brands']['Update']
@@ -54,9 +55,21 @@ export async function deleteBrand(id: string) {
   await requireAuth()
   const admin = createAdminClient()
 
+  // Fetch brand first to retrieve the logo URL
+  const { data: brand } = await admin
+    .from('brands')
+    .select('logo')
+    .eq('id', id)
+    .single()
+
   const { error } = await admin.from('brands').delete().eq('id', id)
 
   if (error) return { error: error.message }
+
+  // Clean up uploaded logo from Supabase Storage
+  if (brand && brand.logo) {
+    await deleteStorageFiles('brands', [brand.logo])
+  }
 
   revalidatePath('/admin/brands')
   revalidatePath('/')
@@ -126,9 +139,21 @@ export async function deleteGalleryImage(id: string) {
   await requireAuth()
   const admin = createAdminClient()
 
+  // Fetch gallery image first to retrieve the image URL
+  const { data: galleryItem } = await admin
+    .from('gallery_images')
+    .select('image')
+    .eq('id', id)
+    .single()
+
   const { error } = await admin.from('gallery_images').delete().eq('id', id)
 
   if (error) return { error: error.message }
+
+  // Clean up uploaded image from Supabase Storage
+  if (galleryItem && galleryItem.image) {
+    await deleteStorageFiles('gallery', [galleryItem.image])
+  }
 
   revalidatePath('/admin/customers')
   revalidatePath('/projects')

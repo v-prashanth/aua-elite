@@ -1,5 +1,23 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  images: {
+    remotePatterns: [
+      // Wildcard: covers all Supabase project subdomains
+      {
+        protocol: 'https',
+        hostname: '*.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/**',
+      },
+      // Explicit: our specific Supabase project (belt-and-suspenders)
+      {
+        protocol: 'https',
+        hostname: 'ynihyvsanckdaguesgoy.supabase.co',
+        port: '',
+        pathname: '/storage/v1/object/**',
+      },
+    ],
+  },
   /**
    * Security Headers — applied to every route.
    * Reference: https://nextjs.org/docs/app/api-reference/config/next-config-js/headers
